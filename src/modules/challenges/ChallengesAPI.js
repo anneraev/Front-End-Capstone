@@ -2,6 +2,7 @@ import ApiCall from "../api/ApiCall"
 import ApplicationViews from "../../ApplicationViews";
 
 const key = "challenges"
+//gets newState property from ApplicationViews in order to set it.
 const newState = ApplicationViews.prototype.newState;
 
 

@@ -2,6 +2,7 @@ import ApiCall from "../api/ApiCall"
 import ApplicationViews from "../../ApplicationViews";
 
 const key = "checkIns"
+//gets newState property from ApplicationViews in order to set a property inside it to the contents of the dataset.
 const newState = ApplicationViews.prototype.newState;
 
 export default {
