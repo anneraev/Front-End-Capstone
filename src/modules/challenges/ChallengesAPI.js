@@ -1,4 +1,4 @@
-import ApiCall from "../ApiCall"
+import ApiCall from "../api/ApiCall"
 import StateManager from "../StateManager";
 
 const key = "challenges"
