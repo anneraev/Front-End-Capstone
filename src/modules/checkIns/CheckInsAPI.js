@@ -1,6 +1,6 @@
 import ApiCall from "../ApiCall"
 
-const key = "alerts"
+const key = "checkIns"
 
 export default {
     getAll: () => {
