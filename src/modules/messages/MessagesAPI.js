@@ -1,10 +1,12 @@
 import ApiCall from "../ApiCall"
+import StateManager from "../StateManager";
 
 const key = "messages"
+const newState = StateManager.newState
 
 export default {
     getAll: () => {
-        ApiCall.getAll(key)
+        ApiCall.getAll(key).then(messages => newState.messages = messages)
     },
     getOne: (id) => {
         ApiCall.getOne(key, id)

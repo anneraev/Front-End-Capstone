@@ -1,10 +1,13 @@
 import ApiCall from "../ApiCall"
+import StateManager from "../StateManager";
 
 const key = "challenges"
+const newState = StateManager.newState
+
 
 export default {
     getAll: () => {
-        ApiCall.getAll(key)
+        ApiCall.getAll(key).then(challenges => newState.challenges = challenges)
     },
     getOne: (id) => {
         ApiCall.getOne(key, id)
