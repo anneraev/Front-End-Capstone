@@ -1,10 +1,14 @@
-import ApiCall from "../ApiCall"
+import ApiCall from "../api/ApiCall"
+import ApplicationViews from "../../ApplicationViews";
 
 const key = "challenges"
+//gets newState property from ApplicationViews in order to set it.
+const newState = ApplicationViews.prototype.newState;
+
 
 export default {
     getAll: () => {
-        ApiCall.getAll(key)
+        ApiCall.getAll(key).then(challenges => newState.challenges = challenges)
     },
     getOne: (id) => {
         ApiCall.getOne(key, id)
