@@ -4,7 +4,7 @@ const key = "users"
 
 export default {
     getAll: () => {
-        ApiCall.getAll(key)
+        ApiCall.getAll(key)//.then(users => )
     },
     getOne: (id) => {
         ApiCall.getOne(key, id)
