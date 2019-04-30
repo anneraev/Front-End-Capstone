@@ -1,8 +1,8 @@
 import ApiCall from "../api/ApiCall"
-import StateManager from "../StateManager";
+import ApplicationViews from "../../ApplicationViews";
 
 const key = "users"
-const newState = StateManager.newState
+const newState = ApplicationViews.prototype.newState;
 
 export default {
     getAll: () => {
