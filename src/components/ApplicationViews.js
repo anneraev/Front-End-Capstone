@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ApiManager from "./ApiManager";
+import stateManager from "./stateManager";
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -10,12 +11,17 @@ export default class ApplicationViews extends Component {
         checkIns: [],
     }
 
-    //All API calls write to newState so that State can be updated with setState in componentDidMount.
-    newState = {}
-
     componentDidMount() {
         //calls function to pull all data from the API, then sets state.
-        ApiManager.updateStateFromAPI().then(() => this.setState(this.newState));
+        ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState));
         console.log(this.props);
+    }
+
+    render(){
+        return(
+            <React.Fragment>
+                <h1>Ohhai, Mark.</h1>
+            </React.Fragment>
+        )
     }
 }

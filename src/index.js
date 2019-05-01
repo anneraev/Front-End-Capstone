@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { BrowserRouter as Router } from "react-router-dom"
+import Capstone from "./components/Capstone"
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+//Renders elements to the dom. First argument are the imported elements (containing their children), second argument is the target which, in this case, is a callback function to get a reference to the container element with an id of "root".
+ReactDOM.render(
+    <Router>
+        <Capstone />
+    </Router>
+    , document.getElementById('root')
+)
