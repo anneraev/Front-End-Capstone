@@ -17,7 +17,6 @@ export default class ApplicationViews extends Component {
     }
 
     render(){
-        console.log(this.state);
         return(
             <React.Fragment>
                 <h1>Ohhai, Mark.</h1>

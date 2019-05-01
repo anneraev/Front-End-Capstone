@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ApplicationViews from "./ApplicationViews";
 import "bootstrap/dist/css/bootstrap.min.css"
+import NavBar from "./nav/navBar";
 
 //alias of orginal component class in react.
 export default class Capstone extends Component {
@@ -9,6 +10,7 @@ export default class Capstone extends Component {
         //Renders ApplicationViews and all of its child components.
         return(
             <React.Fragment>
+                <NavBar />
                 <ApplicationViews />
             </React.Fragment>
         )
