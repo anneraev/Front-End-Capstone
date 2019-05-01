@@ -1,3 +1,12 @@
+
+#Front-End Capstone: An App for Bettering Yourself
+
+If you're struggling with bad coping mechanisms, poor self-control, or you just aren't making progress on your self-improvement goals, this is the app for you. This Front-End Capstone provides simple tools for having daily interventions with yourself, allowing you to modify your behavior without having to devote as much mental bandwidth to controlling yourself. The app works under the assumption that the user knows what the right decisions are, but has trouble making them in the moment. It allows the user to take their own advice (or keep track of the advice of professionals).
+
+The app helps the user to make better choices by "checking in" with them at specified times and asking them if they're experiencing the beginning of an emotional, physical or behavioral problem. Once the user has specified the problem they are having, the app provides them with a reminder of what they've already learned--advice and ways of seeing the problem meant to alter behavior and promote better coping mechanisms (the kind of advice we get from help-groups and mental health professionals). The hope is that this will better allow the user to take stock of their current state and alter the course of their behavior BEFORE it becomes a real problem. Essentially, it's a mini-self intervention app.
+
+#React Information (Running the App)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
