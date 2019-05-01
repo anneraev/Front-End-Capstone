@@ -14,10 +14,10 @@ export default class ApplicationViews extends Component {
     componentDidMount() {
         //calls function to pull all data from the API, then sets state.
         ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState));
-        console.log(this.props);
     }
 
     render(){
+        console.log(this.state);
         return(
             <React.Fragment>
                 <h1>Ohhai, Mark.</h1>
