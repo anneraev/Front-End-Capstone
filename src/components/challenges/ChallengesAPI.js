@@ -1,4 +1,4 @@
-import ApiCall from "../api/ApiCall"
+import ApiCall from "../../modules/ApiCall"
 import ApplicationViews from "../../ApplicationViews";
 
 const key = "challenges"

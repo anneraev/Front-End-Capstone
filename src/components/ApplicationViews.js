@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import ApiManager from "./modules/api/ApiManager";
+import ApiManager from "./ApiManager";
 
 export default class ApplicationViews extends Component {
-    //state object.
+    //state object. All information for rendering to DOM is pulled from here.
     state =  {
         users: [],
         messages: [],
