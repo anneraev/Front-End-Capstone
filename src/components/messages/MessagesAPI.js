@@ -1,13 +1,13 @@
-import ApiCall from "../api/ApiCall"
-import ApplicationViews from "../../ApplicationViews";
+import ApiCall from "../../modules/ApiCall"
+import stateManager from "../stateManager";
 
-const key = "checkIns"
+const key = "messages"
 //gets newState property from ApplicationViews in order to set a property inside it to the contents of the dataset.
-const newState = ApplicationViews.prototype.newState;
+const newState = stateManager.newState
 
 export default {
     getAll: () => {
-        ApiCall.getAll(key).then(checkIns => newState.checkIns = checkIns)
+        return ApiCall.getAll(key).then(messages => newState.messages = messages)
     },
     getOne: (id) => {
         ApiCall.getOne(key, id)
