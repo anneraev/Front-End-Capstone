@@ -24,7 +24,7 @@ export default class ApplicationViews extends Component {
         //calls function to pull all data from the API, then sets state. Then start update timer.
         ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState)).then(checkInUpdate.startUpdate());
     }
-
+    //renders a JSX element.
     render() {
         return (
             <React.Fragment>
