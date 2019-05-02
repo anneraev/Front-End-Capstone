@@ -1,11 +1,11 @@
 import React, { Component } from  "react";
 
-export default class CheckInList extends Component {
+export default class Profile extends Component {
     render(){
         return(
             <React.Fragment>
                 <div>
-                    Check-in List
+                    Profile
                 </div>
             </React.Fragment>
         )
