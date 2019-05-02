@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import ApiManager from "./ApiManager";
 import stateManager from "./stateManager";
 import checkInUpdate from "./checkInUpdate";
+import { withRouter } from "react-router";
+import { Route, Redirect } from "react-router-dom";
+
+import Home from "./home/Home"
+import Profile from "./profile/Profile"
+import CheckInList from "./checkIns/CheckInList"
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -22,7 +28,13 @@ export default class ApplicationViews extends Component {
     render() {
         return (
             <React.Fragment>
-                <h1>Ohhai, Mark.</h1>
+                <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} challenges={this.state.challenges} messages={this.state.messages} /> }} />
+                <Route exact path="/profile" render={props => {
+                    return <Profile {...props} challenges={this.state.challenge} messages={this.state.messages}/>
+                }}/>
+                <Route exact path="/check-ins" render={props => {
+                    return < CheckInList {...props} checkIns={this.state.checkIns}/>
+                }}/>
             </React.Fragment>
         )
     }
