@@ -3,8 +3,9 @@
 export default {
     startUpdate: function () {
         setInterval(() => {
-            
-        }, 60000)
+            let now = new Date();
+            console.log(now.toLocaleTimeString());
+        }, 1000)
     },
 
     stopUpdate: function() {
