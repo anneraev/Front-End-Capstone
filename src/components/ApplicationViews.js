@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ApiManager from "./ApiManager";
 import stateManager from "./stateManager";
 import checkInUpdate from "./checkInUpdate";
-import { withRouter } from "react-router";
+//import { withRouter } from "react-router";
 import { Route, Redirect } from "react-router-dom";
 
 import Home from "./home/Home"
