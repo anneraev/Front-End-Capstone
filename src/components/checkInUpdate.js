@@ -1,10 +1,17 @@
+import stateManager from "./stateManager";
+
 //handles the update loop for the app.
+let now = new Date()
 
 export default {
     startUpdate: function () {
         setInterval(() => {
-            let now = new Date();
-            console.log(now.toLocaleTimeString());
+            now = new Date();
+            stateManager.newState.checkIns.forEach(checkIn => {
+                if (checkIn.alertTime === now.toLocaleTimeString()){
+                    alert("You are being alerted!")
+                }
+            })
         }, 1000)
     },
 
