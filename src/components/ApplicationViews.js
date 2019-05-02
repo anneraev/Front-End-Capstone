@@ -28,11 +28,14 @@ export default class ApplicationViews extends Component {
     render() {
         return (
             <React.Fragment>
+                <Route exact path ="/dashboard" render={props => {
+                    return < Redirect to = "/" />
+                }} />
                 <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} challenges={this.state.challenges} messages={this.state.messages} /> }} />
                 <Route exact path="/profile" render={props => {
                     return <Profile {...props} challenges={this.state.challenge} messages={this.state.messages}/>
                 }}/>
-                <Route exact path="/check-ins" render={props => {
+                <Route exact path="/checkins" render={props => {
                     return < CheckInList {...props} checkIns={this.state.checkIns}/>
                 }}/>
             </React.Fragment>
