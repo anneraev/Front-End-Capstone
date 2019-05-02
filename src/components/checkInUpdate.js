@@ -1,14 +1,16 @@
-import stateManager from "./stateManager";
 
 //handles the update loop for the app.
 let now = new Date()
+let currentState
 
 export default {
+    updateState: function (state){
+        currentState = state;
+    },
     startUpdate: function (history) {
-        console.log("update starting");
         setInterval(() => {
             now = new Date();
-            stateManager.newState.checkIns.forEach(checkIn => {
+            currentState.checkIns.forEach(checkIn => {
                 if (checkIn.alertTime === now.toLocaleTimeString()){
                     alert("redirecting");
                     history.push("/")
@@ -18,7 +20,6 @@ export default {
     },
 
     stopUpdate: function() {
-        console.log("update paused")
         clearInterval();
     }
 }

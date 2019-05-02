@@ -13,7 +13,6 @@ export default class Home extends Component {
     }
 
     render(){
-        console.log(this.props)
         return(
             <React.Fragment>
                 <h1>How are you doing?</h1>

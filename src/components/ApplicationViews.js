@@ -7,6 +7,7 @@ import { Route, Redirect } from "react-router-dom";
 import Home from "./home/Home"
 import Profile from "./profile/Profile"
 import CheckInList from "./checkIns/CheckInList"
+import checkInUpdate from "./checkInUpdate";
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -18,7 +19,7 @@ export default class ApplicationViews extends Component {
     }
 
     componentDidMount() {
-        ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState));
+        ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState)).then(() => checkInUpdate.updateState(this.state));
     }
     //renders a JSX element.
     render() {
@@ -29,10 +30,10 @@ export default class ApplicationViews extends Component {
                 }} />
                 <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} challenges={this.state.challenges} messages={this.state.messages} /> }} />
                 <Route exact path="/profile" render={props => {
-                    return <Profile {...props} challenges={this.state.challenge} messages={this.state.messages}/>
+                    return <Profile {...props} challenges={this.state.challenge} messages={this.state.messages} />
                 }}/>
                 <Route exact path="/checkins" render={props => {
-                    return < CheckInList {...props} checkIns={this.state.checkIns}/>
+                    return < CheckInList {...props} checkIns={this.state.checkIns} />
                 }}/>
             </React.Fragment>
         )
