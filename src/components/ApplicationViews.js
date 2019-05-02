@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ApiManager from "./ApiManager";
 import stateManager from "./stateManager";
-import checkInUpdate from "./checkInUpdate";
 //import { withRouter } from "react-router";
 import { Route, Redirect } from "react-router-dom";
 
@@ -19,10 +18,7 @@ export default class ApplicationViews extends Component {
     }
 
     componentDidMount() {
-        //stop timer for state update.
-        checkInUpdate.stopUpdate();
-        //calls function to pull all data from the API, then sets state. Then start update timer.
-        ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState)).then(checkInUpdate.startUpdate());
+        ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState));
     }
     //renders a JSX element.
     render() {
