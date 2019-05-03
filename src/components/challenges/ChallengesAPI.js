@@ -1,14 +1,14 @@
 import ApiCall from "../../modules/ApiCall"
 import stateManager from "../stateManager";
 
-const key = "challenges"
+const key = "issues"
 //gets newState property from ApplicationViews in order to set a property inside it to the contents of the dataset.
 const newState = stateManager.newState
 
 
 export default {
     getAll: () => {
-        return ApiCall.getAll(key).then(challenges => newState.challenges = challenges)
+        return ApiCall.getAll(key).then(issues => newState.issues = issues)
     },
     getOne: (id) => {
         ApiCall.getOne(key, id)

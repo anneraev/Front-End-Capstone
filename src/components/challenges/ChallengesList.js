@@ -7,9 +7,9 @@ export default class ChallengesList extends Component {
             <React.Fragment>
                 <section>
                     {
-                        this.props.challenges.map(challenge =>
-                            <button key={challenge.id} onClick={() => this.props.history.push(`/challenge-messages/${challenge.id}`)}>
-                                {challenge.content}
+                        this.props.issues.map(issue =>
+                            <button key={issue.id} onClick={() => this.props.history.push(`/challenge-messages/${issue.id}`)}>
+                                {issue.content}
                             </button>
                         )
                     }
