@@ -15,7 +15,7 @@ export default class ApplicationViews extends Component {
     state = {
         users: [],
         messages: [],
-        challenges: [],
+        issues: [],
         checkIns: [],
     }
 
@@ -33,13 +33,18 @@ export default class ApplicationViews extends Component {
                 <Route exact path ="/dashboard" render={props => {
                     return < Redirect to = "/" />
                 }} />
+<<<<<<< HEAD
                 <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} challenges={this.state.challenges} messages={this.state.messages} users={this.state.users}/> }} />
                 {/* ":" in route denotes a url parameter. In this case, the number (/d+) is stored in props.match.params as challengeId and can be referenced in MessagesList*/}
                 <Route exact path ="/challenge-messages/:challengeId(\d+)" render={props => {
+=======
+                <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users}/> }} />
+                <Route exact path ="/challenge-messages/(\d+)" render={props => {
+>>>>>>> master
                     return <MessagesList {...props} messages={this.state.messages} users={this.state.users}/>
                 }}/>
                 <Route exact path="/profile" render={props => {
-                    return <Profile {...props} challenges={this.state.challenge} messages={this.state.messages} users={this.state.users}/>
+                    return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users}/>
                 }}/>
                 <Route exact path="/checkins" render={props => {
                     return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users}/>
