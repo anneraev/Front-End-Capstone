@@ -12,7 +12,19 @@
         {
             "id": 1,
             "challengeId": 1,
-            "content": "Don't crane your neck. Breathe into your spine as your neck extends and lowers slightly, your chest rises up with the breath, your pelvis rests down and your knees are slightly bent. This will correct your posture and allow you to sit and stand more comfortably.",
+            "content": "This is tied to problem 1.",
+            "active": true
+        },
+        {
+            "id": 2,
+            "challengeId": 1,
+            "content": "This is a second message that is also tied to problem 1.",
+            "active": true
+        },
+        {
+            "id": 3,
+            "challengeId": 2,
+            "content": "This message is tied to problem 2.",
             "active": true
         }
     ],
@@ -20,7 +32,13 @@
         {
             "id": 1,
             "userId": 1,
-            "content": "My neck hurts.",
+            "content": "This is problem 1",
+            "active": true
+        },
+        {
+            "id": 2,
+            "userId": 1,
+            "content": "This is problem 2",
             "active": true
         }
     ],

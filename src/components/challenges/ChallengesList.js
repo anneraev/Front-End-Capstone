@@ -8,7 +8,7 @@ export default class ChallengesList extends Component {
                 <section>
                     {
                         this.props.challenges.map(challenge =>
-                            <button key={challenge.id}>
+                            <button key={challenge.id} onClick={() => this.props.history.push(`/challenges/${challenge.id}`)}>
                                 {challenge.content}
                             </button>
                         )
