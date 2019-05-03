@@ -8,6 +8,7 @@ import Home from "./home/Home"
 import Profile from "./profile/Profile"
 import CheckInList from "./checkIns/CheckInList"
 import checkInUpdate from "./checkInUpdate";
+import MessagesList from "./messages/MessagesList";
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -32,12 +33,15 @@ export default class ApplicationViews extends Component {
                 <Route exact path ="/dashboard" render={props => {
                     return < Redirect to = "/" />
                 }} />
-                <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} challenges={this.state.challenges} messages={this.state.messages} /> }} />
+                <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} challenges={this.state.challenges} messages={this.state.messages} users={this.state.users}/> }} />
+                <Route exact path ="/challenge-messages/(\d+)" render={props => {
+                    return <MessagesList {...props} messages={this.state.messages} users={this.state.users}/>
+                }}/>
                 <Route exact path="/profile" render={props => {
-                    return <Profile {...props} challenges={this.state.challenge} messages={this.state.messages} />
+                    return <Profile {...props} challenges={this.state.challenge} messages={this.state.messages} users={this.state.users}/>
                 }}/>
                 <Route exact path="/checkins" render={props => {
-                    return < CheckInList {...props} checkIns={this.state.checkIns} />
+                    return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users}/>
                 }}/>
             </React.Fragment>
         )
