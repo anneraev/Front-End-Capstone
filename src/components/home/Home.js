@@ -16,6 +16,7 @@ export default class Home extends Component {
         return(
             <React.Fragment>
                 <h1>How are you doing?</h1>
+                {/* passes props object to challengesList, including History and all properties defined the route for this current page (in this case, "users" and "messages".) All can be accessed with dot notation. */}
                 <ChallengesList {...this.props} />
             </React.Fragment>
         )

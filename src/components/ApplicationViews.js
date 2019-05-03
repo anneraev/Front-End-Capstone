@@ -34,7 +34,8 @@ export default class ApplicationViews extends Component {
                     return < Redirect to = "/" />
                 }} />
                 <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} challenges={this.state.challenges} messages={this.state.messages} users={this.state.users}/> }} />
-                <Route exact path ="/challenge-messages/(\d+)" render={props => {
+                {/* ":" in route denotes a url parameter. In this case, the number (/d+) is stored in props.match.params as challengeId and can be referenced in MessagesList*/}
+                <Route exact path ="/challenge-messages/:challengeId(\d+)" render={props => {
                     return <MessagesList {...props} messages={this.state.messages} users={this.state.users}/>
                 }}/>
                 <Route exact path="/profile" render={props => {
