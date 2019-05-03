@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import ApiManager from "./ApiManager";
-import stateManager from "./stateManager";
 //import { withRouter } from "react-router";
 import { Route, Redirect } from "react-router-dom";
 
+import ApiManager from "./ApiManager";
+import stateManager from "./stateManager";
 import Home from "./home/Home"
 import Profile from "./profile/Profile"
 import CheckInList from "./checkIns/CheckInList"
@@ -21,8 +21,12 @@ export default class ApplicationViews extends Component {
     componentDidMount() {
         ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState)).then(() => checkInUpdate.updateState(this.state));
     }
+
     //renders a JSX element.
     render() {
+        if (this.state.checkIns === []) {
+            window.location.reload();
+        } else {
         return (
             <React.Fragment>
                 <Route exact path ="/dashboard" render={props => {
@@ -37,5 +41,6 @@ export default class ApplicationViews extends Component {
                 }}/>
             </React.Fragment>
         )
+            }
     }
 }
