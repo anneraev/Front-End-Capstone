@@ -1,5 +1,6 @@
 import React, { Component } from  "react";
 import checkInUpdate from "../checkInUpdate"
+import ChallengesList from "../challenges/ChallengesList";
 
 export default class Profile extends Component {
     componentWillMount(){
@@ -12,9 +13,7 @@ export default class Profile extends Component {
     render(){
         return(
             <React.Fragment>
-                <div>
-                    Profile
-                </div>
+                < ChallengesList {...this.props} />
             </React.Fragment>
         )
     }

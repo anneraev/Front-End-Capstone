@@ -25,6 +25,7 @@ export default class ApplicationViews extends Component {
 
     //renders a JSX element.
     render() {
+        //failsafe in case render loads before there is data.
         if (this.state.checkIns === []) {
             window.location.reload();
         } else {
