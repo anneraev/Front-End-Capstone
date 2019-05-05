@@ -9,9 +9,11 @@ export default class ChallengesList extends Component {
             {issue.content}
         </button>)
         } else {
+            if (issue.active === true) {
         return (<button key={issue.id} onClick={() => this.props.history.push(`/challenge-messages/${issue.id}`)}>
             {issue.content}
         </button>)
+            }
         }
     }
 

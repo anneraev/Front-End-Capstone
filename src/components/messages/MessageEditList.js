@@ -12,7 +12,7 @@ export default class MessageEditList extends Component {
             <textarea></textarea>
             </React.Fragment>
         )
-    }
+        }
 
     render(){
         console.log(this.props)

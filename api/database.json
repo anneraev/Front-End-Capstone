@@ -44,19 +44,19 @@
     {
       "content": "I don't know how to be around people.",
       "userId": 1,
-      "active": true,
+      "active": false,
       "id": 3
     },
     {
       "content": "I am having trouble staying on task.",
       "userId": 1,
-      "active": true,
+      "active": false,
       "id": 4
     },
     {
       "content": "This is a new challenge.",
       "userId": 1,
-      "active": true,
+      "active": false,
       "id": 5
     }
   ],

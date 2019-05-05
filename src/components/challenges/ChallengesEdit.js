@@ -12,7 +12,7 @@ export default class ChallengeEdit extends Component {
     state = {
         content: "",
         userId: 1,
-        active: true
+        active: false
     }
 
     //called when anything changes in the input field. Updates the issue object state internal to this component. The event targets ID becomes the key name and the value becomes the value of the key.
