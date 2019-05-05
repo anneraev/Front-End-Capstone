@@ -52,6 +52,12 @@
       "userId": 1,
       "active": true,
       "id": 4
+    },
+    {
+      "content": "This is a new challenge.",
+      "userId": 1,
+      "active": true,
+      "id": 5
     }
   ],
   "checkIns": [

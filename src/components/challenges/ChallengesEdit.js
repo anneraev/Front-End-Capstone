@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ChallengesAPI from "./ChallengesAPI";
 import ChallengesSubmitButton from "./ChallengesSubmitButton";
 
 //challengeEdit/new
@@ -22,7 +21,7 @@ export default class ChallengeEdit extends Component {
         this.setState(stateToChange)
     }
 
-    //conditional checks if there is content to post, then creates an object from state and passes that object to ChallengesAPI for posting to the API. Finally, sets the value of the input to blank. The reference challengeInput is defined as an attribute of the JSX element (ref=).
+    //conditional checks if there is content to post, then creates an object from state calls postIssue in ApplicationViews from props. Sets the value of the input to blank. The reference challengeInput is defined as an attribute of the JSX element (ref=). Finally, after the API returns a response, the URL is set back to /profile.
     constructNewIssue = event => {
         event.preventDefault()
         if (this.state.content === "") {
@@ -33,8 +32,8 @@ export default class ChallengeEdit extends Component {
                 userId: this.state.userId,
                 active: this.state.active,
             }
-            this.props.postIssue(issue);
             this.challengeInput.value = ""
+            this.props.postIssue(issue).then(() => this.props.history.push("/profile"));
         }
     }
 

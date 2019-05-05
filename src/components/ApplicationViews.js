@@ -22,7 +22,7 @@ export default class ApplicationViews extends Component {
     }
 
     postIssue = issue => {
-        ChallengesAPI.post(issue).then(() => this.updateData())
+        return ChallengesAPI.post(issue).then(() => this.updateData())
     }
 
     updateData = () => {
