@@ -52,7 +52,7 @@ export default class ApplicationViews extends Component {
                     return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users}/>
                 }}/>
                 <Route exact path="/profile/challenges/new" render={props => {
-                    return  <ChallengeEdit {...props} postIssue={this.postIssue}/>
+                    return  <ChallengeEdit {...props} postIssue={this.postIssue} messages={this.state.messages}/>
                 }} />
                 <Route exact path="/checkins" render={props => {
                     return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users}/>

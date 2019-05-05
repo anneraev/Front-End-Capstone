@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ChallengesSubmitButton from "./ChallengesSubmitButton";
+import MessageEditList from "../messages/MessageEditList";
 
 //challengeEdit/new
 //challengeEdit/num
@@ -46,6 +47,7 @@ export default class ChallengeEdit extends Component {
             <input type="text" required className="form-control" onChange={this.handleInput} id="content" placeholder="What would you like help with?" ref={(element) => this.challengeInput = element}>
             </input>
             </section>
+            <MessageEditList {...this.props}/>
             <ChallengesSubmitButton {...this.props} constructNewIssue={this.constructNewIssue}/>
             </React.Fragment>
         )
