@@ -14,7 +14,7 @@ export default {
         ApiCall.getOne(key, id)
     },
     post: (object) => {
-        ApiCall.post(key, object)
+        return ApiCall.post(key, object)
     },
     delete: (id) => {
         ApiCall.delete(key, id)

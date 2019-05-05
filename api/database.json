@@ -1,53 +1,70 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "name": "Anne",
-            "userName": "AnneRae",
-            "email": "anneraevick@outlook.com",
-            "password": "password123"
-        }
-    ],
-    "messages": [
-        {
-            "id": 1,
-            "issueId": 1,
-            "content": "This is tied to problem 1.",
-            "active": true
-        },
-        {
-            "id": 2,
-            "issueId": 1,
-            "content": "This is a second message that is also tied to problem 1.",
-            "active": true
-        },
-        {
-            "id": 3,
-            "issueId": 2,
-            "content": "This message is tied to problem 2.",
-            "active": true
-        }
-    ],
-    "issues": [
-        {
-            "id": 1,
-            "userId": 1,
-            "content": "This is problem 1",
-            "active": true
-        },
-        {
-            "id": 2,
-            "userId": 1,
-            "content": "This is problem 2",
-            "active": true
-        }
-    ],
-    "checkIns": [
-        {
-            "id": 1,
-            "userId": 1,
-            "alertTime": "3:51:00 PM",
-            "active": true
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "name": "Anne",
+      "userName": "AnneRae",
+      "email": "anneraevick@outlook.com",
+      "password": "password123"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "issueId": 1,
+      "content": "This is tied to problem 1.",
+      "active": true
+    },
+    {
+      "id": 2,
+      "issueId": 1,
+      "content": "This is a second message that is also tied to problem 1.",
+      "active": true
+    },
+    {
+      "id": 3,
+      "issueId": 2,
+      "content": "This message is tied to problem 2.",
+      "active": true
+    }
+  ],
+  "issues": [
+    {
+      "id": 1,
+      "userId": 1,
+      "content": "This is problem 1",
+      "active": true
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "content": "This is problem 2",
+      "active": true
+    },
+    {
+      "content": "I don't know how to be around people.",
+      "userId": 1,
+      "active": true,
+      "id": 3
+    },
+    {
+      "content": "I am having trouble staying on task.",
+      "userId": 1,
+      "active": true,
+      "id": 4
+    },
+    {
+      "content": "This is a new challenge.",
+      "userId": 1,
+      "active": true,
+      "id": 5
+    }
+  ],
+  "checkIns": [
+    {
+      "id": 1,
+      "userId": 1,
+      "alertTime": "3:51:00 PM"
+    }
+  ]
 }
