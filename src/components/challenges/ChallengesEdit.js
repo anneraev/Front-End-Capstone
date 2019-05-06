@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import ChallengesSubmitButton from "./ChallengesSubmitButton";
 import MessageEditList from "../messages/MessageEditList";
 
-//challengeEdit/new
-//challengeEdit/num
-
-//Change post/patch feature based on whether or not there's a /new at the end of the URL.
-
 export default class ChallengeEdit extends Component {
     //issue object state
     state = {
@@ -30,7 +25,7 @@ export default class ChallengeEdit extends Component {
         return (
             <React.Fragment>
                 <section className="form-group">
-                    <input type="text" required className="form-control" onChange={this.handleInput} id="content" placeholder="What would you like help with?" ref={(element) => this.challengeInput = element} value={this.state.content}>
+                    <input type="text" required className="form-control" onChange={this.handleInput} id="content" placeholder="What would you like help with?" value={this.state.content}>
                     </input>
                 </section>
                 <MessageEditList {...this.props} />
