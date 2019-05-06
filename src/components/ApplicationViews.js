@@ -24,6 +24,10 @@ export default class ApplicationViews extends Component {
     //array of messages for the currently selected issue in Profile.
     currentIssueMessageArray = []
 
+    clearIssuesArray = () => {
+        this.currentIssueMessageArray = [];
+    }
+
     createNewMessage = message => {
         MessagesAPI.post(message).then(() => this.updateData())
     }
@@ -37,7 +41,6 @@ export default class ApplicationViews extends Component {
             this.currentIssueMessageArray.forEach(message => {
                 MessagesAPI.patch(message.id, message)
             })
-            this.currentIssueMessageArray.length = 0;
         })
     }
 
@@ -65,10 +68,10 @@ export default class ApplicationViews extends Component {
                     return <MessagesList {...props} messages={this.state.messages} users={this.state.users}/>
                 }}/>
                 <Route exact path="/profile" render={props => {
-                    return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} createNewMessage={this.createNewMessage} postIssue={this.postIssue}/>
+                    return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue}/>
                 }}/>
                 <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
-                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} currentIssueMessageArray={this.currentIssueMessageArray}/>
+                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} currentIssueMessageArray={this.currentIssueMessageArray} clearIssuesArray={this.clearIssuesArray} createNewMessage={this.createNewMessage}/>
                 }} />
                 <Route exact path="/checkins" render={props => {
                     return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users}/>

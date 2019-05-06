@@ -6,21 +6,22 @@ import MessagesList from "./MessagesList";
 
 export default class MessageEditList extends Component {
     createMessageEditWindow = () => {
-        return(
-            <React.Fragment>
-            <h2>Write messages to help yourself navigate your challenges</h2>
-            <textarea></textarea>
-            </React.Fragment>
-        )
-        }
+        console.log("messageEditWindow", this.props.currentIssueMessageArray)
+            return (
+                <React.Fragment>
+                    <textarea></textarea>
+                </React.Fragment>
+            )
+    }
 
-    render(){
+    render() {
         console.log(this.props)
-        return(
+        return (
             <React.Fragment>
                 <section>
+                    <h2>Write messages to help yourself navigate your challenges</h2>
                     {this.createMessageEditWindow()}
-                    <MessagesList {...this.props}/>
+                    <MessagesList {...this.props} />
                 </section>
             </React.Fragment>
         )
