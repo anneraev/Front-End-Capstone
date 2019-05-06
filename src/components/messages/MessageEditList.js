@@ -6,43 +6,56 @@ import MessagesList from "./MessagesList";
 
 export default class MessageEditList extends Component {
     //issue object state
+
+    messageState = {
+        messages: this.props.currentIssueMessageArray,
+        currentFieldText: "Blank Message"
+    }
+
     state = {
-        messages: this.props.currentIssueMessageArray
+        messages: this.messageState.messages
     }
 
     //called when anything changes in the input field. Updates the issue object state internal to this component. The event targets ID becomes the key name and the value becomes the value of the key.
     handleInput = (event) => {
-        const stateToChange = {}
-        stateToChange[event.target.id] = event.target.value
-        this.setState(stateToChange)
+        this.messageState.currentFieldText = event.target.value
+        console.log(this.messageState.currentFieldText);
+        // this.setState(stateToChange)
+        // this.props.clearIssueStorage()
     }
+
+    //when editing in handle input, get messageArray, find message being edited, update messgae, update state with new messageArray.
 
     createMessageEditWindow = () => {
-        console.log("messageEditWindow", this.props.currentIssueMessageArray)
-            return (
-                <React.Fragment>
-                    <textarea></textarea>
-                </React.Fragment>
-            )
+        return (
+            <React.Fragment>
+                <textarea className="form-control" placeholder="Type a reminder to help you navigate the problem." onChange={this.handleInput}></textarea>
+            </React.Fragment>
+        )
     }
 
-        //on click, create a new message and immediately post it to the API. Only appears if navigating to message from profile.
-        newMessageItem = () => {
-            if (this.props.location.pathname.includes("profile/challenges/")) {
-                const newMessage = {
-                    content: "New Message",
-                    active: true,
-                    issueId: parseInt(this.props.match.params.issueId)
-                }
-                return (
-                    <React.Fragment>
-                    <button key="0" onClick={() => this.props.createNewMessage(newMessage)}>
+    constructNewMessage = () => {
+        //content equal to currentFieldText
+        const newMessage = {
+            content: this.messageState.currentFieldText,
+            issueId: parseInt(this.props.match.params.issueId),
+            active: true
+        }
+        return newMessage;
+    }
+
+    //on click, create a new message and immediately post it to the API. Only appears if navigating to message from profile.
+    newMessageItem = () => {
+        if (this.props.location.pathname.includes("profile/challenges/")) {
+            return (
+                <React.Fragment>
+                    <button key="0" onClick={() => this.props.createNewMessage(this.constructNewMessage())}>
                         New Message
             </button>
-            </React.Fragment>
-                )
-            }
+                </React.Fragment>
+            )
         }
+    }
 
     render() {
         console.log(this.props)

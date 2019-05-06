@@ -6,7 +6,6 @@ export default class ChallengeEdit extends Component {
     //issue object state
 
     loadContentState = () => {
-        console.log("running");
         if (sessionStorage.getItem("currentContent")) {
             return sessionStorage.getItem("currentContent")
         }
@@ -26,11 +25,13 @@ export default class ChallengeEdit extends Component {
         }
     }
 
+    //state references this object.
     issueState = {
         content: this.loadContentState(),
         id: this.loadIdState()
     }
 
+    //current component state.
     state = {
         content: this.issueState.content,
         userId: 1,
@@ -43,7 +44,6 @@ export default class ChallengeEdit extends Component {
         this.issueState.content = event.target.value;
         this.setState(this.issueState);
         sessionStorage.setItem("currentContent", this.issueState.cotent);
-        console.log("currentEditStat", this.state);
     }
 
     //on Change takes a reference to a function that runs when something changes in the input field. Ref takes an anonymous callback function, in this case it creates a key/value pair belonging to this object, and passes a reference to that function to set the value to a reference to the element.

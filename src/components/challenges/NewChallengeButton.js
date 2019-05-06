@@ -14,7 +14,6 @@ export default class NewChallengeButton extends Component {
     }
 
     render() {
-        console.log(this.props)
         return(
             <React.Fragment>
             <section>
