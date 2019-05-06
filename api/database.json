@@ -32,32 +32,14 @@
     {
       "id": 1,
       "userId": 1,
-      "content": "This is problem 1",
+      "content": "Problem 1",
       "active": true
     },
     {
       "id": 2,
       "userId": 1,
-      "content": "This is problem 2",
+      "content": "This is problem 22",
       "active": true
-    },
-    {
-      "content": "I don't know how to be around people.",
-      "userId": 1,
-      "active": true,
-      "id": 3
-    },
-    {
-      "content": "I am having trouble staying on task.",
-      "userId": 1,
-      "active": true,
-      "id": 4
-    },
-    {
-      "content": "This is a new challenge.",
-      "userId": 1,
-      "active": true,
-      "id": 5
     }
   ],
   "checkIns": [

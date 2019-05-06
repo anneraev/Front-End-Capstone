@@ -11,6 +11,7 @@ import checkInUpdate from "./checkInUpdate";
 import MessagesList from "./messages/MessagesList";
 import ChallengeEdit from "./challenges/ChallengesEdit";
 import ChallengesAPI from "./challenges/ChallengesAPI";
+import MessagesAPI from "./messages/MessagesAPI";
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -20,13 +21,31 @@ export default class ApplicationViews extends Component {
         issues: [],
         checkIns: [],
     }
+    //array of messages for the currently selected issue in Profile.
+
+    clearIssueStorage = () => {
+        sessionStorage.removeItem("currentContent");
+        sessionStorage.removeItem("currentId");
+    }
+
+    createNewMessage = message => {
+        MessagesAPI.post(message).then(() => this.updateData())
+    }
 
     postIssue = issue => {
         return ChallengesAPI.post(issue).then(() => this.updateData())
     }
 
+    updateIssue = issue => {
+        return ChallengesAPI.patch(issue.id, issue)
+        }
+
+    updateMessage = message => {
+        MessagesAPI.patch(message.id, message).then(() => this.updateData())
+    }
+
     updateData = () => {
-        ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState)).then(() => checkInUpdate.updateState(this.state));
+        return ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState)).then(() => checkInUpdate.updateState(this.state));
     }
 
     componentDidMount() {
@@ -49,10 +68,10 @@ export default class ApplicationViews extends Component {
                     return <MessagesList {...props} messages={this.state.messages} users={this.state.users}/>
                 }}/>
                 <Route exact path="/profile" render={props => {
-                    return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users}/>
+                    return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage}/>
                 }}/>
-                <Route exact path="/profile/challenges/new" render={props => {
-                    return  <ChallengeEdit {...props} postIssue={this.postIssue}/>
+                <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
+                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage}/>
                 }} />
                 <Route exact path="/checkins" render={props => {
                     return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users}/>
