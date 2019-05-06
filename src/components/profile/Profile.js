@@ -11,6 +11,7 @@ export default class Profile extends Component {
     }
 
     render(){
+        console.log(this.props.currentIssueMessageArray)
         return(
             <React.Fragment>
                 < ChallengesList {...this.props} />
