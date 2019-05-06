@@ -62,7 +62,7 @@ export default class ChallengeEdit extends Component {
                     <input type="text" required className="form-control" onChange={this.handleInput} id="content" placeholder="What would you like help with?" value={this.state.content}>
                     </input>
                 </section>
-                <MessageEditList {...this.props} />
+                <MessageEditList {...this.props} messagesArray = {this.currentMessagesArray}/>
                 <ChallengesSubmitButton {...this.props} issue={this.state} messagesArray = {this.currentMessagesArray}/>
             </React.Fragment>
         )
