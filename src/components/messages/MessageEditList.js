@@ -17,11 +17,11 @@ export default class MessageEditList extends Component {
 
     //when a message in MessageList is clicked, this is called to receive the id of that message and set currentFieldText and currentMessageId to that of the selected message. This will give the component a reference to the message being edited, as well as set the contents of the text box to the content of the message.
     getMessageId = (key) => {
-            this.messageState.currentMessageId = parseInt(key)
-            const currentMessage = this.props.messages.find(message => message.id === parseInt(key));
-            this.messageState.currentFieldText = currentMessage.content;
-            this.setState(this.messageState);
-        }
+        this.messageState.currentMessageId = parseInt(key)
+        const currentMessage = this.props.messages.find(message => message.id === parseInt(key));
+        this.messageState.currentFieldText = currentMessage.content;
+        this.setState(this.messageState);
+    }
 
     //called when anything changes in the input field. Updates the issue object state internal to this component. The event targets ID becomes the key name and the value becomes the value of the key.
     handleInput = (event) => {
@@ -35,10 +35,23 @@ export default class MessageEditList extends Component {
         return this.state.currentFieldText;
     }
 
+    renderEditButton = () => {
+        if (this.state.currentMessageId !== 0) {
+            return (
+                <React.Fragment>
+                    <button >
+                        Update Message
+                </button>
+                </React.Fragment>
+            )
+        }
+    }
+
     createMessageEditWindow = () => {
         return (
             <React.Fragment>
                 <textarea className="form-control" placeholder="Type a reminder to help you navigate the problem." onChange={this.handleInput} value={this.setTextValue()}></textarea>
+                {this.renderEditButton()}
             </React.Fragment>
         )
     }
@@ -53,6 +66,7 @@ export default class MessageEditList extends Component {
         if (newMessage.content === "") {
             newMessage.content = "New Message"
         }
+        this.messageState.currentMessageId = 0;
         this.messageState.currentFieldText = "";
         this.setState(this.messageState);
         return newMessage;
@@ -78,7 +92,7 @@ export default class MessageEditList extends Component {
                 <section>
                     <h2>Write messages to help yourself navigate your challenges</h2>
                     {this.createMessageEditWindow()}
-                    <MessagesList {...this.props} getMessageId={this.getMessageId}/>
+                    <MessagesList {...this.props} getMessageId={this.getMessageId} />
                     {this.newMessageItem()}
                 </section>
             </React.Fragment>
