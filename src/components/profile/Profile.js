@@ -8,6 +8,7 @@ export default class Profile extends Component {
     }
     componentDidMount() {
         checkInUpdate.startUpdate(this.props.history)
+        this.props.clearIssueStorage();
     }
 
     render(){

@@ -5,6 +5,18 @@ import MessagesList from "./MessagesList";
 
 
 export default class MessageEditList extends Component {
+    //issue object state
+    state = {
+        messages: this.props.currentIssueMessageArray
+    }
+
+    //called when anything changes in the input field. Updates the issue object state internal to this component. The event targets ID becomes the key name and the value becomes the value of the key.
+    handleInput = (event) => {
+        const stateToChange = {}
+        stateToChange[event.target.id] = event.target.value
+        this.setState(stateToChange)
+    }
+
     createMessageEditWindow = () => {
         console.log("messageEditWindow", this.props.currentIssueMessageArray)
             return (
