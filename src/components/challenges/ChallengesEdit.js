@@ -3,7 +3,13 @@ import ChallengesSubmitButton from "./ChallengesSubmitButton";
 import MessageEditList from "../messages/MessageEditList";
 
 export default class ChallengeEdit extends Component {
-    //issue object state
+    //reference to all messages associated with this challenge.
+    currentMessagesArray = []
+
+    //find all messages associated with this challenge.
+    setMessageArray = () => {
+        this.currentMessagesArray = this.props.messages.filter(message => message.issueId === parseInt(this.props.match.params.issueId))
+    }
 
     loadContentState = () => {
         if (sessionStorage.getItem("currentContent")) {
@@ -48,6 +54,8 @@ export default class ChallengeEdit extends Component {
 
     //on Change takes a reference to a function that runs when something changes in the input field. Ref takes an anonymous callback function, in this case it creates a key/value pair belonging to this object, and passes a reference to that function to set the value to a reference to the element.
     render() {
+        this.setMessageArray()
+        console.log(this.currentMessagesArray);
         return (
             <React.Fragment>
                 <section className="form-group">
@@ -55,7 +63,7 @@ export default class ChallengeEdit extends Component {
                     </input>
                 </section>
                 <MessageEditList {...this.props} />
-                <ChallengesSubmitButton {...this.props} issue={this.state} />
+                <ChallengesSubmitButton {...this.props} issue={this.state} messagesArray = {this.currentMessagesArray}/>
             </React.Fragment>
         )
     }

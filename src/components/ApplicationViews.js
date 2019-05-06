@@ -22,11 +22,6 @@ export default class ApplicationViews extends Component {
         checkIns: [],
     }
     //array of messages for the currently selected issue in Profile.
-    currentIssueMessageArray = []
-
-    clearIssuesArray = () => {
-        this.currentIssueMessageArray = [];
-    }
 
     clearIssueStorage = () => {
         sessionStorage.removeItem("currentContent");
@@ -41,9 +36,9 @@ export default class ApplicationViews extends Component {
         return ChallengesAPI.post(issue).then(() => this.updateData())
     }
 
-    updateIssue = (issue) => {
+    updateIssue = (issue, messageArray) => {
         return ChallengesAPI.patch(issue.id, issue).then(() => {
-            this.currentIssueMessageArray.forEach(message => {
+            messageArray.forEach(message => {
                 MessagesAPI.patch(message.id, message)
             })
         })
@@ -76,7 +71,7 @@ export default class ApplicationViews extends Component {
                     return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage}/>
                 }}/>
                 <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
-                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} currentIssueMessageArray={this.currentIssueMessageArray} clearIssuesArray={this.clearIssuesArray} createNewMessage={this.createNewMessage} />
+                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData}  createNewMessage={this.createNewMessage} />
                 }} />
                 <Route exact path="/checkins" render={props => {
                     return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users}/>
