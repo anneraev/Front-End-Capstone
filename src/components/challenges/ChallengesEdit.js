@@ -12,7 +12,7 @@ export default class ChallengeEdit extends Component {
     state = {
         content: "",
         userId: 1,
-        active: false,
+        active: true,
         id: this.props.match.params.issueId
     }
 

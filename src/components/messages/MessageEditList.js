@@ -14,6 +14,24 @@ export default class MessageEditList extends Component {
             )
     }
 
+        //on click, create a new message and immediately post it to the API. Only appears if navigating to message from profile.
+        newMessageItem = () => {
+            if (this.props.location.pathname.includes("profile/challenges/")) {
+                const newMessage = {
+                    content: "New Message",
+                    active: true,
+                    issueId: parseInt(this.props.match.params.issueId)
+                }
+                return (
+                    <React.Fragment>
+                    <button key="0" onClick={() => this.props.createNewMessage(newMessage)}>
+                        New Message
+            </button>
+            </React.Fragment>
+                )
+            }
+        }
+
     render() {
         console.log(this.props)
         return (
@@ -22,6 +40,7 @@ export default class MessageEditList extends Component {
                     <h2>Write messages to help yourself navigate your challenges</h2>
                     {this.createMessageEditWindow()}
                     <MessagesList {...this.props} />
+                    {this.newMessageItem()}
                 </section>
             </React.Fragment>
         )
