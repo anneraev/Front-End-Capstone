@@ -35,11 +35,20 @@ export default class MessageEditList extends Component {
         return this.state.currentFieldText;
     }
 
+    //passes a newly-created message update back to Application Views for posting to the API, updates state as well.
+    handleMessageUpdate = () => {
+        const messageUpdate = {
+            content: this.state.currentFieldText,
+            id: this.state.currentMessageId
+        }
+        this.props.updateMessage(messageUpdate);
+    }
+
     renderEditButton = () => {
         if (this.state.currentMessageId !== 0) {
             return (
                 <React.Fragment>
-                    <button >
+                    <button onClick={this.handleMessageUpdate}>
                         Update Message
                 </button>
                 </React.Fragment>

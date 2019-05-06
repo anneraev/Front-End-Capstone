@@ -36,12 +36,12 @@ export default class ApplicationViews extends Component {
         return ChallengesAPI.post(issue).then(() => this.updateData())
     }
 
-    updateIssue = (issue, messageArray) => {
-        return ChallengesAPI.patch(issue.id, issue).then(() => {
-            messageArray.forEach(message => {
-                MessagesAPI.patch(message.id, message)
-            })
-        })
+    updateIssue = issue => {
+        return ChallengesAPI.patch(issue.id, issue)
+        }
+
+    updateMessage = message => {
+        MessagesAPI.patch(message.id, message).then(() => this.updateData())
     }
 
     updateData = () => {
@@ -71,7 +71,7 @@ export default class ApplicationViews extends Component {
                     return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage}/>
                 }}/>
                 <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
-                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData}  createNewMessage={this.createNewMessage} />
+                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage}/>
                 }} />
                 <Route exact path="/checkins" render={props => {
                     return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users}/>
