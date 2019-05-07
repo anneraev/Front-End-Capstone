@@ -12,12 +12,29 @@ export default class MessagesList extends Component {
         this.props.deleteMessage(event.target.id).then(() => this.props.updateData());
     }
 
+    //toggles message active property when button is clicked.
+    activate = (event) => {
+        const messageUpdate = {
+            active: true,
+            id: event.target.id
+        }
+        this.props.updateMessage(messageUpdate)
+    }
+
+    deactivate = (event) => {
+        const messageUpdate = {
+            active: false,
+            id: event.target.id
+        }
+        this.props.updateMessage(messageUpdate)
+    }
+
     //displays a button that, when clicked, toggles active/inactive flag for the message in the data. The appearance of the button changes based on the status of the message.
     renderActiveButton = (message) => {
         if (message.active === true) {
             return(
                 <React.Fragment>
-                    <button>
+                    <button key={message.id} id={message.id} onClick={this.deactivate}>
                         Active
                     </button>
                 </React.Fragment>
@@ -26,7 +43,7 @@ export default class MessagesList extends Component {
         {
             return(
                 <React.Fragment>
-                    <button>
+                    <button key={message.id} id={message.id} onClick={this.activate}>
                         Inactive
                     </button>
                 </React.Fragment>
@@ -59,7 +76,7 @@ export default class MessagesList extends Component {
                 )
             }
         } else {
-            if (message.active === true) {
+            if (message.issueId === Number(this.props.match.params.issueId) && message.active === true) {
                 return (
                     <li key={message.id} id={message.id}>
                         {message.content}
