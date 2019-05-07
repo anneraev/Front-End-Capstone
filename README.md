@@ -1,5 +1,5 @@
 
-##Front-End Capstone: An App for Bettering Yourself
+#Front-End Capstone: An App for Bettering Yourself
 
 If you're struggling with bad coping mechanisms, poor self-control, or you just aren't making progress on your self-improvement goals, this is the app for you. This Front-End Capstone provides simple tools for having daily interventions with yourself, allowing you to modify your behavior without having to devote as much mental bandwidth to controlling yourself. The app works under the assumption that the user knows what the right decisions are, but has trouble making them in the moment. It allows the user to take their own advice (or keep track of the advice of professionals).
 
@@ -7,6 +7,12 @@ The app helps the user to make better choices by "checking in" with them at spec
 
 ## Up-to-the-minute Check-In Feature
 The key feature of the app is its check-in feature. By scheduling times for the app to "check in" on you, the app can inquire as to your current state (via personal challenges stored in your profile), and by selecting those challenges, you are given a message to help you alter your thinking and hopefully correct the problem before it gets outside of your control.
+
+## Identify New Challenges
+Navigate to profile and select "New Challenge", then give it a title that reflects the problem you're having. Type a message to help you remind you how to navigate the problem, then hit "New Message". Finally, hit "Update Message" to finalize your changes to the title.
+
+## Update and Edit Challenges and Messages
+Add as many messages as you need to appear during a check-in. Just click "New Message" to add another one to a challenge. Click on an existing message to edit it, then click "update message" to confirm. You can also clear a message by clicking "clear". Finally, you can delete any issue by navigating to its edit page from your profile, and clicking "Delete Challenge".
 
 #React Information (Running the App)
 
