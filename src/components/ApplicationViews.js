@@ -12,6 +12,8 @@ import MessagesList from "./messages/MessagesList";
 import ChallengeEdit from "./challenges/ChallengesEdit";
 import ChallengesAPI from "./challenges/ChallengesAPI";
 import MessagesAPI from "./messages/MessagesAPI";
+import CheckInsAPI from "./checkIns/CheckInsAPI";
+import CheckInEditForm from "./checkIns/CheckInEditForm";
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -39,7 +41,7 @@ export default class ApplicationViews extends Component {
 
     updateIssue = issue => {
         return ChallengesAPI.patch(issue.id, issue)
-        }
+    }
 
     updateMessage = message => {
         MessagesAPI.patch(message.id, message).then(() => this.updateData())
@@ -51,6 +53,10 @@ export default class ApplicationViews extends Component {
 
     deleteIssue = id => {
         return ChallengesAPI.delete(id)
+    }
+
+    postCheckIn = alert => {
+        return CheckInsAPI.post(alert).then(() => this.updateData())
     }
 
     updateData = () => {
@@ -67,26 +73,30 @@ export default class ApplicationViews extends Component {
         if (this.state.checkIns === []) {
             window.location.reload();
         } else {
-        return (
-            <React.Fragment>
-                <Route exact path ="/dashboard" render={props => {
-                    return < Redirect to = "/" />
-                }} />
-                <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users}/> }} />
-                <Route exact path ="/challenge-messages/:issueId(\d+)" render={props => {
-                    return <MessagesList {...props} messages={this.state.messages} users={this.state.users}/>
-                }}/>
-                <Route exact path="/profile" render={props => {
-                    return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage}/>
-                }}/>
-                <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
-                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue}/>
-                }} />
-                <Route exact path="/checkins" render={props => {
-                    return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users}/>
-                }}/>
-            </React.Fragment>
-        )
-            }
+            return (
+                <React.Fragment>
+                    <Route exact path="/dashboard" render={props => {
+                        return < Redirect to="/" />
+                    }} />
+                    <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} /> }} />
+                    <Route exact path="/challenge-messages/:issueId(\d+)" render={props => {
+                        return <MessagesList {...props} messages={this.state.messages} users={this.state.users} />
+                    }} />
+                    <Route exact path="/profile" render={props => {
+                        return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage} />
+                    }} />
+                    <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
+                        return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue} />
+                    }} />
+                    <Route exact path="/checkins" render={props => {
+                        return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} />
+                    }} />
+                    <Route exact path="/checkIns/edit/:checkInId(\d+)" render={props => {
+                        return <CheckInEditForm {...props} checkIns={this.props.checkIns} users={this.props.users} />
+                    }} />
+
+                </React.Fragment>
+            )
+        }
     }
 }
