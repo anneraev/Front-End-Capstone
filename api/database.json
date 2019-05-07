@@ -10,47 +10,47 @@
   ],
   "messages": [
     {
-      "content": "This is a message.",
+      "content": "New Message",
       "issueId": 1,
       "active": true,
       "id": 1
     },
     {
-      "content": "This is an inactive message. It will not appear during check in.",
+      "content": "Another new message.",
       "issueId": 1,
-      "active": false,
+      "active": true,
       "id": 2
     },
     {
-      "content": "This is another challenge message, but it is only associated with this challenge and won't be shown in the previous challenge.",
-      "issueId": 2,
-      "active": true,
+      "content": "An inactive message that won't appear during Check In.",
+      "issueId": 1,
+      "active": false,
       "id": 3
     },
     {
-      "content": "Will this message show up in the wrong place?",
-      "issueId": 3,
+      "content": "This is a new challenge message, but it is only associated with this challenge. It won't appear in another challenge.",
+      "issueId": 2,
       "active": true,
       "id": 4
     }
   ],
   "issues": [
     {
-      "content": "This is a completely new challenge.",
+      "content": "Challenge 1",
       "userId": 1,
       "active": true,
       "id": 1
     },
     {
-      "content": "New Challenge",
+      "content": "Challenge 2",
       "userId": 1,
       "active": true,
       "id": 2
     },
     {
-      "content": "New Challenge",
+      "content": "Inactive Challenge",
       "userId": 1,
-      "active": true,
+      "active": false,
       "id": 3
     }
   ],
