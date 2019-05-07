@@ -44,6 +44,16 @@ export default class ChallengeEdit extends Component {
         sessionStorage.setItem("currentContent", this.issueState.cotent);
     }
 
+    //delete issue and all associated messages.
+    handleDelete = () => {
+        const id = this.issueState.id;
+        const associatedMessagesArray = this.props.messages.filter(message => message.issueId === id)
+        this.props.deleteIssue(id).then(() => this.props.updateData()).then(() => this.props.history.push("/profile"))
+        associatedMessagesArray.forEach(message => {
+            this.props.deleteMessage(message.id);
+        })
+    }
+
     //on Change takes a reference to a function that runs when something changes in the input field. Ref takes an anonymous callback function, in this case it creates a key/value pair belonging to this object, and passes a reference to that function to set the value to a reference to the element.
     render() {
         return (
@@ -54,6 +64,9 @@ export default class ChallengeEdit extends Component {
                 </section>
                 <MessageEditList {...this.props} />
                 <ChallengesSubmitButton {...this.props} issue={this.state} />
+                <button onClick={this.handleDelete}>
+                    Delete Challenge
+                </button>
             </React.Fragment>
         )
     }

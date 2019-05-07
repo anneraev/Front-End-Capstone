@@ -10,16 +10,16 @@
   ],
   "messages": [
     {
-      "id": 3,
-      "issueId": 2,
-      "content": "This message is tied to problem 22",
-      "active": true
-    },
-    {
       "content": "This is a reminder.",
       "issueId": 1,
       "active": true,
       "id": 4
+    },
+    {
+      "content": "New Message",
+      "issueId": 1,
+      "active": true,
+      "id": 5
     }
   ],
   "issues": [
@@ -27,12 +27,6 @@
       "id": 1,
       "userId": 1,
       "content": "Problem 1",
-      "active": true
-    },
-    {
-      "id": 2,
-      "userId": 1,
-      "content": "This is problem 22",
       "active": true
     }
   ],

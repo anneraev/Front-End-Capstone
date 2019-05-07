@@ -45,7 +45,11 @@ export default class ApplicationViews extends Component {
     }
 
     deleteMessage = id => {
-        MessagesAPI.delete(id).then(() => this.updateData())
+        return MessagesAPI.delete(id)
+    }
+
+    deleteIssue = id => {
+        return ChallengesAPI.delete(id)
     }
 
     updateData = () => {
@@ -75,7 +79,7 @@ export default class ApplicationViews extends Component {
                     return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage}/>
                 }}/>
                 <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
-                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage}/>
+                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue}/>
                 }} />
                 <Route exact path="/checkins" render={props => {
                     return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users}/>
