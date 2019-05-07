@@ -10,30 +10,48 @@
   ],
   "messages": [
     {
-      "id": 3,
-      "issueId": 2,
-      "content": "This message is tied to problem 22",
-      "active": true
+      "content": "This is a message.",
+      "issueId": 1,
+      "active": true,
+      "id": 1
     },
     {
-      "content": "This is a reminder.",
+      "content": "This is an inactive message. It will not appear during check in.",
       "issueId": 1,
+      "active": false,
+      "id": 2
+    },
+    {
+      "content": "This is another challenge message, but it is only associated with this challenge and won't be shown in the previous challenge.",
+      "issueId": 2,
+      "active": true,
+      "id": 3
+    },
+    {
+      "content": "Will this message show up in the wrong place?",
+      "issueId": 3,
       "active": true,
       "id": 4
     }
   ],
   "issues": [
     {
-      "id": 1,
+      "content": "This is a completely new challenge.",
       "userId": 1,
-      "content": "Problem 1",
-      "active": true
+      "active": true,
+      "id": 1
     },
     {
-      "id": 2,
+      "content": "New Challenge",
       "userId": 1,
-      "content": "This is problem 22",
-      "active": true
+      "active": true,
+      "id": 2
+    },
+    {
+      "content": "New Challenge",
+      "userId": 1,
+      "active": true,
+      "id": 3
     }
   ],
   "checkIns": [
