@@ -13,7 +13,6 @@ import ChallengeEdit from "./challenges/ChallengesEdit";
 import ChallengesAPI from "./challenges/ChallengesAPI";
 import MessagesAPI from "./messages/MessagesAPI";
 import CheckInsAPI from "./checkIns/CheckInsAPI";
-import CheckInEditForm from "./checkIns/CheckInEditForm";
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -59,6 +58,10 @@ export default class ApplicationViews extends Component {
         return CheckInsAPI.post(alert).then(() => this.updateData())
     }
 
+    updateCheckIn = alert => {
+        return CheckInsAPI.patch(alert.id, alert).then(() => this.updateData())
+    }
+
     updateData = () => {
         return ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState)).then(() => checkInUpdate.updateState(this.state));
     }
@@ -89,12 +92,8 @@ export default class ApplicationViews extends Component {
                         return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue} />
                     }} />
                     <Route exact path="/checkins" render={props => {
-                        return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} />
+                        return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} updateCheckIn={this.updateCheckIn}/>
                     }} />
-                    <Route exact path="/checkIns/edit/:checkInId(\d+)" render={props => {
-                        return <CheckInEditForm {...props} checkIns={this.props.checkIns} users={this.props.users} />
-                    }} />
-
                 </React.Fragment>
             )
         }
