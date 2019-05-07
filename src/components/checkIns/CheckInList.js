@@ -12,7 +12,7 @@ export default class CheckInList extends Component {
     createAlert = (checkIn) => {
             return(
                 <React.Fragment>
-                    <button>
+                    <button key={checkIn.id}>
                         {checkIn.alertTime}
                     </button>
                 </React.Fragment>
