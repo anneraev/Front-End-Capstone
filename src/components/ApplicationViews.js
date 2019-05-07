@@ -44,6 +44,10 @@ export default class ApplicationViews extends Component {
         MessagesAPI.patch(message.id, message).then(() => this.updateData())
     }
 
+    deleteMessage = id => {
+        MessagesAPI.delete(id).then(() => this.updateData())
+    }
+
     updateData = () => {
         return ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState)).then(() => checkInUpdate.updateState(this.state));
     }
@@ -71,7 +75,7 @@ export default class ApplicationViews extends Component {
                     return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage}/>
                 }}/>
                 <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
-                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage}/>
+                    return  <ChallengeEdit {...props} issues={this.state.issues}  messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage}/>
                 }} />
                 <Route exact path="/checkins" render={props => {
                     return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users}/>
