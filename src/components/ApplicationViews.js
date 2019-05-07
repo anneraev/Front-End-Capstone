@@ -26,6 +26,7 @@ export default class ApplicationViews extends Component {
     clearIssueStorage = () => {
         sessionStorage.removeItem("currentContent");
         sessionStorage.removeItem("currentId");
+        sessionStorage.removeItem("currentActive");
     }
 
     createNewMessage = message => {

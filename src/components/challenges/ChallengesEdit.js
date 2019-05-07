@@ -3,6 +3,17 @@ import ChallengesSubmitButton from "./ChallengesSubmitButton";
 import MessageEditList from "../messages/MessageEditList";
 
 export default class ChallengeEdit extends Component {
+    loadActiveState = () => {
+        if (!sessionStorage.getItem("currentActive")) {
+            sessionStorage.setItem("currentActive", this.props.issues[this.props.match.params.issueId - 1].active);
+        }
+        if (sessionStorage.getItem("currentActive") === "true") {
+            return true
+        } else {
+            return false
+        }
+    }
+
     loadContentState = () => {
         if (sessionStorage.getItem("currentContent")) {
             return sessionStorage.getItem("currentContent")
@@ -26,14 +37,15 @@ export default class ChallengeEdit extends Component {
     //state references this object.
     issueState = {
         content: this.loadContentState(),
-        id: this.loadIdState()
+        id: this.loadIdState(),
+        active: this.loadActiveState()
     }
 
     //current component state.
     state = {
         content: this.issueState.content,
         userId: 1,
-        active: true,
+        active: this.issueState.active,
         id: this.issueState.id
     }
 
@@ -54,10 +66,24 @@ export default class ChallengeEdit extends Component {
         })
     }
 
+    //changes active flag in state so that it will be udpated when the user clicks "update".
+    toggleActive = (event) => {
+        this.issueState.active = event.target.checked;
+        sessionStorage.setItem("currentActive", this.issueState.active)
+        this.setState(this.issueState);
+        console.log("issueState", this.issueState.active)
+        console.log("state", this.state)
+        console.log("storage", sessionStorage.getItem("currentActive"))
+    }
+
     //on Change takes a reference to a function that runs when something changes in the input field. Ref takes an anonymous callback function, in this case it creates a key/value pair belonging to this object, and passes a reference to that function to set the value to a reference to the element.
     render() {
         return (
             <React.Fragment>
+                <div>
+                    <span>Active?</span>
+                    <input type="checkbox" id={this.props.match.params.issueId} checked={this.state.active} onChange={this.toggleActive}></input>
+                </div>
                 <section className="form-group">
                     <input type="text" required className="form-control" onChange={this.handleInput} id="content" placeholder="What would you like help with?" value={this.state.content}>
                     </input>

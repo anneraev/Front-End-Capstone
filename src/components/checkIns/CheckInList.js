@@ -9,12 +9,25 @@ export default class CheckInList extends Component {
         checkInUpdate.startUpdate(this.props.history)
     }
 
+    createAlert = (checkIn) => {
+            return(
+                <React.Fragment>
+                    <button>
+                        {checkIn.alertTime}
+                    </button>
+                </React.Fragment>
+            )
+    }
+
     render(){
         return(
             <React.Fragment>
-                <div>
-                    Check-in List
-                </div>
+                <section>
+                    {this.props.checkIns.map(checkIn =>
+                        this.createAlert(checkIn)
+                    )
+                        }
+                </section>
             </React.Fragment>
         )
     }
