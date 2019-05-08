@@ -9,21 +9,29 @@ export default class NewChallengeButton extends Component {
             userId: 1,
             active: false
         }
-        const newId = this.props.issues.length + 1
+        let newId = this.props.issues.map(issue => {
+            return issue.id
+        })
+        newId = Math.max.apply(null, newId)
+        if (newId.toString() === "-Infinity") {
+            newId = 1
+        } else if (newId !== 0) {
+            newId += 1
+        }
         this.props.postIssue(issue).then(() => this.props.history.push(`profile/challenges/${newId}`));
     }
 
     render() {
-        return(
+        return (
             <React.Fragment>
-            <section>
-                <div>
-                Is there something else you'd like help with?
+                <section>
+                    <div>
+                        Is there something else you'd like help with?
                 </div>
-                <button onClick={event => this.constructNewIssue(event)}>
-                New Challenge
+                    <button onClick={event => this.constructNewIssue(event)}>
+                        New Challenge
                 </button>
-            </section>
+                </section>
             </React.Fragment>
         )
     }
