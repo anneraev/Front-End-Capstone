@@ -1,4 +1,4 @@
-import React, { Component } from  "react";
+import React, { Component } from "react";
 import checkInUpdate from "../checkInUpdate"
 
 export default class CheckInList extends Component {
@@ -14,7 +14,7 @@ export default class CheckInList extends Component {
         userId: this.alertState.userId
     }
 
-    componentWillMount(){
+    componentWillMount() {
         checkInUpdate.stopUpdate()
     }
     componentDidMount() {
@@ -33,13 +33,13 @@ export default class CheckInList extends Component {
     //creates an alert button.
     createAlert = (checkIn) => {
         console.log(checkIn.id)
-            return(
-                <React.Fragment>
-                    <button key={checkIn.alertTime} id={checkIn.id} onClick={this.setCurrentCheckIn}>
-                        {checkIn.alertTime}
-                    </button>
-                </React.Fragment>
-            )
+        return (
+            <React.Fragment>
+                <button key={checkIn.alertTime} id={checkIn.id} onClick={this.setCurrentCheckIn}>
+                    {checkIn.alertTime}
+                </button>
+            </React.Fragment>
+        )
     }
 
     //creates a new alert time from state and posts it to the API. Also sets the current ID to the new item's ID so the editing interface is brought up.
@@ -53,8 +53,10 @@ export default class CheckInList extends Component {
             return checkIn.id
         })
         newId = Math.max.apply(null, newId)
-        if (newId !== 0) {
-        newId += 1
+        if (newId.toString() === "-Infinity") {
+            newId = 1
+        } else if (newId !== 0) {
+            newId += 1
         }
         this.alertState.id = newId
         this.props.postCheckIn(alert)
@@ -89,34 +91,34 @@ export default class CheckInList extends Component {
 
     //build's a list of interractive elements centered around setting alert. Only renders when there's an active alert item (id !== 0).
     createAlertItems = () => {
-        if (this.state.id !== 0){
+        if (this.state.id !== 0) {
             return (
-            <React.Fragment>
-            <input type="time" value={this.state.alertTime} onChange={this.handleChange}></input>
-            <button onClick={this.updateAlert}>
-                Update
+                <React.Fragment>
+                    <input type="time" value={this.state.alertTime} onChange={this.handleChange}></input>
+                    <button onClick={this.updateAlert}>
+                        Update
             </button>
-            <button onClick={this.deleteAlert}>
-                Delete
+                    <button onClick={this.deleteAlert}>
+                        Delete
             </button>
-            </React.Fragment>
+                </React.Fragment>
             )
         }
     }
 
-    render(){
+    render() {
         console.log("checkin", this.props)
-        return(
+        return (
             <React.Fragment>
                 <section>
                     {this.props.checkIns.map(checkIn =>
                         this.createAlert(checkIn))
-                        }
+                    }
                 </section>
                 <button id="0" key="0" onClick={this.constructNewAlert}>
                     New Alert
                 </button>
-            {this.createAlertItems()}
+                {this.createAlertItems()}
             </React.Fragment>
         )
     }

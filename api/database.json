@@ -8,68 +8,13 @@
       "password": "password123"
     }
   ],
-  "messages": [
-    {
-      "content": "Changed First Message.",
-      "issueId": 1,
-      "active": true,
-      "id": 1
-    },
-    {
-      "content": "Another New Message",
-      "issueId": 1,
-      "active": true,
-      "id": 2
-    },
-    {
-      "content": "Inactive Message",
-      "issueId": 1,
-      "active": false,
-      "id": 3
-    },
-    {
-      "content": "This Message will not show in another challenge.",
-      "issueId": 2,
-      "active": true,
-      "id": 4
-    },
-    {
-      "content": "This Challenge will not appear during checkin because it is not active.",
-      "issueId": 3,
-      "active": true,
-      "id": 5
-    }
-  ],
-  "issues": [
-    {
-      "content": "This is problem 1",
-      "userId": 1,
-      "active": true,
-      "id": 1
-    },
-    {
-      "content": "New Challenge 2",
-      "userId": 1,
-      "active": true,
-      "id": 2
-    },
-    {
-      "content": "Inactive Challenge",
-      "userId": 1,
-      "active": false,
-      "id": 3
-    }
-  ],
+  "messages": [],
+  "issues": [],
   "checkIns": [
     {
       "userId": 1,
-      "alertTime": "14:00",
+      "alertTime": "09:00",
       "id": 1
-    },
-    {
-      "userId": 1,
-      "alertTime": "21:00",
-      "id": 2
     }
   ]
 }
