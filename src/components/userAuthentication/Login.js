@@ -16,13 +16,11 @@ export default class Login extends Component {
     handleEmail = (event) => {
         this.loginState.email = event.target.value;
         this.setState(this.loginState)
-        console.log(this.state.email)
     }
 
     handlePassword = (event) => {
         this.loginState.password = event.target.value;
         this.setState(this.loginState);
-        console.log(this.state.password);
     }
 
     credentialsCheck = (user) => {

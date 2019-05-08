@@ -26,7 +26,6 @@ export default class MessageEditList extends Component {
     //called when anything changes in the input field. Updates the issue object state internal to this component. The event targets ID becomes the key name and the value becomes the value of the key.
     handleInput = (event) => {
         this.messageState.currentFieldText = event.target.value
-        console.log(this.messageState.currentFieldText);
         this.setState(this.messageState);
     }
 
@@ -95,7 +94,6 @@ export default class MessageEditList extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <React.Fragment>
                 <section>

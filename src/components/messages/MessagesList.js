@@ -87,7 +87,6 @@ export default class MessagesList extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <React.Fragment>
                 <section>

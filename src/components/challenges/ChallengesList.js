@@ -3,6 +3,7 @@ import NewChallengeButton from "./NewChallengeButton";
 
 export default class ChallengesList extends Component {
     //clicking button will redirect to different page based on the URL of the page the buttons are displayed on. In "Home", displays read-only messages. From "profile", messages and issues are editable. Looks for string in pathname.
+    //currently, it filters out data based in userId, however in the future I should refactor so that it filters the array of data first by userId and then passes THAT array as props.
     challengeListButtonHandler = (issue) => {
         console.log(this.props);
         if (this.props.history.location.pathname === "/profile" && this.props.isUser(issue)) {

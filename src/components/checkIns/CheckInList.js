@@ -32,7 +32,6 @@ export default class CheckInList extends Component {
 
     //creates an alert button.
     createAlert = (checkIn) => {
-        console.log(checkIn.id)
         if (this.props.isUser(checkIn)) {
             return (
                 <React.Fragment>
@@ -94,6 +93,7 @@ export default class CheckInList extends Component {
     }
 
     //build's a list of interractive elements centered around setting alert. Only renders when there's an active alert item (id !== 0).
+        //currently, it filters out data based in userId, however in the future I should refactor so that it filters the array of data first by userId and then passes THAT array as props.
     createAlertItems = () => {
         if (this.state.id !== 0) {
             return (
@@ -111,7 +111,6 @@ export default class CheckInList extends Component {
     }
 
     render() {
-        console.log("checkin", this.props)
         return (
             <React.Fragment>
                 <section>

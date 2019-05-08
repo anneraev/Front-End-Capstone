@@ -3,7 +3,6 @@ import React, { Component } from "react";
 export default class LogOut extends Component {
     authenticationRevoke = () => {
         if (this.props.isAuthenticated()) {
-            console.log(this.props.isAuthenticated)
             alert("Logging Out...")
             sessionStorage.removeItem("userId");
         } else {

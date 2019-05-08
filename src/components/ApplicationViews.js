@@ -27,7 +27,6 @@ export default class ApplicationViews extends Component {
 
     //checks to see that a user has logged in.
     isAuthenticated = () => {
-        console.log("authenticated", sessionStorage.getItem("userId"))
         return sessionStorage.getItem("userId") !== null
     }
 
