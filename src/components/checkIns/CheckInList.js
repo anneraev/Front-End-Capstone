@@ -5,7 +5,7 @@ export default class CheckInList extends Component {
     alertState = {
         id: 0,
         alertTime: "12:00",
-        userId: 1
+        userId: 0
     }
 
     state = {
@@ -27,19 +27,21 @@ export default class CheckInList extends Component {
         this.alertState.id = id;
         const time = this.props.checkIns.find(checkin => checkin.id === this.alertState.id).alertTime
         this.alertState.alertTime = time;
-        this.setState(this.alertState)
+        this.setState(this.alertState);
     }
 
     //creates an alert button.
     createAlert = (checkIn) => {
         console.log(checkIn.id)
-        return (
-            <React.Fragment>
-                <button key={checkIn.alertTime} id={checkIn.id} onClick={this.setCurrentCheckIn}>
-                    {checkIn.alertTime}
-                </button>
-            </React.Fragment>
-        )
+        if (this.props.isUser(checkIn)) {
+            return (
+                <React.Fragment>
+                    <button key={checkIn.alertTime} id={checkIn.id} onClick={this.setCurrentCheckIn}>
+                        {checkIn.alertTime}
+                    </button>
+                </React.Fragment>
+            )
+        }
     }
 
     //creates a new alert time from state and posts it to the API. Also sets the current ID to the new item's ID so the editing interface is brought up.
@@ -58,6 +60,8 @@ export default class CheckInList extends Component {
         } else if (newId !== 0) {
             newId += 1
         }
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        this.alertState.userId = userId;
         this.alertState.id = newId
         this.props.postCheckIn(alert)
         this.setState(this.alertState)

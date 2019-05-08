@@ -25,9 +25,15 @@ export default class ApplicationViews extends Component {
         checkIns: [],
     }
 
+    //checks to see that a user has logged in.
     isAuthenticated = () => {
         console.log("authenticated", sessionStorage.getItem("userId"))
         return sessionStorage.getItem("userId") !== null
+    }
+
+    //checks to see that the passed data has a userId that matches the current user Id in session storage.
+    isUser = (data) => {
+        return data.userId === parseInt(sessionStorage.getItem("userId"))
     }
 
     clearIssueStorage = () => {
@@ -93,21 +99,21 @@ export default class ApplicationViews extends Component {
                     }} />
                     <Route exact path="/" render={props => {
                         if (this.isAuthenticated()) {
-                            return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} />
+                            return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} isUser={this.isUser}/>
                         } else {
                             return < Login {...props} users={this.state.users} />
                         }
                     }} />
                     <Route exact path="/challenge-messages/:issueId(\d+)" render={props => {
                         if (this.isAuthenticated()) {
-                            return <MessagesList {...props} messages={this.state.messages} users={this.state.users} />
+                            return <MessagesList {...props} messages={this.state.messages} users={this.state.users} isUser={this.isUser}/>
                         } else {
                             return < Login {...props} users={this.state.users} />
                         }
                     }} />
                     <Route exact path="/profile" render={props => {
                         if (this.isAuthenticated()) {
-                            return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage} />
+                            return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage} isUser={this.isUser}/>
                         }
                         else {
                             return < Login {...props} users={this.state.users} />
@@ -116,7 +122,7 @@ export default class ApplicationViews extends Component {
                     <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
                         if (this.isAuthenticated()) {
 
-                            return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue} />
+                            return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue} isUser={this.isUser}/>
                         }
                         else {
                             return < Login {...props} users={this.state.users} />
@@ -124,7 +130,7 @@ export default class ApplicationViews extends Component {
                     }} />
                     <Route exact path="/checkins" render={props => {
                         if (this.isAuthenticated()) {
-                            return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} updateCheckIn={this.updateCheckIn} deleteCheckIn={this.deleteCheckIn} />
+                            return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} updateCheckIn={this.updateCheckIn} deleteCheckIn={this.deleteCheckIn} isUser={this.isUser}/>
                         }
                         else {
                             return < Login {...props} users={this.state.users} />
