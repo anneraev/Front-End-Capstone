@@ -23,9 +23,9 @@ export default class CheckInList extends Component {
 
     //sets state based on what alarm button has been pressed, so that the corresponding data will be altered when alert time is updated. Also sets the default posiiton of the clock.
     setCurrentCheckIn = event => {
-        const id = event.target.id;
+        const id = parseInt(event.target.id);
         this.alertState.id = id;
-        const time = this.props.checkIns[id - 1].alertTime
+        const time = this.props.checkIns.find(checkin => checkin.id === this.alertState.id).alertTime
         this.alertState.alertTime = time;
         this.setState(this.alertState)
     }
@@ -49,8 +49,12 @@ export default class CheckInList extends Component {
             userId: this.state.userId,
             alertTime: this.state.alertTime
         }
-        const newId = this.props.checkIns.length + 1
-        this.alertState.id = newId;
+        let newId = this.props.checkIns.map(checkIn => {
+            return checkIn.id
+        })
+        newId = Math.max.apply(null, newId)
+        newId += 1
+        this.alertState.id = newId
         this.props.postCheckIn(alert)
         this.setState(this.alertState)
     }
@@ -58,6 +62,15 @@ export default class CheckInList extends Component {
     //patches update and resets state to defualt values.
     updateAlert = () => {
         this.props.updateCheckIn(this.state).then(() => {
+            this.alertState.alertTime = "12:00"
+            this.alertState.id = 0;
+            this.setState(this.alertState);
+        });
+    }
+
+    //calls an alert to be deleted from the data, then resets the state of this component.
+    deleteAlert = () => {
+        this.props.deleteCheckIn(this.state.id).then(() => {
             this.alertState.alertTime = "12:00"
             this.alertState.id = 0;
             this.setState(this.alertState);
@@ -72,14 +85,17 @@ export default class CheckInList extends Component {
         this.setState(this.alertState);
     }
 
-    //build's a list of interractive alert buttons.
+    //build's a list of interractive elements centered around setting alert. Only renders when there's an active alert item (id !== 0).
     createAlertItems = () => {
         if (this.state.id !== 0){
             return (
             <React.Fragment>
             <input type="time" value={this.state.alertTime} onChange={this.handleChange}></input>
             <button onClick={this.updateAlert}>
-                Update Time
+                Update
+            </button>
+            <button onClick={this.deleteAlert}>
+                Delete
             </button>
             </React.Fragment>
             )

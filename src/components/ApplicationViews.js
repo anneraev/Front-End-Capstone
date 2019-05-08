@@ -62,6 +62,10 @@ export default class ApplicationViews extends Component {
         return CheckInsAPI.patch(alert.id, alert).then(() => this.updateData())
     }
 
+    deleteCheckIn = id => {
+        return CheckInsAPI.delete(id).then(() => this.updateData())
+    }
+
     updateData = () => {
         return ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState)).then(() => checkInUpdate.updateState(this.state));
     }
@@ -92,7 +96,7 @@ export default class ApplicationViews extends Component {
                         return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue} />
                     }} />
                     <Route exact path="/checkins" render={props => {
-                        return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} updateCheckIn={this.updateCheckIn}/>
+                        return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} updateCheckIn={this.updateCheckIn} deleteCheckIn={this.deleteCheckIn}/>
                     }} />
                 </React.Fragment>
             )
