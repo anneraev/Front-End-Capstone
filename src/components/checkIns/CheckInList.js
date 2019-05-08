@@ -53,7 +53,9 @@ export default class CheckInList extends Component {
             return checkIn.id
         })
         newId = Math.max.apply(null, newId)
+        if (newId !== 0) {
         newId += 1
+        }
         this.alertState.id = newId
         this.props.postCheckIn(alert)
         this.setState(this.alertState)
