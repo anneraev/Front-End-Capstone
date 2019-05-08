@@ -5,7 +5,7 @@ import MessageEditList from "../messages/MessageEditList";
 export default class ChallengeEdit extends Component {
     loadActiveState = () => {
         if (!sessionStorage.getItem("currentActive")) {
-            sessionStorage.setItem("currentActive", this.props.issues.find(issue => issue.id === this.props.params.issueId))
+            sessionStorage.setItem("currentActive", this.props.issues.find(issue => issue.id === parseInt(this.props.match.params.issueId)).active);
         }
         if (sessionStorage.getItem("currentActive") === "true") {
             return true
@@ -19,7 +19,8 @@ export default class ChallengeEdit extends Component {
             return sessionStorage.getItem("currentContent")
         }
         else {
-            sessionStorage.setItem("currentContent", this.props.issues.find(issue => issue.id === this.props.params.issueId));
+            console.log("fucking props", this.props)
+            sessionStorage.setItem("currentContent", this.props.issues.find(issue => issue.id === parseInt(this.props.match.params.issueId)).content);
             return sessionStorage.getItem("currentContent")
         }
     }
@@ -29,7 +30,7 @@ export default class ChallengeEdit extends Component {
             return sessionStorage.getItem("currentId")
         }
         else {
-            sessionStorage.setItem("currentId", this.props.match.params.issueId);
+            sessionStorage.setItem("currentId", parseInt(this.props.match.params.issueId));
             return sessionStorage.getItem("currentId")
         }
     }

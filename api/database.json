@@ -10,7 +10,7 @@
   ],
   "messages": [
     {
-      "content": "This is a message.",
+      "content": "This is a message. Updated.",
       "issueId": 1,
       "active": true,
       "id": 1
@@ -18,20 +18,14 @@
     {
       "content": "This is an inactive message. It will not appear during check in.",
       "issueId": 1,
-      "active": false,
-      "id": 2
+      "active": true,
+      "id": 5
     },
     {
-      "content": "This is another challenge message, but it is only associated with this challenge and won't be shown in the previous challenge.",
-      "issueId": 2,
+      "content": "Update Message",
+      "issueId": 1,
       "active": true,
-      "id": 3
-    },
-    {
-      "content": "Will this message show up in the wrong place?",
-      "issueId": 3,
-      "active": true,
-      "id": 4
+      "id": 6
     }
   ],
   "issues": [
@@ -40,18 +34,6 @@
       "userId": 1,
       "active": true,
       "id": 1
-    },
-    {
-      "content": "New Challenge",
-      "userId": 1,
-      "active": true,
-      "id": 2
-    },
-    {
-      "content": "New Challenge",
-      "userId": 1,
-      "active": true,
-      "id": 3
     }
   ],
   "checkIns": [
