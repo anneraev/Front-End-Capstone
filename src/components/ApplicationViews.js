@@ -13,6 +13,8 @@ import ChallengeEdit from "./challenges/ChallengesEdit";
 import ChallengesAPI from "./challenges/ChallengesAPI";
 import MessagesAPI from "./messages/MessagesAPI";
 import CheckInsAPI from "./checkIns/CheckInsAPI";
+import Login from "./userAuthentication/Login";
+import LogOut from "./userAuthentication/LogOut";
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -22,7 +24,11 @@ export default class ApplicationViews extends Component {
         issues: [],
         checkIns: [],
     }
-    //array of messages for the currently selected issue in Profile.
+
+    isAuthenticated = () => {
+        console.log("authenticated", sessionStorage.getItem("userId"))
+        return sessionStorage.getItem("userId") !== null
+    }
 
     clearIssueStorage = () => {
         sessionStorage.removeItem("currentContent");
@@ -85,18 +91,47 @@ export default class ApplicationViews extends Component {
                     <Route exact path="/dashboard" render={props => {
                         return < Redirect to="/" />
                     }} />
-                    <Route exact path="/" render={props => { return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} /> }} />
+                    <Route exact path="/" render={props => {
+                        if (this.isAuthenticated()) {
+                            return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} />
+                        } else {
+                            return < Login {...props} users={this.state.users} />
+                        }
+                    }} />
                     <Route exact path="/challenge-messages/:issueId(\d+)" render={props => {
-                        return <MessagesList {...props} messages={this.state.messages} users={this.state.users} />
+                        if (this.isAuthenticated()) {
+                            return <MessagesList {...props} messages={this.state.messages} users={this.state.users} />
+                        } else {
+                            return < Login {...props} users={this.state.users} />
+                        }
                     }} />
                     <Route exact path="/profile" render={props => {
-                        return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage} />
+                        if (this.isAuthenticated()) {
+                            return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage} />
+                        }
+                        else {
+                            return < Login {...props} users={this.state.users} />
+                        }
                     }} />
                     <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
-                        return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue} />
+                        if (this.isAuthenticated()) {
+
+                            return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue} />
+                        }
+                        else {
+                            return < Login {...props} users={this.state.users} />
+                        }
                     }} />
                     <Route exact path="/checkins" render={props => {
-                        return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} updateCheckIn={this.updateCheckIn} deleteCheckIn={this.deleteCheckIn}/>
+                        if (this.isAuthenticated()) {
+                            return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} updateCheckIn={this.updateCheckIn} deleteCheckIn={this.deleteCheckIn} />
+                        }
+                        else {
+                            return < Login {...props} users={this.state.users} />
+                        }
+                    }} />
+                    <Route exact path="/logOut" render={props => {
+                        return < LogOut {...props} isAuthenticated={this.isAuthenticated}/>
                     }} />
                 </React.Fragment>
             )

@@ -10,11 +10,5 @@
   ],
   "messages": [],
   "issues": [],
-  "checkIns": [
-    {
-      "userId": 1,
-      "alertTime": "09:00",
-      "id": 1
-    }
-  ]
+  "checkIns": []
 }
