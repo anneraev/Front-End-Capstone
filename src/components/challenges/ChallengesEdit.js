@@ -19,7 +19,6 @@ export default class ChallengeEdit extends Component {
             return sessionStorage.getItem("currentContent")
         }
         else {
-            console.log("fucking props", this.props)
             sessionStorage.setItem("currentContent", this.props.issues.find(issue => issue.id === parseInt(this.props.match.params.issueId)).content);
             return sessionStorage.getItem("currentContent")
         }
@@ -45,7 +44,6 @@ export default class ChallengeEdit extends Component {
     //current component state.
     state = {
         content: this.issueState.content,
-        userId: 1,
         active: this.issueState.active,
         id: this.issueState.id
     }
@@ -72,9 +70,6 @@ export default class ChallengeEdit extends Component {
         this.issueState.active = event.target.checked;
         sessionStorage.setItem("currentActive", this.issueState.active)
         this.setState(this.issueState);
-        console.log("issueState", this.issueState.active)
-        console.log("state", this.state)
-        console.log("storage", sessionStorage.getItem("currentActive"))
     }
 
     //on Change takes a reference to a function that runs when something changes in the input field. Ref takes an anonymous callback function, in this case it creates a key/value pair belonging to this object, and passes a reference to that function to set the value to a reference to the element.

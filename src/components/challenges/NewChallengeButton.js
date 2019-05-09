@@ -6,7 +6,7 @@ export default class NewChallengeButton extends Component {
         event.preventDefault()
         const issue = {
             content: "New Challenge",
-            userId: 1,
+            userId: parseInt(sessionStorage.getItem("userId")),
             active: false
         }
         let newId = this.props.issues.map(issue => {

@@ -6,15 +6,72 @@
       "userName": "AnneRae",
       "email": "anneraevick@outlook.com",
       "password": "password123"
+    },
+    {
+      "email": "tonyrayvick@hotmail.com",
+      "userName": "DeadName",
+      "name": "Anthony R Vick",
+      "password": "newpassword",
+      "id": 2
     }
   ],
-  "messages": [],
-  "issues": [],
+  "messages": [
+    {
+      "content": "New Message",
+      "issueId": 1,
+      "active": true,
+      "id": 1
+    },
+    {
+      "content": "adsfasdf",
+      "issueId": 2,
+      "active": true,
+      "id": 2
+    },
+    {
+      "content": "adfasfadssadfasd",
+      "issueId": 2,
+      "active": true,
+      "id": 3
+    },
+    {
+      "content": "adsfasdfasdfadsf",
+      "issueId": 2,
+      "active": true,
+      "id": 4
+    },
+    {
+      "content": "adfasdf",
+      "issueId": 4,
+      "active": true,
+      "id": 5
+    }
+  ],
+  "issues": [
+    {
+      "content": "New Chasdfadfasdallenge",
+      "userId": 1,
+      "active": true,
+      "id": 1
+    },
+    {
+      "content": "New Challengeasdfasf",
+      "userId": 1,
+      "active": true,
+      "id": 2
+    },
+    {
+      "content": "This belongs to user 2.",
+      "userId": 2,
+      "active": true,
+      "id": 4
+    }
+  ],
   "checkIns": [
     {
-      "userId": 1,
-      "alertTime": "09:00",
-      "id": 1
+      "userId": 2,
+      "alertTime": "08:55",
+      "id": 4
     }
   ]
 }
