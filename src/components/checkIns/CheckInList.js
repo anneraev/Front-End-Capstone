@@ -43,25 +43,16 @@ export default class CheckInList extends Component {
         }
     }
 
-    //creates a new alert time from state and posts it to the API. Also sets the current ID to the new item's ID so the editing interface is brought up.
+    //creates a new alert time from state and posts it to the API.
     constructNewAlert = event => {
         event.preventDefault()
         const alert = {
             userId: this.state.userId,
             alertTime: this.state.alertTime
         }
-        let newId = this.props.checkIns.map(checkIn => {
-            return checkIn.id
-        })
-        newId = Math.max.apply(null, newId)
-        if (newId.toString() === "-Infinity") {
-            newId = 1
-        } else if (newId !== 0) {
-            newId += 1
-        }
         const userId = parseInt(sessionStorage.getItem("userId"))
         this.alertState.userId = userId;
-        this.alertState.id = newId
+        this.alertState.id = 0;
         this.props.postCheckIn(alert)
         this.setState(this.alertState)
     }
@@ -93,7 +84,8 @@ export default class CheckInList extends Component {
     }
 
     //build's a list of interractive elements centered around setting alert. Only renders when there's an active alert item (id !== 0).
-        //currently, it filters out data based in userId, however in the future I should refactor so that it filters the array of data first by userId and then passes THAT array as props.
+    //currently, it filters out data based in userId, however in the future I should refactor so that it filters the array of data first by userId and then passes THAT array as props.
+    //IMPROVEMENT: Forgot about using "expand" in fetch call to get users. Not sure if it will make it easier, but should look into it since i've never tried to use it in code.
     createAlertItems = () => {
         if (this.state.id !== 0) {
             return (
@@ -106,6 +98,13 @@ export default class CheckInList extends Component {
                         Delete
             </button>
                 </React.Fragment>
+            )
+        }
+        else {
+            return (
+            <React.Fragment>
+                <input type="time" value={this.state.alertTime} onChange={this.handleChange}></input>
+            </React.Fragment>
             )
         }
     }

@@ -37,9 +37,9 @@ export default class ApplicationViews extends Component {
     }
 
     clearIssueStorage = () => {
-        sessionStorage.removeItem("currentContent");
+        sessionStorage.removeItem("currentcontent");
         sessionStorage.removeItem("currentId");
-        sessionStorage.removeItem("currentActive");
+        sessionStorage.removeItem("currentactive");
     }
 
     createNewUser = user => {
