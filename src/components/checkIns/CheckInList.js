@@ -46,14 +46,13 @@ export default class CheckInList extends Component {
     //creates a new alert time from state and posts it to the API.
     constructNewAlert = event => {
         event.preventDefault()
+        this.alertState.userId = parseInt(sessionStorage.getItem("userId"))
         const alert = {
-            userId: this.state.userId,
+            userId: this.alertState.userId,
             alertTime: this.state.alertTime
         }
-        const userId = parseInt(sessionStorage.getItem("userId"))
-        this.alertState.userId = userId;
-        this.alertState.id = 0;
         this.props.postCheckIn(alert)
+        this.alertState.Id = 0;
         this.setState(this.alertState)
     }
 

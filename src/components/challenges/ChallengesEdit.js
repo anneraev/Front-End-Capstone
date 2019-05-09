@@ -8,19 +8,28 @@ export default class ChallengeEdit extends Component {
         return this.props.issues.find(issue => issue.id === parseInt(this.props.match.params.issueId))
     }
 
+    //determines if the current issue exists or not.
+    issueExists = () => {
+        if (this.getIssue()) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     //session storage prevents problems with reloading page. A lot of data needs to remain persistent because messages are tied to issues and not to user.
     loadContent = (type) => {
         if (sessionStorage.getItem(`current${type}`)) {
             return sessionStorage.getItem(`current${type}`)
         }
         else {
-            const issue = this.getIssue()
-            if (issue) {
-            sessionStorage.setItem(`current${type}`, issue[type]);
-            console.log(issue[type])
+            if (this.issueExists()) {
+                const issue = this.getIssue()
+                sessionStorage.setItem(`current${type}`, issue[type]);
+                console.log(issue[type])
             } else {
                 sessionStorage.setItem(`current${type}`, () => {
-                    if (type === "active"){
+                    if (type === "active") {
                         return true
                     } else {
                         return ""
@@ -31,7 +40,7 @@ export default class ChallengeEdit extends Component {
             if (storedItem === "true") {
                 return true
             }
-            else if (storedItem === "false"){
+            else if (storedItem === "false") {
                 return false
             } else {
                 return storedItem
@@ -102,9 +111,11 @@ export default class ChallengeEdit extends Component {
                 </section>
                 <MessageEditList {...this.props} />
                 <ChallengesSubmitButton {...this.props} issue={this.state} />
-                <button onClick={this.handleDelete}>
-                    Delete Challenge
+                <React.Fragment>
+                    <button onClick={this.handleDelete}>
+                        Delete Challenge
                 </button>
+                </React.Fragment>
             </React.Fragment>
         )
     }
