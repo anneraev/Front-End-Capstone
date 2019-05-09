@@ -23,6 +23,7 @@ export default {
             }
             const time = `${hours}:${minutes}`
             //checks current time against all checkIn times for user, and initiates an alert when the current time matches an alert time.
+            //IMPROVEMENT: Create and pass property containing just the data for current user.
             currentState.checkIns.forEach(checkIn => {
                 if (checkIn.alertTime === time && seconds === 0 && parseInt(sessionStorage.getItem("userId")) === checkIn.userId){
                     alert("redirecting");

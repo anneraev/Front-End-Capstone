@@ -46,6 +46,12 @@
       "issueId": 7,
       "active": true,
       "id": 8
+    },
+    {
+      "content": "Even if you have an inkling as to what to do, or you think you can figure it out on your own, ask someone else what they thing.",
+      "issueId": 8,
+      "active": true,
+      "id": 9
     }
   ],
   "issues": [
@@ -72,6 +78,12 @@
       "active": true,
       "userId": 1,
       "id": 7
+    },
+    {
+      "content": "I don't ask enough questions and I run myself into problems.",
+      "active": true,
+      "userId": 1,
+      "id": 8
     }
   ],
   "checkIns": [
@@ -84,41 +96,6 @@
       "userId": 3,
       "alertTime": "10:55",
       "id": 9
-    },
-    {
-      "userId": 1,
-      "alertTime": "19:00",
-      "id": 10
-    },
-    {
-      "userId": 1,
-      "alertTime": "12:00",
-      "id": 12
-    },
-    {
-      "userId": 1,
-      "alertTime": "21:00",
-      "id": 13
-    },
-    {
-      "userId": 1,
-      "alertTime": "12:00",
-      "id": 14
-    },
-    {
-      "userId": 1,
-      "alertTime": "12:00",
-      "id": 16
-    },
-    {
-      "userId": 1,
-      "alertTime": "12:00",
-      "id": 17
-    },
-    {
-      "userId": 1,
-      "alertTime": "08:55",
-      "id": 18
     }
   ]
 }
