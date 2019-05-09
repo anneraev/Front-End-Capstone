@@ -26,8 +26,8 @@ export default class ChallengesList extends Component {
         }
     }
 
+    // renders section with .map function that creates an array of items with JSX wrappers from the items inside the array of objects specified.
     render() {
-        //renders section with .map function that creates an array of items with JSX wrappers from the items inside the array of objects specified.
         return (
             <React.Fragment>
                 <section>
