@@ -20,26 +20,31 @@ export default class Login extends Component {
         name: this.loginState.name
     }
 
+    //sets email.
     handleEmail = (event) => {
         this.loginState.email = event.target.value;
         this.setState(this.loginState)
     }
 
+    //sets password from input.
     handlePassword = (event) => {
         this.loginState.password = event.target.value;
         this.setState(this.loginState);
     }
 
+    //sets state name from input.
     handleName = (event) => {
         this.loginState.name = event.target.value;
         this.setState(this.loginState);
     }
 
+    //sets state username from input.
     handleUserName = (event) => {
         this.loginState.userName = event.target.value;
         this.setState(this.loginState);
     }
 
+    //compares input email and password in state with email and password of the user passed to it.
     credentialsCheck = (user) => {
         if (user.email === this.state.email && user.password === this.state.password) {
             return true
@@ -50,6 +55,7 @@ export default class Login extends Component {
         sessionStorage.setItem("userId", user.id)
     }
 
+    //logs in user after confirming that the user information entered matches a user in the database. Deletes the information from the input boxes and opens up the home page. Also called when a new user registers.
     login = () => {
         const loggedUser = this.props.users.find(user => {
             return this.credentialsCheck(user)
@@ -66,6 +72,8 @@ export default class Login extends Component {
         this.props.history.push("/");
     }
 
+    //conditional checks that all forms are filled, then creates a new user from the form information.
+    //Should probably include a way to confirm that the values of each form conform to a specific standard (i.e.: passwords have specific format, ect.)
     register = () => {
         if (this.state.user === "" || this.state.userName === "" || this.state.password === "" || this.state.email === "") {
             alert("Please fill out all required forms.")

@@ -3,24 +3,48 @@ import ChallengesSubmitButton from "./ChallengesSubmitButton";
 import MessageEditList from "../messages/MessageEditList";
 
 export default class ChallengeEdit extends Component {
-    loadActiveState = () => {
-        if (!sessionStorage.getItem("currentActive")) {
-            sessionStorage.setItem("currentActive", this.props.issues.find(issue => issue.id === parseInt(this.props.match.params.issueId)).active);
-        }
-        if (sessionStorage.getItem("currentActive") === "true") {
+    //finds the current issue from Id and returns it.
+    getIssue = () => {
+        return this.props.issues.find(issue => issue.id === parseInt(this.props.match.params.issueId))
+    }
+
+    //determines if the current issue exists or not.
+    issueExists = () => {
+        if (this.getIssue()) {
             return true
         } else {
             return false
         }
     }
 
-    loadContentState = () => {
-        if (sessionStorage.getItem("currentContent")) {
-            return sessionStorage.getItem("currentContent")
+    //session storage prevents problems with reloading page. A lot of data needs to remain persistent because messages are tied to issues and not to user.
+    loadContent = (type) => {
+        if (sessionStorage.getItem(`current${type}`)) {
+            return sessionStorage.getItem(`current${type}`)
         }
         else {
-            sessionStorage.setItem("currentContent", this.props.issues.find(issue => issue.id === parseInt(this.props.match.params.issueId)).content);
-            return sessionStorage.getItem("currentContent")
+            if (this.issueExists()) {
+                const issue = this.getIssue()
+                sessionStorage.setItem(`current${type}`, issue[type]);
+                console.log(issue[type])
+            } else {
+                sessionStorage.setItem(`current${type}`, () => {
+                    if (type === "active") {
+                        return true
+                    } else {
+                        return ""
+                    }
+                })
+            }
+            const storedItem = sessionStorage.getItem(`current${type}`)
+            if (storedItem === "true") {
+                return true
+            }
+            else if (storedItem === "false") {
+                return false
+            } else {
+                return storedItem
+            }
         }
     }
 
@@ -36,16 +60,16 @@ export default class ChallengeEdit extends Component {
 
     //state references this object.
     issueState = {
-        content: this.loadContentState(),
+        content: this.loadContent("content"),
         id: this.loadIdState(),
-        active: this.loadActiveState()
+        active: this.loadContent("active"),
     }
 
     //current component state.
     state = {
         content: this.issueState.content,
         active: this.issueState.active,
-        id: this.issueState.id
+        id: this.issueState.id,
     }
 
     //called when anything changes in the input field. Updates the issue object state internal to this, then loads the sets the actual state to that object, then sets item in session storage for retrieval in case the page reloads for whatever reason (storage is deleted when navigating to profile page).
@@ -72,8 +96,9 @@ export default class ChallengeEdit extends Component {
         this.setState(this.issueState);
     }
 
-    //on Change takes a reference to a function that runs when something changes in the input field. Ref takes an anonymous callback function, in this case it creates a key/value pair belonging to this object, and passes a reference to that function to set the value to a reference to the element.
+    //on Change takes a reference to a function that runs when something changes in the input field. In this case it creates a key/value pair belonging to this object, and passes a reference to that function to set the value to a reference to the element.
     render() {
+        console.log(this.state)
         return (
             <React.Fragment>
                 <div>
@@ -86,9 +111,11 @@ export default class ChallengeEdit extends Component {
                 </section>
                 <MessageEditList {...this.props} />
                 <ChallengesSubmitButton {...this.props} issue={this.state} />
-                <button onClick={this.handleDelete}>
-                    Delete Challenge
+                <React.Fragment>
+                    <button onClick={this.handleDelete}>
+                        Delete Challenge
                 </button>
+                </React.Fragment>
             </React.Fragment>
         )
     }

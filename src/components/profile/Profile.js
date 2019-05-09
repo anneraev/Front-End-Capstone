@@ -6,6 +6,8 @@ export default class Profile extends Component {
     componentWillMount(){
         checkInUpdate.stopUpdate()
     }
+
+    //starts update and also clears previous issue from storage.
     componentDidMount() {
         checkInUpdate.startUpdate(this.props.history)
         this.props.clearIssueStorage();

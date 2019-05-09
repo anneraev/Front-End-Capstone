@@ -13,58 +13,65 @@
       "name": "Anthony R Vick",
       "password": "newpassword",
       "id": 2
+    },
+    {
+      "email": "name@email.com",
+      "userName": "userName",
+      "name": "name",
+      "password": "password",
+      "id": 3
     }
   ],
   "messages": [
-    {
-      "content": "New Message",
-      "issueId": 1,
-      "active": true,
-      "id": 1
-    },
-    {
-      "content": "adsfasdf",
-      "issueId": 2,
-      "active": true,
-      "id": 2
-    },
-    {
-      "content": "adfasfadssadfasd",
-      "issueId": 2,
-      "active": true,
-      "id": 3
-    },
-    {
-      "content": "adsfasdfasdfadsf",
-      "issueId": 2,
-      "active": true,
-      "id": 4
-    },
     {
       "content": "adfasdf",
       "issueId": 4,
       "active": true,
       "id": 5
+    },
+    {
+      "content": "Sometimes you lose sight of the point of what you're doing moment to moment, so your comments are there to stay on that ball. Other than that, you know the code you wrote and what it does.",
+      "issueId": 5,
+      "active": true,
+      "id": 6
+    },
+    {
+      "content": "Imagine everyone in their underwear.",
+      "issueId": 6,
+      "active": true,
+      "id": 7
+    },
+    {
+      "content": "This is what will remind me of what is helpful to do in this situation.",
+      "issueId": 7,
+      "active": true,
+      "id": 8
     }
   ],
   "issues": [
-    {
-      "content": "New Chasdfadfasdallenge",
-      "userId": 1,
-      "active": true,
-      "id": 1
-    },
-    {
-      "content": "New Challengeasdfasf",
-      "userId": 1,
-      "active": true,
-      "id": 2
-    },
     {
       "content": "This belongs to user 2.",
       "userId": 2,
       "active": true,
       "id": 4
+    },
+    {
+      "content": "I have trouble talking about code....",
+      "userId": 1,
+      "active": true,
+      "id": 5
+    },
+    {
+      "content": "I get agitated during presentations.",
+      "userId": 3,
+      "active": true,
+      "id": 6
+    },
+    {
+      "content": "I need help with a thing.",
+      "active": true,
+      "userId": 1,
+      "id": 7
     }
   ],
   "checkIns": [
@@ -72,6 +79,46 @@
       "userId": 2,
       "alertTime": "08:55",
       "id": 4
+    },
+    {
+      "userId": 3,
+      "alertTime": "10:55",
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "alertTime": "19:00",
+      "id": 10
+    },
+    {
+      "userId": 1,
+      "alertTime": "12:00",
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "alertTime": "21:00",
+      "id": 13
+    },
+    {
+      "userId": 1,
+      "alertTime": "12:00",
+      "id": 14
+    },
+    {
+      "userId": 1,
+      "alertTime": "12:00",
+      "id": 16
+    },
+    {
+      "userId": 1,
+      "alertTime": "12:00",
+      "id": 17
+    },
+    {
+      "userId": 1,
+      "alertTime": "08:55",
+      "id": 18
     }
   ]
 }

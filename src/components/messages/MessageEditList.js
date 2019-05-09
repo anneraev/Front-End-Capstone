@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import MessagesList from "./MessagesList";
 
-//get messageId when clicking message in messageList.
-
 export default class MessageEditList extends Component {
     //referened by state and handleInput to alter messages and text input.
     messageState = {
@@ -43,6 +41,7 @@ export default class MessageEditList extends Component {
         this.props.updateMessage(messageUpdate);
     }
 
+    //renders the edit button only if there is a message Id stored in state, so that there is reference to the message being edited.
     renderEditButton = () => {
         if (this.state.currentMessageId !== 0) {
             return (
@@ -55,6 +54,7 @@ export default class MessageEditList extends Component {
         }
     }
 
+    //creates message edit window and sets the value of the box to what is in state.
     createMessageEditWindow = () => {
         return (
             <React.Fragment>
@@ -64,6 +64,7 @@ export default class MessageEditList extends Component {
         )
     }
 
+    //creteas new message object and returns it. Also resets input fields and state.
     constructNewMessage = () => {
         //content equal to currentFieldText
         const newMessage = {
