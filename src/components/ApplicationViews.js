@@ -15,6 +15,7 @@ import MessagesAPI from "./messages/MessagesAPI";
 import CheckInsAPI from "./checkIns/CheckInsAPI";
 import Login from "./userAuthentication/Login";
 import LogOut from "./userAuthentication/LogOut";
+import UsersAPI from "./users/UsersAPI";
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -39,6 +40,10 @@ export default class ApplicationViews extends Component {
         sessionStorage.removeItem("currentContent");
         sessionStorage.removeItem("currentId");
         sessionStorage.removeItem("currentActive");
+    }
+
+    createNewUser = user => {
+        return UsersAPI.post(user).then(() => this.updateData())
     }
 
     createNewMessage = message => {
@@ -100,14 +105,14 @@ export default class ApplicationViews extends Component {
                         if (this.isAuthenticated()) {
                             return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} isUser={this.isUser}/>
                         } else {
-                            return < Login {...props} users={this.state.users} />
+                            return < Login {...props} users={this.state.users} createNewUser={this.createNewUser}/>
                         }
                     }} />
                     <Route exact path="/challenge-messages/:issueId(\d+)" render={props => {
                         if (this.isAuthenticated()) {
                             return <MessagesList {...props} messages={this.state.messages} users={this.state.users} isUser={this.isUser}/>
                         } else {
-                            return < Login {...props} users={this.state.users} />
+                            return < Login {...props} users={this.state.users} createNewUser={this.createNewUser}/>
                         }
                     }} />
                     <Route exact path="/profile" render={props => {
@@ -115,7 +120,7 @@ export default class ApplicationViews extends Component {
                             return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage} isUser={this.isUser}/>
                         }
                         else {
-                            return < Login {...props} users={this.state.users} />
+                            return < Login {...props} users={this.state.users} createNewUser={this.createNewUser}/>
                         }
                     }} />
                     <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
@@ -124,7 +129,7 @@ export default class ApplicationViews extends Component {
                             return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue} isUser={this.isUser}/>
                         }
                         else {
-                            return < Login {...props} users={this.state.users} />
+                            return < Login {...props} users={this.state.users} createNewUser={this.createNewUser}/>
                         }
                     }} />
                     <Route exact path="/checkins" render={props => {
@@ -132,7 +137,7 @@ export default class ApplicationViews extends Component {
                             return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} updateCheckIn={this.updateCheckIn} deleteCheckIn={this.deleteCheckIn} isUser={this.isUser}/>
                         }
                         else {
-                            return < Login {...props} users={this.state.users} />
+                            return < Login {...props} users={this.state.users} createNewUser={this.createNewUser}/>
                         }
                     }} />
                     <Route exact path="/logOut" render={props => {

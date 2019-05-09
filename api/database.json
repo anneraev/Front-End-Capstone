@@ -6,6 +6,13 @@
       "userName": "AnneRae",
       "email": "anneraevick@outlook.com",
       "password": "password123"
+    },
+    {
+      "email": "tonyrayvick@hotmail.com",
+      "userName": "DeadName",
+      "name": "Anthony R Vick",
+      "password": "newpassword",
+      "id": 2
     }
   ],
   "messages": [
@@ -32,6 +39,12 @@
       "issueId": 2,
       "active": true,
       "id": 4
+    },
+    {
+      "content": "adfasdf",
+      "issueId": 4,
+      "active": true,
+      "id": 5
     }
   ],
   "issues": [
@@ -46,23 +59,19 @@
       "userId": 1,
       "active": true,
       "id": 2
+    },
+    {
+      "content": "This belongs to user 2.",
+      "userId": 2,
+      "active": true,
+      "id": 4
     }
   ],
   "checkIns": [
     {
-      "userId": 1,
-      "alertTime": "17:01",
-      "id": 1
-    },
-    {
-      "userId": 1,
-      "alertTime": "05:00",
-      "id": 2
-    },
-    {
-      "userId": 1,
-      "alertTime": "17:13",
-      "id": 3
+      "userId": 2,
+      "alertTime": "08:55",
+      "id": 4
     }
   ]
 }
