@@ -15,10 +15,10 @@ export default {
             let hours = now.getHours()
             let minutes = now.getMinutes()
             const seconds = now.getSeconds()
-            if (hours >= 9 && hours < 0) {
+            if (hours <= 9 && hours > 10) {
                 hours = `0${hours}`
             }
-            if (minutes >= 9 && minutes < 0) {
+            if (minutes <= 9 && minutes > 10) {
                 minutes = `0${minutes}`
             }
             const time = `${hours}:${minutes}`
