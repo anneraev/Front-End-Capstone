@@ -5,7 +5,7 @@ export default class CheckInList extends Component {
     alertState = {
         id: 0,
         alertTime: "12:00",
-        userId: 0
+        userId: parseInt(sessionStorage.getItem("userId"))
     }
 
     state = {
