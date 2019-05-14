@@ -33,6 +33,7 @@ export default class ApplicationViews extends Component {
     isUser = (data) => {
         return data.userId === parseInt(sessionStorage.getItem("userId"))
     }
+    //API functions call functionst that interract with the API, update the API, fetch the new data from the API, and then generally set State to match the current API and in the case of checkIns, updates the array of alerts that checkInsUpdate.js uses.
 
     //user API
     createNewUser = user => {
@@ -48,11 +49,19 @@ export default class ApplicationViews extends Component {
 
     updateMessage = message => {
         const newState = {}
-        return MessagesAPI.patch(message.id, message).then(() => this.updateData()).then(() => MessagesAPI.getAll().then(messages => newState.messages = messages)).then(() => this.setState(newState))
+        return MessagesAPI.patch(message.id, message).then(() => MessagesAPI.getAll().then(messages => newState.messages = messages)).then(() => this.setState(newState))
     }
 
-    deleteMessage = id => {
-        return MessagesAPI.delete(id)
+    deleteSingleMessage = id => {
+        const newState = {}
+        return MessagesAPI.delete(id).then(() => MessagesAPI.getAll().then(messages => newState.messages = messages)).then(() => this.setState(newState))
+    }
+
+    //separate call for deleting all messages associated with an issue (called when deleting an issue). Since these are no longer accessible by the user once their associated issue is deleted, there's no special need for this function to be waited on, and state will only be updated once the issue itself is deleted by the function which calls this one.
+    deleteMessagesInMessageList = messageList => {
+        return messageList.forEach(message => {
+            MessagesAPI.delete(message.id)
+        })
     }
 
     //Issue API
@@ -66,25 +75,26 @@ export default class ApplicationViews extends Component {
         return ChallengesAPI.patch(issue.id, issue).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(() => this.setState(newState))
     }
 
+    //deletes an issue. Before updating state, messages are also fetched from the API, as any messages associated with the deleted issue will have been previously deleted.
     deleteIssue = id => {
         const newState = {}
-        return ChallengesAPI.delete(id).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(() => this.setState(newState))
+        return ChallengesAPI.delete(id).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(MessagesAPI.getAll().then(messages => newState.messages = messages)).then(() => this.setState(newState))
     }
 
     //CheckIn API
     postCheckIn = alert => {
         const newState = {}
-        return CheckInsAPI.post(alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState))
+        return CheckInsAPI.post(alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState, () => checkInUpdate.updateUsersAlerts(this.state.checkIns)))
     }
 
     updateCheckIn = alert => {
         const newState = {}
-        return CheckInsAPI.patch(alert.id, alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState))
+        return CheckInsAPI.patch(alert.id, alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState, () => checkInUpdate.updateUsersAlerts(this.state.checkIns)))
     }
 
     deleteCheckIn = id => {
         const newState = {}
-        return CheckInsAPI.delete(id).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState))
+        return CheckInsAPI.delete(id).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState, () => checkInUpdate.updateUsersAlerts(this.state.checkIns)))
     }
 
     //Updates all data.
@@ -97,7 +107,7 @@ export default class ApplicationViews extends Component {
     }
 
     componentDidMount() {
-        this.updateData().then(() => checkInUpdate.updateState(this.state));
+        this.updateData().then(() => checkInUpdate.updateUsersAlerts(this.state.checkIns));
     }
 
     //renders a JSX element.
@@ -136,7 +146,7 @@ export default class ApplicationViews extends Component {
                     <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
                         if (this.isAuthenticated()) {
 
-                            return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue} isUser={this.isUser}/>
+                            return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteMessage={this.deleteMessage} deleteIssue={this.deleteIssue} isUser={this.isUser} deleteMessagesInMessageList={this.deleteMessagesInMessageList} />
                         }
                         else {
                             return < Login {...props} users={this.state.users} createNewUser={this.createNewUser}/>

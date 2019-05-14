@@ -56,10 +56,7 @@ export default class ChallengeEdit extends Component {
 
     //delete issue and all associated messages. Also updates data.
     handleDelete = () => {
-        this.props.deleteIssue(this.state.id).then(() => this.props.updateData()).then(() => this.props.history.push("/profile"))
-        this.state.messages.forEach(message => {
-            this.props.deleteMessage(message.id);
-        })
+        this.props.deleteMessagesInMessageList(this.state.messages).then(this.props.deleteIssue(this.state.id))
     }
 
     //changes active flag in state to state of the checkbox (boolean).

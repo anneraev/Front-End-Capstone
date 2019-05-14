@@ -1,31 +1,26 @@
+let now = new Date()
+let usersAlerts
 
 //handles the update loop for the app.
-let now = new Date()
-let currentState
 
 export default {
-    updateState: function (state){
-        currentState = state;
+    updateUsersAlerts: function (alerts){
+        //passed list of all user alerts is filtered for those just assocaited with the current user.
+        usersAlerts = alerts.filter(alert => alert.userId === parseInt(sessionStorage.getItem("userId")))
     },
     startUpdate: function (history) {
         setInterval(() => {
             //get current time.
-            //could probably improve this by storing a number equal to the number of seconds that the alertTime equals in the data for that alert, then comparing total seconds from the information acccessed here, and simply comparing the numbers.
             now = new Date();
-            let hours = now.getHours()
-            let minutes = now.getMinutes()
+            const hours = now.getHours()
+            const minutes = now.getMinutes()
             const seconds = now.getSeconds()
-            if (hours <= 9 && hours > 10) {
-                hours = `0${hours}`
-            }
-            if (minutes <= 9 && minutes > 10) {
-                minutes = `0${minutes}`
-            }
-            const time = `${hours}:${minutes}`
+            const hoursSeconds = (hours * 60) * 60
+            const minutesSeconds = minutes * 60
+            const time = hoursSeconds + minutesSeconds + seconds
             //checks current time against all checkIn times for user, and initiates an alert when the current time matches an alert time.
-            //IMPROVEMENT: Create and pass property containing just the data for current user.
-            currentState.checkIns.forEach(checkIn => {
-                if (checkIn.alertTime === time && seconds === 0 && parseInt(sessionStorage.getItem("userId")) === checkIn.userId){
+            usersAlerts.forEach(checkIn => {
+                if (checkIn.alertSeconds === time){
                     alert("redirecting");
                     history.push("/")
                 }

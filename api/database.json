@@ -57,7 +57,7 @@
       "userId": 1,
       "alertTime": "10:25",
       "id": 1,
-      "Id": 0
+      "alertSeconds": 37500
     }
   ]
 }
