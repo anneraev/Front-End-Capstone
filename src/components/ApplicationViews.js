@@ -2,12 +2,9 @@ import React, { Component } from "react";
 //import { withRouter } from "react-router";
 import { Route, Redirect } from "react-router-dom";
 
-import ApiManager from "./ApiManager";
-import stateManager from "./stateManager";
-import Home from "./home/Home"
-import Profile from "./profile/Profile"
-import CheckInList from "./checkIns/CheckInList"
-import checkInUpdate from "./checkInUpdate";
+import Home from "./home/Home";
+import Profile from "./profile/Profile";
+import CheckInList from "./checkIns/CheckInList";
 import MessagesList from "./messages/MessagesList";
 import ChallengeEdit from "./challenges/ChallengesEdit";
 import ChallengesAPI from "./challenges/ChallengesAPI";
@@ -16,6 +13,7 @@ import CheckInsAPI from "./checkIns/CheckInsAPI";
 import Login from "./userAuthentication/Login";
 import LogOut from "./userAuthentication/LogOut";
 import UsersAPI from "./users/UsersAPI";
+import checkInUpdate from "./checkInUpdate";
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -36,58 +34,70 @@ export default class ApplicationViews extends Component {
         return data.userId === parseInt(sessionStorage.getItem("userId"))
     }
 
-    clearIssueStorage = () => {
-        sessionStorage.removeItem("currentcontent");
-        sessionStorage.removeItem("currentId");
-        sessionStorage.removeItem("currentactive");
-    }
-
+    //user API
     createNewUser = user => {
-        return UsersAPI.post(user).then(() => this.updateData())
+        const newState = {}
+        return UsersAPI.post(user).then(() => UsersAPI.getAll().then(users => newState.users = users)).then(() => this.setState(newState))
     }
 
+    //message API
     createNewMessage = message => {
-        MessagesAPI.post(message).then(() => this.updateData())
-    }
-
-    postIssue = issue => {
-        return ChallengesAPI.post(issue).then(() => this.updateData())
-    }
-
-    updateIssue = issue => {
-        return ChallengesAPI.patch(issue.id, issue)
+        const newState = {}
+        return MessagesAPI.post(message).then(() => MessagesAPI.getAll().then(messages => newState.messages = messages)).then(() => this.setState(newState))
     }
 
     updateMessage = message => {
-        MessagesAPI.patch(message.id, message).then(() => this.updateData())
+        const newState = {}
+        return MessagesAPI.patch(message.id, message).then(() => this.updateData()).then(() => MessagesAPI.getAll().then(messages => newState.messages = messages)).then(() => this.setState(newState))
     }
 
     deleteMessage = id => {
         return MessagesAPI.delete(id)
     }
 
-    deleteIssue = id => {
-        return ChallengesAPI.delete(id)
+    //Issue API
+    postIssue = issue => {
+        const newState = {}
+        return ChallengesAPI.post(issue).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(() => this.setState(newState))
     }
 
+    updateIssue = issue => {
+        const newState = {}
+        return ChallengesAPI.patch(issue.id, issue).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(() => this.setState(newState))
+    }
+
+    deleteIssue = id => {
+        const newState = {}
+        return ChallengesAPI.delete(id).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(() => this.setState(newState))
+    }
+
+    //CheckIn API
     postCheckIn = alert => {
-        return CheckInsAPI.post(alert).then(() => this.updateData())
+        const newState = {}
+        return CheckInsAPI.post(alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState))
     }
 
     updateCheckIn = alert => {
-        return CheckInsAPI.patch(alert.id, alert).then(() => this.updateData())
+        const newState = {}
+        return CheckInsAPI.patch(alert.id, alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState))
     }
 
     deleteCheckIn = id => {
-        return CheckInsAPI.delete(id).then(() => this.updateData())
+        const newState = {}
+        return CheckInsAPI.delete(id).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState))
     }
 
+    //Updates all data.
     updateData = () => {
-        return ApiManager.updateStateFromAPI().then(() => this.setState(stateManager.newState)).then(() => checkInUpdate.updateState(this.state));
+        const newState = {}
+        return UsersAPI.getAll().then(users => newState.users = users)
+        .then(() => MessagesAPI.getAll().then(messages => newState.messages = messages))
+        .then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues))
+        .then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState))
     }
 
     componentDidMount() {
-        this.updateData()
+        this.updateData().then(() => checkInUpdate.updateState(this.state));
     }
 
     //renders a JSX element.

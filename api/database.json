@@ -22,8 +22,36 @@
       "id": 3
     }
   ],
-  "messages": [],
-  "issues": [],
+  "messages": [
+    {
+      "content": "Things. Ohai",
+      "issueId": 1,
+      "active": true,
+      "id": 1
+    }
+  ],
+  "issues": [
+    {
+      "content": "Hello.",
+      "active": true,
+      "userId": 1,
+      "id": 1,
+      "issue": {
+        "content": "Hello.",
+        "active": false,
+        "userId": 1,
+        "id": 1,
+        "issue": {
+          "content": "Challenge Name",
+          "active": false,
+          "userId": 1,
+          "id": 1
+        },
+        "messages": []
+      },
+      "messages": []
+    }
+  ],
   "checkIns": [
     {
       "userId": 1,

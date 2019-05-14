@@ -3,102 +3,75 @@ import ChallengesSubmitButton from "./ChallengesSubmitButton";
 import MessageEditList from "../messages/MessageEditList";
 
 export default class ChallengeEdit extends Component {
+    //gets Id.
+    getId = () => {
+        //id passed from Issue id.
+        let id = parseInt(this.props.match.params.issueId);
+        return id
+    }
+
     //finds the current issue from Id and returns it.
     getIssue = () => {
-        return this.props.issues.find(issue => issue.id === parseInt(this.props.match.params.issueId))
-    }
-
-    //determines if the current issue exists or not.
-    issueExists = () => {
-        if (this.getIssue()) {
-            return true
+        if  (this.props.issues.length > 0) {
+        const id = this.getId()
+        return this.props.issues.find(issue => issue.id === id);
         } else {
-            return false
+            return 0
         }
     }
 
-    //session storage prevents problems with reloading page. A lot of data needs to remain persistent because messages are tied to issues and not to user.
-    loadContent = (type) => {
-        if (sessionStorage.getItem(`current${type}`)) {
-            return sessionStorage.getItem(`current${type}`)
+    //gets a list of messages associated with the current issue.
+    getIssueMessages = () => {
+        if (this.props.messages.length > 0) {
+        const id = this.getId();
+        return this.props.messages.filter(message => message.issueId === id)
+        } else {
+            return ""
         }
-        else {
-            if (this.issueExists()) {
-                const issue = this.getIssue()
-                sessionStorage.setItem(`current${type}`, issue[type]);
-                console.log(issue[type])
-            } else {
-                sessionStorage.setItem(`current${type}`, () => {
-                    if (type === "active") {
-                        return true
-                    } else {
-                        return ""
-                    }
-                })
-            }
-            const storedItem = sessionStorage.getItem(`current${type}`)
-            if (storedItem === "true") {
-                return true
-            }
-            else if (storedItem === "false") {
-                return false
-            } else {
-                return storedItem
-            }
-        }
-    }
-
-    loadIdState = () => {
-        if (sessionStorage.getItem("currentId")) {
-            return sessionStorage.getItem("currentId")
-        }
-        else {
-            sessionStorage.setItem("currentId", parseInt(this.props.match.params.issueId));
-            return sessionStorage.getItem("currentId")
-        }
-    }
-
-    //state references this object.
-    issueState = {
-        content: this.loadContent("content"),
-        id: this.loadIdState(),
-        active: this.loadContent("active"),
     }
 
     //current component state.
     state = {
-        content: this.issueState.content,
-        active: this.issueState.active,
-        id: this.issueState.id,
+        //reference to current issue object..
+        issue: this.getIssue(),
+        //reference to content of issue
+        content: this.getIssue().content,
+        //reference to active status of issue
+        active: this.getIssue().active,
+        //reference to the mssages associated with the current issue.
+        messages: this.getIssueMessages(),
+        //id of current issue.
+        id: this.getId()
     }
 
-    //called when anything changes in the input field. Updates the issue object state internal to this, then loads the sets the actual state to that object, then sets item in session storage for retrieval in case the page reloads for whatever reason (storage is deleted when navigating to profile page).
+    //called when anything changes in the input field.
     handleInput = (event) => {
-        this.issueState.content = event.target.value;
-        this.setState(this.issueState);
-        sessionStorage.setItem("currentContent", this.issueState.cotent);
+        //creates a new object with the value from the entry field.
+        const newContent = {
+            content: event.target.value
+        }
+        //sets state content to the new object content.
+        this.setState(newContent);
     }
 
-    //delete issue and all associated messages.
+    //delete issue and all associated messages. Also updates data.
     handleDelete = () => {
-        const id = this.issueState.id;
-        const associatedMessagesArray = this.props.messages.filter(message => message.issueId === id)
-        this.props.deleteIssue(id).then(() => this.props.updateData()).then(() => this.props.history.push("/profile"))
-        associatedMessagesArray.forEach(message => {
+        this.props.deleteIssue(this.state.id).then(() => this.props.updateData()).then(() => this.props.history.push("/profile"))
+        this.state.messages.forEach(message => {
             this.props.deleteMessage(message.id);
         })
     }
 
-    //changes active flag in state so that it will be udpated when the user clicks "update".
+    //changes active flag in state to state of the checkbox (boolean).
     toggleActive = (event) => {
-        this.issueState.active = event.target.checked;
-        sessionStorage.setItem("currentActive", this.issueState.active)
-        this.setState(this.issueState);
+        const checked = {
+            active: event.target.checked
+        }
+        this.setState(checked);
     }
 
-    //on Change takes a reference to a function that runs when something changes in the input field. In this case it creates a key/value pair belonging to this object, and passes a reference to that function to set the value to a reference to the element.
     render() {
-        console.log(this.state)
+        console.log("props", this.props)
         return (
             <React.Fragment>
                 <div>

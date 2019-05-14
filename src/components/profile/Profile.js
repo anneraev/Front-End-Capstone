@@ -9,8 +9,7 @@ export default class Profile extends Component {
 
     //starts update and also clears previous issue from storage.
     componentDidMount() {
-        checkInUpdate.startUpdate(this.props.history)
-        this.props.clearIssueStorage();
+        checkInUpdate.startUpdate(this.props.history);
     }
 
     render(){
