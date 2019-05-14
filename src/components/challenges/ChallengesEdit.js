@@ -12,9 +12,9 @@ export default class ChallengeEdit extends Component {
 
     //finds the current issue from Id and returns it.
     getIssue = () => {
-        if  (this.props.issues.length > 0) {
-        const id = this.getId()
-        return this.props.issues.find(issue => issue.id === id);
+        if (this.props.issues.length > 0) {
+            const id = this.getId()
+            return this.props.issues.find(issue => issue.id === id);
         } else {
             return 0
         }
@@ -23,8 +23,8 @@ export default class ChallengeEdit extends Component {
     //gets a list of messages associated with the current issue.
     getIssueMessages = () => {
         if (this.props.messages.length > 0) {
-        const id = this.getId();
-        return this.props.messages.filter(message => message.issueId === id)
+            const id = this.getId();
+            return this.props.messages.filter(message => message.issueId === id)
         } else {
             return ""
         }
@@ -80,7 +80,11 @@ export default class ChallengeEdit extends Component {
                     </input>
                 </section>
                 <MessageEditList {...this.props} />
-                <ChallengesSubmitButton {...this.props} issue={this.state} />
+                <section>
+                    <button onClick={() => this.props.updateIssue(this.props.issue).then(() => this.props.history.push("/profile"))}>
+                        Update Challenge
+                </button>
+                </section>
                 <React.Fragment>
                     <button onClick={this.handleDelete}>
                         Delete Challenge
