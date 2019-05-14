@@ -13,7 +13,7 @@ import CheckInsAPI from "./checkIns/CheckInsAPI";
 import Login from "./userAuthentication/Login";
 import LogOut from "./userAuthentication/LogOut";
 import UsersAPI from "./users/UsersAPI";
-import checkInUpdate from "./checkInUpdate";
+import checkInUpdate from "../modules/checkInUpdate";
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.

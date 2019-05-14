@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import checkInUpdate from "../checkInUpdate"
+import checkInUpdate from "../../modules/checkInUpdate"
 
 export default class CheckInList extends Component {
     alertState = {

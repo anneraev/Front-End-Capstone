@@ -20,13 +20,6 @@ export default class ChallengesList extends Component {
         }
     }
 
-    //adds new challenge button only on profile.
-    addNewChallengeButtonOnProfile = () => {
-        if (this.props.history.location.pathname === "/profile") {
-            return < NewChallengeButton {...this.props}/>
-        }
-    }
-
     // renders section with .map function that creates an array of items with JSX wrappers from the items inside the array of objects specified.
     render() {
         return (
@@ -36,7 +29,6 @@ export default class ChallengesList extends Component {
                         this.props.issues.map(issue => this.challengeListButtonHandler(issue))
                     }
                 </section>
-                {this.addNewChallengeButtonOnProfile()}
             </React.Fragment>
         )
     }

@@ -1,6 +1,7 @@
 import React, { Component } from  "react";
-import checkInUpdate from "../checkInUpdate"
+import checkInUpdate from "../../modules/checkInUpdate"
 import ChallengesList from "../challenges/ChallengesList";
+import NewChallengeButton from "../challenges/NewChallengeButton";
 
 export default class Profile extends Component {
     componentWillMount(){
@@ -16,6 +17,7 @@ export default class Profile extends Component {
         return(
             <React.Fragment>
                 < ChallengesList {...this.props} />
+                < NewChallengeButton {...this.props} />
             </React.Fragment>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import ChallengesSubmitButton from "./ChallengesSubmitButton";
 import MessageEditList from "../messages/MessageEditList";
+import checkInUpdate from "../../modules/checkInUpdate";
 
 export default class ChallengeEdit extends Component {
     //gets Id.
@@ -67,6 +67,15 @@ export default class ChallengeEdit extends Component {
         this.setState(checked);
     }
 
+    componentWillMount(){
+        checkInUpdate.stopUpdate()
+    }
+
+    //starts update and also clears previous issue from storage.
+    componentDidMount() {
+        checkInUpdate.startUpdate(this.props.history);
+    }
+
     render() {
         console.log("props", this.props)
         return (
@@ -81,7 +90,7 @@ export default class ChallengeEdit extends Component {
                 </section>
                 <MessageEditList {...this.props} />
                 <section>
-                    <button onClick={() => this.props.updateIssue(this.props.issue).then(() => this.props.history.push("/profile"))}>
+                    <button onClick={() => this.props.updateIssue(this.state.issue).then(() => this.props.history.push("/profile"))}>
                         Update Challenge
                 </button>
                 </section>
