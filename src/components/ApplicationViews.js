@@ -59,7 +59,8 @@ export default class ApplicationViews extends Component {
 
     //separate call for deleting all messages associated with an issue (called when deleting an issue). Since these are no longer accessible by the user once their associated issue is deleted, there's no special need for this function to be waited on, and state will only be updated once the issue itself is deleted by the function which calls this one.
     deleteMessagesInMessageList = messageList => {
-        return messageList.forEach(message => {
+        console.log(messageList)
+        messageList.forEach(message => {
             MessagesAPI.delete(message.id)
         })
     }
