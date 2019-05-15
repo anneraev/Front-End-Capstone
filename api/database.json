@@ -52,12 +52,5 @@
       "messages": []
     }
   ],
-  "checkIns": [
-    {
-      "userId": 1,
-      "alertTime": "10:25",
-      "id": 1,
-      "alertSeconds": 37500
-    }
-  ]
+  "checkIns": []
 }

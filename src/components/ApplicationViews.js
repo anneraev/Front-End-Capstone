@@ -87,9 +87,9 @@ export default class ApplicationViews extends Component {
         return CheckInsAPI.post(alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState, () => checkInUpdate.updateUsersAlerts(this.state.checkIns)))
     }
 
-    updateCheckIn = alert => {
+    updateCheckIn = (id, alert) => {
         const newState = {}
-        return CheckInsAPI.patch(alert.id, alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState, () => checkInUpdate.updateUsersAlerts(this.state.checkIns)))
+        return CheckInsAPI.patch(id, alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState, () => checkInUpdate.updateUsersAlerts(this.state.checkIns)))
     }
 
     deleteCheckIn = id => {

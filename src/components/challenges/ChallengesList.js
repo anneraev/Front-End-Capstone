@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import NewChallengeButton from "./NewChallengeButton";
 
 export default class ChallengesList extends Component {
     //clicking button will redirect to different page based on the URL of the page the buttons are displayed on. In "Home", displays read-only messages. From "profile", messages and issues are editable. Looks for string in pathname.
