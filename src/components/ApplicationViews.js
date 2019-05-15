@@ -24,6 +24,10 @@ export default class ApplicationViews extends Component {
         checkIns: [],
     }
 
+    getUser = () => {
+        return parseInt(sessionStorage.getItem("userId"))
+    }
+
     //checks to see that a user has logged in.
     isAuthenticated = () => {
         return sessionStorage.getItem("userId") !== null
@@ -129,7 +133,7 @@ export default class ApplicationViews extends Component {
                     }} />
                     <Route exact path="/" render={props => {
                         if (this.isAuthenticated()) {
-                            return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} isUser={this.isUser} />
+                            return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} isUser={this.isUser} postIssue={this.postIssue} getUser={this.getUser}/>
                         } else {
                             return < Login {...props} users={this.state.users} createNewUser={this.createNewUser} />
                         }
