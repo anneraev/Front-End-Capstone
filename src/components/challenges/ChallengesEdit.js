@@ -22,14 +22,15 @@ export default class ChallengeEdit extends Component {
 
     //gets a list of messages associated with the current issue.
     getIssueMessages = () => {
-        this.props.refreshMessagesList().then(() => {
-            if (this.props.messages.length > 0) {
-                const id = this.getId();
-                return this.props.messages.filter(message => message.issueId === id)
-            } else {
-                return []
-            }
-        })
+        console.log("propsmessages", this.props.messages)
+        if (this.props.messages && this.props.messages.length > 0) {
+            const id = this.getId();
+            const messages = this.props.messages.filter(message => message.issueId === id)
+            console.log(messages)
+            return messages
+        } else {
+            return []
+        }
     }
 
     //current component state.
@@ -41,25 +42,42 @@ export default class ChallengeEdit extends Component {
         //reference to active status of issue
         active: this.getIssue().active,
         //reference to the mssages associated with the current issue.
-        messages: this.getIssueMessages(),
-        //id of current issue.
         id: this.getId()
     }
 
     //called when anything changes in the input field.
     handleInput = (event) => {
+        console.log(event.target.value)
         //creates a new object with the value from the entry field.
         const newContent = {
             content: event.target.value
         }
         //sets state content to the new object content.
         this.setState(newContent);
+        console.log(this.state.content)
     }
 
     //delete issue and all associated messages. Also updates data.
     handleDelete = () => {
-        this.props.deleteMessagesInMessageList(this.state.messages)
-        this.props.deleteIssue(this.state.id).then(this.props.history.push("/profile"))
+        const newMessagesList = this.getIssueMessages()
+        this.props.deleteMessagesInMessageList(newMessagesList).then(this.props.deleteIssue(this.state.id).then(this.props.history.push("/profile"))
+        )
+    }
+
+    updateChallenge = () => {
+        const newMessagesList = this.getIssueMessages()
+        const issueChange = {
+            content: this.state.content,
+            active: this.state.active
+        }
+        if (this.state.content === "") {
+            console.log(this.state.issue)
+            issueChange.content = this.state.issue.content
+        }
+        if (!newMessagesList || newMessagesList === []) {
+            alert("If you want, you can create a list of messages to remind you how to focus your mind on what will help you navigate your challenges.")
+        }
+        this.props.updateIssue(this.state.id, issueChange).then(() => this.props.history.push("/profile"))
     }
 
     //changes active flag in state to state of the checkbox (boolean).
@@ -70,8 +88,9 @@ export default class ChallengeEdit extends Component {
         this.setState(checked);
     }
 
-    componentWillMount(){
+    componentWillMount() {
         checkInUpdate.stopUpdate()
+        this.props.refreshMessagesList()
     }
 
     //starts update and also clears previous issue from storage.
@@ -93,7 +112,7 @@ export default class ChallengeEdit extends Component {
                 </section>
                 <MessageEditList {...this.props} />
                 <section>
-                    <button onClick={() => this.props.updateIssue(this.state.issue).then(() => this.props.history.push("/profile"))}>
+                    <button onClick={this.updateChallenge}>
                         Update Challenge
                 </button>
                 </section>

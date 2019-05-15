@@ -7,14 +7,40 @@ export default class NewChallengeButton extends Component {
         userId: parseInt(sessionStorage.getItem("userId"))
     }
 
+    helpMessage = () => {
+        if (this.props.issues && this.props.issues.find(issue => issue.userId === this.state.userId)){
+            return (
+                <React.Fragment>
+                <div>
+                    Is there something else you'd like help with?
+                </div>
+                </React.Fragment>
+            )
+        } else {
+            return (
+                <React.Fragment>
+                <div>
+                    Is there something you'd like help with?
+                </div>
+                </React.Fragment>
+            )
+
+        }
+    }
+
     //redirects to the newly-created issue.
     goToCreatedIssue = () => {
+        console.log("props", this.props)
+        console.log("all issues", this.props.issues)
         const issues = this.props.issues.filter(issue => issue.userId === this.state.userId);
-        console.log(issues);
+        console.log("user issues", issues);
         const issueIds = issues.map(issue => issue.id);
-        console.log(issueIds);
-        const newestIssue = Math.max(...issueIds);
-        console.log(newestIssue)
+        console.log("issueIds", issueIds);
+        let newestIssue = Math.max(...issueIds);
+        console.log("issue number", newestIssue)
+        if (newestIssue === -Infinity) {
+            newestIssue = 1
+        }
         this.props.history.push(`/profile/challenges/${newestIssue}`)
     }
 
@@ -26,7 +52,11 @@ export default class NewChallengeButton extends Component {
             active: true,
             userId: this.state.userId
         }
-        this.props.postIssue(newChallenge).then(() => this.goToCreatedIssue(newChallenge.content, newChallenge.userId))
+        if (this.state.content !== "") {
+            this.props.postIssue(newChallenge).then(() => this.goToCreatedIssue())
+        } else {
+            alert("Try typing a phrase that explains your problem in the first person.")
+        }
     }
 
     handleChange = event => {
@@ -81,9 +111,7 @@ export default class NewChallengeButton extends Component {
         return (
             <React.Fragment>
                 <section>
-                    <div>
-                        Is there something else you'd like help with?
-                </div>
+                    {this.helpMessage()}
                     {this.newButton()}
                     {this.challengeDialogue()}
                 </section>

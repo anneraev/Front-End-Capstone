@@ -39,6 +39,13 @@ export default {
         })
     },
 
+    deleteMass: (key, ids) => {
+        return fetch(`${apiURL}/${key}?ids=${ids}`, {
+            //method
+            method: "DELETE",
+        })
+    },
+
     //accesses specified data set (key), and update the specified item (id) with the values of the passed object.
     patch: (key, id, object) => {
         return fetch(`${apiURL}/${key}/${id}`, {
