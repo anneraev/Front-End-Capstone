@@ -6,20 +6,6 @@
       "userName": "AnneRae",
       "email": "anneraevick@outlook.com",
       "password": "password123"
-    },
-    {
-      "email": "tonyrayvick@hotmail.com",
-      "userName": "DeadName",
-      "name": "Anthony R Vick",
-      "password": "newpassword",
-      "id": 2
-    },
-    {
-      "email": "name@email.com",
-      "userName": "userName",
-      "name": "name",
-      "password": "password",
-      "id": 3
     }
   ],
   "messages": [],

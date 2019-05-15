@@ -3,7 +3,9 @@ import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 export default class Login extends Component {
-    loginState = {
+
+    //component state. Logs state of interactive items.
+    state = {
         email: "",
         password: "",
         loginMode: true,
@@ -11,37 +13,32 @@ export default class Login extends Component {
         name: ""
     }
 
-    //component state. Logs state of interactive items.
-    state = {
-        email: this.loginState.email,
-        password: this.loginState.password,
-        loginMode: this.loginState.loginMode,
-        userName: this.loginState.userName,
-        name: this.loginState.name
-    }
-
     //sets email.
     handleEmail = (event) => {
-        this.loginState.email = event.target.value;
-        this.setState(this.loginState)
+        const loginState = {}
+        loginState.email = event.target.value;
+        this.setState(loginState)
     }
 
     //sets password from input.
     handlePassword = (event) => {
-        this.loginState.password = event.target.value;
-        this.setState(this.loginState);
+        const loginState = {}
+        loginState.password = event.target.value;
+        this.setState(loginState);
     }
 
     //sets state name from input.
     handleName = (event) => {
-        this.loginState.name = event.target.value;
-        this.setState(this.loginState);
+        const loginState = {}
+        loginState.name = event.target.value;
+        this.setState(loginState);
     }
 
     //sets state username from input.
     handleUserName = (event) => {
-        this.loginState.userName = event.target.value;
-        this.setState(this.loginState);
+        const loginState = {}
+        loginState.userName = event.target.value;
+        this.setState(loginState);
     }
 
     //compares input email and password in state with email and password of the user passed to it.
@@ -66,9 +63,10 @@ export default class Login extends Component {
         } else {
             alert("Incorrect email and/or password. Please Try again.")
         }
-        this.loginState.email = "";
-        this.loginState.password = "";
-        this.setState(this.loginState);
+        const loginState = {}
+        loginState.email = "";
+        loginState.password = "";
+        this.setState(loginState);
         this.props.history.push("/");
     }
 
@@ -114,12 +112,13 @@ export default class Login extends Component {
     //sets the page to registration mode.
     toggleMode = event => {
         event.preventDefault();
-        if (this.loginState.loginMode === false){
-            this.loginState.loginMode = true
+        const loginState = {}
+        if (this.state.loginMode === false){
+            loginState.loginMode = true
         } else {
-            this.loginState.loginMode = false
+            loginState.loginMode = false
         }
-        this.setState(this.loginState);
+        this.setState(loginState);
     }
 
     render() {
