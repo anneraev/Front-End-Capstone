@@ -26,7 +26,11 @@ export default class NewChallengeButton extends Component {
             active: true,
             userId: this.state.userId
         }
-        this.props.postIssue(newChallenge).then(() => this.goToCreatedIssue(newChallenge.content, newChallenge.userId))
+        if (this.state.content !== "") {
+            this.props.postIssue(newChallenge).then(() => this.goToCreatedIssue(newChallenge.content, newChallenge.userId))
+        } else {
+            alert("Try typing a phrase that explains your problem in the first person.")
+        }
     }
 
     handleChange = event => {

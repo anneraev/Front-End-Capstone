@@ -16,6 +16,9 @@ export default {
     delete: (id) => {
         return ApiCall.delete(key, id)
     },
+    deleteMass: (ids) => {
+        return ApiCall.deleteMass(key, ...ids)
+    },
     patch: (id, object) => {
         return ApiCall.patch(key, id, object)
     }

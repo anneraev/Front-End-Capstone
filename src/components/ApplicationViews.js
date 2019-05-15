@@ -59,11 +59,9 @@ export default class ApplicationViews extends Component {
 
     //separate call for deleting all messages associated with an issue (called when deleting an issue).
     deleteMessagesInMessageList = messageList => {
-        if (messageList) {
-            messageList.forEach(message => {
-                MessagesAPI.delete(message.id)
-            })
-        }
+            const newState = {};
+            const messageIds = messageList.map(message => message.id)
+            return MessagesAPI.deleteMass(messageIds).then(() => MessagesAPI.getAll().then(messages => newState.messages = messages)).then(this.setState(newState));
     }
 
     //called when a new edit page is opened. Ensures that there are no lingering messages from previously deleted challenge.
@@ -78,15 +76,15 @@ export default class ApplicationViews extends Component {
         return ChallengesAPI.post(issue).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(() => this.setState(newState))
     }
 
-    updateIssue = issue => {
+    updateIssue = (id, issue) => {
         const newState = {}
-        return ChallengesAPI.patch(issue.id, issue).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(() => this.setState(newState))
+        return ChallengesAPI.patch(id, issue).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(() => this.setState(newState))
     }
 
     //deletes an issue. Before updating state, messages are also fetched from the API, as any messages associated with the deleted issue will have been previously deleted.
     deleteIssue = id => {
         const newState = {}
-        return ChallengesAPI.delete(id).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(MessagesAPI.getAll().then(messages => newState.messages = messages)).then(() => this.setState(newState))
+        return ChallengesAPI.delete(id).then(() => ChallengesAPI.getAll().then(issues => newState.issues = issues)).then(() => this.setState(newState))
     }
 
     //CheckIn API
