@@ -1,59 +1,41 @@
 import React, { Component } from "react";
 
 export default class NewChallengeButton extends Component {
-    newChallengeState = {
-        createMode: false,
-        content: ""
-    }
-
     state = {
-        createMode: this.newChallengeState.createMode,
-        content: this.newChallengeState.content
+        createMode: false,
+        content: "",
+        userId: parseInt(sessionStorage.getItem("userId"))
     }
 
-    getNewlyCreatedIssue = (content, userId) => {
-        const issues = this.props.issues
-        return issues.filter(issue => issue.content === content && issue.userId === userId)
+    //redirects to the newly-created issue.
+    goToCreatedIssue = () => {
+        const issues = this.props.issues.filter(issue => issue.userId === this.state.userId);
+        console.log(issues);
+        const issueIds = issues.map(issue => issue.id);
+        console.log(issueIds);
+        const newestIssue = Math.max(...issueIds);
+        console.log(newestIssue)
+        this.props.history.push(`/profile/challenges/${newestIssue}`)
     }
 
-    //the URL is set to the navigation page for the issue.
-    goToChallengeCreation = event => {
+    //a new challenge is created, then redirects to that challenge's edit page.
+    createNewChallenge = event => {
         event.preventDefault()
         const newChallenge = {
             content: this.state.content,
-            active: false,
-            userId: parseInt(sessionStorage.getItem("userId"))
+            active: true,
+            userId: this.state.userId
         }
-        this.newChallengeState.createMode = true;
-        this.props.postIssue(newChallenge).then(() => this.getNewlyCreatedIssue(newChallenge.content, newChallenge.userId))
+        this.props.postIssue(newChallenge).then(() => this.goToCreatedIssue(newChallenge.content, newChallenge.userId))
     }
 
     handleChange = event => {
         const value = event.target.value;
-        this.newChallengeState.content = value;
-        this.newChallengeState.createMode = true;
-        this.setState(this.newChallengeState);
-    }
-
-    newButton = () => {
-        if (this.state.createMode === false) {
-            return (
-                <React.Fragment>
-                    <button onClick={event => this.openChallengeDialogue(event)}>
-                        New Challenge
-                </button>
-                </React.Fragment>
-            )
-        } else {
-            return (
-                <React.Fragment>
-                    <button onClick={event => this.goToChallengeCreation(event)}>
-                        Create New Challenge
-                </button>
-                </React.Fragment>
-            )
-
+        const newChallengeState = {
+            content: value,
+            createMode: true
         }
+        this.setState(newChallengeState);
     }
 
     challengeDialogue = () => {
@@ -66,10 +48,33 @@ export default class NewChallengeButton extends Component {
         }
     }
 
+    //sets state to create mode, meaning a challenge can be created. Signals rerendering so the dialogue box appears along with the appropriate button.
     openChallengeDialogue = () => {
         const create = {}
         create.createMode = true
         this.setState(create)
+    }
+
+    //if not creating a new challenge, opens challenge dialogue. If creating a new challenge, creates new challenge.
+    newButton = () => {
+        if (this.state.createMode === false) {
+            return (
+                <React.Fragment>
+                    <button onClick={event => this.openChallengeDialogue(event)}>
+                        New Challenge
+                </button>
+                </React.Fragment>
+            )
+        } else {
+            return (
+                <React.Fragment>
+                    <button onClick={event => this.createNewChallenge(event)}>
+                        Create New Challenge
+                </button>
+                </React.Fragment>
+            )
+
+        }
     }
 
     render() {

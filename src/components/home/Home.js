@@ -1,6 +1,6 @@
 import React, { Component } from  "react";
 import ChallengesList from "../challenges/ChallengesList";
-import checkInUpdate from "../checkInUpdate"
+import checkInUpdate from "../../modules/checkInUpdate"
 
 export default class Home extends Component {
     //stops update before component renders.

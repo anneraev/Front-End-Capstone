@@ -9,7 +9,7 @@ export default class MessagesList extends Component {
     }
 
     handleDelete = (event) => {
-        this.props.deleteMessage(event.target.id).then(() => this.props.updateData());
+        this.props.deleteSingleMessage(event.target.id);
     }
 
     //toggles message active property when button is clicked.

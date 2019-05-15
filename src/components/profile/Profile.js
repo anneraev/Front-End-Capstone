@@ -1,6 +1,7 @@
 import React, { Component } from  "react";
-import checkInUpdate from "../checkInUpdate"
+import checkInUpdate from "../../modules/checkInUpdate"
 import ChallengesList from "../challenges/ChallengesList";
+import NewChallengeButton from "../challenges/NewChallengeButton";
 
 export default class Profile extends Component {
     componentWillMount(){
@@ -9,14 +10,14 @@ export default class Profile extends Component {
 
     //starts update and also clears previous issue from storage.
     componentDidMount() {
-        checkInUpdate.startUpdate(this.props.history)
-        this.props.clearIssueStorage();
+        checkInUpdate.startUpdate(this.props.history);
     }
 
     render(){
         return(
             <React.Fragment>
                 < ChallengesList {...this.props} />
+                < NewChallengeButton {...this.props} />
             </React.Fragment>
         )
     }
