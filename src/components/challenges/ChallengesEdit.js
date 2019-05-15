@@ -22,12 +22,14 @@ export default class ChallengeEdit extends Component {
 
     //gets a list of messages associated with the current issue.
     getIssueMessages = () => {
-        if (this.props.messages.length > 0) {
-            const id = this.getId();
-            return this.props.messages.filter(message => message.issueId === id)
-        } else {
-            return []
-        }
+        this.props.refreshMessagesList().then(() => {
+            if (this.props.messages.length > 0) {
+                const id = this.getId();
+                return this.props.messages.filter(message => message.issueId === id)
+            } else {
+                return []
+            }
+        })
     }
 
     //current component state.
