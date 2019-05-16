@@ -1,7 +1,20 @@
 import React, { Component } from "react";
+import MessagesList from "../messages/MessagesList"
 
 export default class ChallengesList extends Component {
-    //clicking button will redirect to different page based on the URL of the page the buttons are displayed on. In "Home", displays read-only messages. From "profile", messages and issues are editable. Looks for string in pathname.
+    state = {
+        currentIssueId: 0
+    }
+
+    showMessages = event => {
+        console.log("run")
+        const newState = {
+            currentIssueId: event.target.id
+        }
+        console.log("issue id", newState.currentIssueId);
+        this.setState(newState);
+    }
+
     challengeListButtonHandler = (issue) => {
         console.log(this.props);
         if (this.props.history.location.pathname === "/profile" && this.props.isUser(issue)) {
@@ -10,10 +23,20 @@ export default class ChallengesList extends Component {
         </button>)
         } else {
             if (this.props.isUser(issue) && issue.active === true) {
-        return (<button key={issue.id} onClick={() => this.props.history.push(`/challenge-messages/${issue.id}`)}>
+        return (<button key={issue.id} id={issue.id} onClick={event => this.showMessages(event)}>
             {issue.content}
         </button>)
             }
+        }
+    }
+
+    messages = () => {
+        if (this.props.history.location.pathname === "/" && this.state.currentIssueId !== 0) {
+            return (
+                <React.Fragment>
+                    < MessagesList {...this.props} currentIssueId={this.state.currentIssueId}/>
+                </React.Fragment>
+            )
         }
     }
 
@@ -22,6 +45,7 @@ export default class ChallengesList extends Component {
         return (
             <React.Fragment>
                 <section>
+                    {this.messages()}
                     {
                         this.props.issues.map(issue => this.challengeListButtonHandler(issue))
                     }
