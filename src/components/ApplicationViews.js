@@ -5,7 +5,6 @@ import { Route, Redirect } from "react-router-dom";
 import Home from "./home/Home";
 import Profile from "./profile/Profile";
 import CheckInList from "./checkIns/CheckInList";
-import MessagesList from "./messages/MessagesList";
 import ChallengeEdit from "./challenges/ChallengesEdit";
 import ChallengesAPI from "./challenges/ChallengesAPI";
 import MessagesAPI from "./messages/MessagesAPI";
@@ -134,13 +133,6 @@ export default class ApplicationViews extends Component {
                     <Route exact path="/" render={props => {
                         if (this.isAuthenticated()) {
                             return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} isUser={this.isUser} postIssue={this.postIssue} getUser={this.getUser}/>
-                        } else {
-                            return < Login {...props} users={this.state.users} createNewUser={this.createNewUser} />
-                        }
-                    }} />
-                    <Route exact path="/challenge-messages/:issueId(\d+)" render={props => {
-                        if (this.isAuthenticated()) {
-                            return <MessagesList {...props} messages={this.state.messages} users={this.state.users} isUser={this.isUser} />
                         } else {
                             return < Login {...props} users={this.state.users} createNewUser={this.createNewUser} />
                         }

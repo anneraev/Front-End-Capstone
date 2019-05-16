@@ -15,7 +15,7 @@ export default class Home extends Component {
 
     ifNoChallenges = () => {
         const user = this.props.getUser()
-        if (!this.props.issues || !this.props.issues.find(issue => issue.userId === user)){
+        if (!this.props.issues || !this.props.issues.find(issue => issue.userId === user && issue.active === true)){
             return (
                 <React.Fragment>
                     < NewChallengeButton {...this.props} />

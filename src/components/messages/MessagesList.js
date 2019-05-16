@@ -64,7 +64,10 @@ export default class MessagesList extends Component {
     }
 
     showApplicableMessages = (message) => {
-        //uses a conditional to see if the message's issueId matches the issueId passed through URL parameter when this page was routed to. The URL parameter is the same as the ID of the issue topic that was clicked on. If it does match, this returns the content of that message as a result, creates an elemement containing it, and passes that to the render function. If called from "/home", filters out inactive messages.
+        console.log("running")
+        console.log("issueId", this.props.currentIssueId)
+        console.log("messageIssueId", message.issueId)
+//uses a conditional to see if the message's issueId matches the issueId passed through URL parameter when this page was routed to. The URL parameter is the same as the ID of the issue topic that was clicked on. If it does match, this returns the content of that message as a result, creates an elemement containing it, and passes that to the render function. If called from "/home", filters out inactive messages.
         if (this.props.location.pathname.includes("profile/challenges/")) {
             if (message.issueId === Number(this.props.match.params.issueId)) {
                 return (
@@ -76,7 +79,7 @@ export default class MessagesList extends Component {
                 )
             }
         } else {
-            if (message.issueId === Number(this.props.match.params.issueId) && message.active === true) {
+            if (message.issueId === parseInt(this.props.currentIssueId) && message.active === true) {
                 return (
                     <li key={message.id} id={message.id}>
                         {message.content}
