@@ -8,7 +8,27 @@
       "password": "password123"
     }
   ],
-  "messages": [],
-  "issues": [],
+  "messages": [
+    {
+      "content": "adsfasdf",
+      "issueId": 1,
+      "active": true,
+      "id": 1
+    },
+    {
+      "content": "adsfadsfa",
+      "issueId": 1,
+      "active": true,
+      "id": 2
+    }
+  ],
+  "issues": [
+    {
+      "content": "adsfadf",
+      "active": true,
+      "userId": 1,
+      "id": 1
+    }
+  ],
   "checkIns": []
 }

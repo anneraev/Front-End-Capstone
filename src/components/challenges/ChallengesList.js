@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import MessagesList from "../messages/MessagesList"
+import "./ChallengesList.css"
+
 
 export default class ChallengesList extends Component {
     state = {
@@ -31,6 +33,21 @@ export default class ChallengesList extends Component {
         }
     }
 
+    welcomeMessage = () => {
+        const user = this.props.users.find(user => user.id === this.props.getUser())
+        let userName
+        if (user) {
+            userName = user.name
+            return (
+                <React.Fragment>
+                    <h1 className="speech-bubble">
+                        Hello, {userName}. How are you doing?
+                    </h1>
+                </React.Fragment>
+            )
+        }
+    }
+
     messages = () => {
         if (this.props.history.location.pathname === "/") {
             if (this.state.currentIssueId !== 0) {
@@ -43,7 +60,7 @@ export default class ChallengesList extends Component {
                 return (
                     <React.Fragment>
                         <section>
-                            <h2>How are you doing?</h2>
+                            {this.welcomeMessage()}
                         </section>
                     </React.Fragment>
                 )

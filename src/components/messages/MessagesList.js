@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import MessageCarousel from "./MessageCarousel";
 
 export default class MessagesList extends Component {
 
@@ -32,16 +33,15 @@ export default class MessagesList extends Component {
     //displays a button that, when clicked, toggles active/inactive flag for the message in the data. The appearance of the button changes based on the status of the message.
     renderActiveButton = (message) => {
         if (message.active === true) {
-            return(
+            return (
                 <React.Fragment>
                     <button key={message.id} id={message.id} onClick={this.deactivate}>
                         Active
                     </button>
                 </React.Fragment>
             )
-        } else
-        {
-            return(
+        } else {
+            return (
                 <React.Fragment>
                     <button key={message.id} id={message.id} onClick={this.activate}>
                         Inactive
@@ -64,43 +64,40 @@ export default class MessagesList extends Component {
     }
 
     showApplicableMessages = (message) => {
-        console.log("running")
-        console.log("issueId", this.props.currentIssueId)
-        console.log("messageIssueId", message.issueId)
-//uses a conditional to see if the message's issueId matches the issueId passed through URL parameter when this page was routed to. The URL parameter is the same as the ID of the issue topic that was clicked on. If it does match, this returns the content of that message as a result, creates an elemement containing it, and passes that to the render function. If called from "/home", filters out inactive messages.
-        if (this.props.location.pathname.includes("profile/challenges/")) {
-            if (message.issueId === Number(this.props.match.params.issueId)) {
-                return (
-                    <li key={message.id} id={message.id}>
-                        <span key={message.id} id={message.id} onClick={this.handleMessageClick}>{message.content}</span>
-                        {this.renderDeleteButton(message)}
-                        {this.renderActiveButton(message)}
-                    </li>
-                )
-            }
-        } else {
-            if (message.issueId === parseInt(this.props.currentIssueId) && message.active === true) {
-                return (
-                    <li key={message.id} id={message.id}>
-                        {message.content}
-                    </li>
-                )
-            }
+        //uses a conditional to see if the message's issueId matches the issueId passed through URL parameter when this page was routed to. The URL parameter is the same as the ID of the issue topic that was clicked on. If it does match, this returns the content of that message as a result, creates an elemement containing it, and passes that to the render function. If called from "/home", filters out inactive messages.
+        if (message.issueId === Number(this.props.match.params.issueId)) {
+            return (
+                <li key={message.id} id={message.id}>
+                    <span key={message.id} id={message.id} onClick={this.handleMessageClick}>{message.content}</span>
+                    {this.renderDeleteButton(message)}
+                    {this.renderActiveButton(message)}
+                </li>
+            )
         }
     }
 
     render() {
-        return (
-            <React.Fragment>
-                <section>
-                    <ul>
-                        {
-                            this.props.messages.map(message => this.showApplicableMessages(message)
-                            )
-                        }
-                    </ul>
-                </section>
-            </React.Fragment>
-        )
+        if (this.props.location.pathname.includes("profile/challenges/")) {
+            return (
+                <React.Fragment>
+                    <section>
+                        <ul>
+                            {
+                                this.props.messages.map(message => this.showApplicableMessages(message)
+                                )
+                            }
+                        </ul>
+                    </section>
+                </React.Fragment>
+            )
+        } else {
+            return (
+                <React.Fragment>
+                    <section>
+                        <MessageCarousel {...this.props} />
+                    </section>
+                </React.Fragment>
+            )
+        }
     }
 }
