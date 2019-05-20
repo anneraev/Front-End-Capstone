@@ -8,21 +8,7 @@
       "password": "password123"
     }
   ],
-  "messages": [
-    {
-      "content": "This. I think this is the way to do it.",
-      "issueId": 1,
-      "active": true,
-      "id": 1
-    }
-  ],
-  "issues": [
-    {
-      "content": "Ohai",
-      "active": true,
-      "userId": 1,
-      "id": 1
-    }
-  ],
+  "messages": [],
+  "issues": [],
   "checkIns": []
 }
