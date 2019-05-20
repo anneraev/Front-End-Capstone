@@ -3,6 +3,10 @@ import MessageCarousel from "./MessageCarousel";
 
 export default class MessagesList extends Component {
 
+    state = {
+        currentIssueId: this.props.currentIssueId
+    }
+
     handleMessageClick = (event) => {
         if (this.props.getMessageId) {
             this.props.getMessageId(event.target.id)
@@ -76,6 +80,12 @@ export default class MessagesList extends Component {
         }
     }
 
+    messageCarousel = () => {
+        return (
+            <MessageCarousel {...this.props} currentIssueId={this.props.currentIssueId} />
+        )
+    }
+
     render() {
         if (this.props.location.pathname.includes("profile/challenges/")) {
             return (
@@ -94,7 +104,7 @@ export default class MessagesList extends Component {
             return (
                 <React.Fragment>
                     <section>
-                        <MessageCarousel {...this.props} />
+                        {this.messageCarousel()}
                     </section>
                 </React.Fragment>
             )

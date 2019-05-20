@@ -15,6 +15,7 @@ export default class ChallengesList extends Component {
         if (event.target.id === this.state.currentIssueId) {
             newState.currentIssueId = 0
         }
+        console.log("newState", newState.currentIssueId)
         this.setState(newState);
     }
 

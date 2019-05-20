@@ -10,21 +10,15 @@
   ],
   "messages": [
     {
-      "content": "adsfasdf",
+      "content": "This. I think this is the way to do it.",
       "issueId": 1,
       "active": true,
       "id": 1
-    },
-    {
-      "content": "adsfadsfa",
-      "issueId": 1,
-      "active": true,
-      "id": 2
     }
   ],
   "issues": [
     {
-      "content": "adsfadf",
+      "content": "Ohai",
       "active": true,
       "userId": 1,
       "id": 1
