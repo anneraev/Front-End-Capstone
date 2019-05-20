@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import MessagesList from "../messages/MessagesList"
+import "./ChallengesList.css"
+import { Button } from 'reactstrap';
+
 
 export default class ChallengesList extends Component {
     state = {
@@ -13,6 +16,7 @@ export default class ChallengesList extends Component {
         if (event.target.id === this.state.currentIssueId) {
             newState.currentIssueId = 0
         }
+        console.log("newState", newState.currentIssueId)
         this.setState(newState);
     }
 
@@ -24,10 +28,35 @@ export default class ChallengesList extends Component {
             </button>)
         } else {
             if (this.props.isUser(issue) && issue.active === true) {
-                return (<button key={issue.id} id={issue.id} onClick={event => this.showMessages(event)}>
-                    {issue.content}
-                </button>)
+                return (
+                    <div className="challenge">
+                        <div className="answer-bubble">
+                            <Button className="challenge-button" key={issue.id} id={issue.id} onClick={event => this.showMessages(event)}>
+                                {issue.content}
+                            </Button>
+                        </div>
+                    </div>
+                )
             }
+        }
+    }
+
+    welcomeMessage = () => {
+        const user = this.props.users.find(user => user.id === this.props.getUser())
+        let userName
+        if (user) {
+            userName = user.name
+            return (
+                <React.Fragment>
+                    <section className="message-section">
+                        <div className="speech-bubble">
+                            <h2>
+                                Hello, {userName}. How are you doing?
+                    </h2>
+                        </div>
+                    </section>
+                </React.Fragment>
+            )
         }
     }
 
@@ -36,14 +65,16 @@ export default class ChallengesList extends Component {
             if (this.state.currentIssueId !== 0) {
                 return (
                     <React.Fragment>
-                        < MessagesList {...this.props} currentIssueId={this.state.currentIssueId} />
+                        <section className="message-section">
+                            < MessagesList {...this.props} currentIssueId={this.state.currentIssueId} />
+                        </section>
                     </React.Fragment>
                 )
             } else {
                 return (
                     <React.Fragment>
                         <section>
-                            <h2>How are you doing?</h2>
+                            {this.welcomeMessage()}
                         </section>
                     </React.Fragment>
                 )
@@ -55,11 +86,11 @@ export default class ChallengesList extends Component {
     render() {
         return (
             <React.Fragment>
-                <section>
-                    {this.messages()}
-                    {
-                        this.props.issues.map(issue => this.challengeListButtonHandler(issue))
-                    }
+                {this.messages()}
+                <section className = "challenge-section">
+                {
+                    this.props.issues.map(issue => this.challengeListButtonHandler(issue))
+                }
                 </section>
             </React.Fragment>
         )

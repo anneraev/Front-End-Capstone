@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 //import { withRouter } from "react-router";
 import { Route, Redirect } from "react-router-dom";
+import "./ApplicationViews.css"
 
 import Home from "./home/Home";
 import Profile from "./profile/Profile";

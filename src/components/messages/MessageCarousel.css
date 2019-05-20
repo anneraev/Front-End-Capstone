@@ -1,0 +1,25 @@
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    background-color: darkgrey;
+}
+
+.item-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    word-wrap: break-word;
+    white-space: normal;
+    width: 65%;
+    overflow-y: scroll;
+}
+
+.slide-image {
+    object-fit: cover;
+    width: 80%;
+    height: 80%;
+}

@@ -1,0 +1,73 @@
+.speech-bubble {
+	margin-left: 175px;
+	position: relative;
+	background: #8a8a8a;
+    color: white;
+    border-radius: .4em;
+	width: 40%;
+	display: flex;
+	flex-flow: row wrap;
+	padding: 10px;
+	padding-left: 30px;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 73px solid transparent;
+	border-right-color: #8a8a8a;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -36.5px;
+	margin-left: -73px;
+}
+
+.message-section {
+	margin-top: 30px;
+	height: 300px
+}
+.challenge-section {
+	height: 280px;
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-start;
+	overflow-y: scroll;
+}
+
+.challenge {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: flex-start;
+	margin-bottom: 30px;
+}
+
+.challenge-button {
+	height: 50px;
+	width: 100%;
+}
+
+.answer-bubble {
+	position: relative;
+	background: #576064;
+	border-radius: .4em;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.answer-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #576064;
+	border-bottom: 0;
+	margin-left: -20px;
+	margin-bottom: -20px;
+}

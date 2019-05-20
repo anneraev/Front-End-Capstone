@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from 'reactstrap';
 
 export default class NewChallengeButton extends Component {
     state = {
@@ -16,7 +17,7 @@ export default class NewChallengeButton extends Component {
                 </div>
                 </React.Fragment>
             )
-        } else {
+        } else if (this.props.history.location.pathname === "/profile") {
             return (
                 <React.Fragment>
                 <div>
@@ -72,7 +73,7 @@ export default class NewChallengeButton extends Component {
         if (this.state.createMode === true) {
             return (
                 <React.Fragment>
-                    <input type="text" value={this.state.content} placeholder="What would you like help with?" onChange={event => this.handleChange(event)}></input>
+                    <input type="text" value={this.state.content} placeholder="What's the problem?" onChange={event => this.handleChange(event)}></input>
                 </React.Fragment>
             )
         }
@@ -88,19 +89,29 @@ export default class NewChallengeButton extends Component {
     //if not creating a new challenge, opens challenge dialogue. If creating a new challenge, creates new challenge.
     newButton = () => {
         if (this.state.createMode === false) {
+            if (this.props.issues && this.props.issues.find(issue => issue.userId === this.state.userId)) {
             return (
                 <React.Fragment>
                     <button onClick={event => this.openChallengeDialogue(event)}>
-                        New Challenge
+                    I need help with something else.
                 </button>
                 </React.Fragment>
             )
+            } else {
+                return (
+                    <React.Fragment>
+                        <Button onClick={event => this.openChallengeDialogue(event)}>
+                        I Want Some Help
+                    </Button>{' '}
+                    </React.Fragment>
+                )
+            }
         } else {
             return (
                 <React.Fragment>
-                    <button onClick={event => this.createNewChallenge(event)}>
-                        Create New Challenge
-                </button>
+                    <Button onClick={event => this.createNewChallenge(event)}>
+                        Create This Challenge
+                </Button>{' '}
                 </React.Fragment>
             )
 
