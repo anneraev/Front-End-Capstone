@@ -8,7 +8,93 @@
       "password": "password123"
     }
   ],
-  "messages": [],
-  "issues": [],
+  "messages": [
+    {
+      "content": "This is a thing you should do.",
+      "issueId": 1,
+      "active": true,
+      "id": 1
+    },
+    {
+      "content": "This is a thing you should not do",
+      "issueId": 1,
+      "active": true,
+      "id": 2
+    },
+    {
+      "content": "This is  a hidden message.",
+      "issueId": 1,
+      "active": false,
+      "id": 3
+    },
+    {
+      "content": "This is another solution.",
+      "issueId": 2,
+      "active": true,
+      "id": 4
+    }
+  ],
+  "issues": [
+    {
+      "content": "I have a problem with stuff.",
+      "active": true,
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "content": "This is another problem.",
+      "active": true,
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "content": "This is a hidden challenge.",
+      "active": false,
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "content": "dasfadsfadsf",
+      "active": true,
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "content": "asdfadsfasd",
+      "active": true,
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "content": "adsfasdfasdf",
+      "active": true,
+      "userId": 1,
+      "id": 6
+    },
+    {
+      "content": "adsfasdfas",
+      "active": true,
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "content": "adafasfvcvasd",
+      "active": true,
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "content": "adfasdfasdf",
+      "active": true,
+      "userId": 1,
+      "id": 9
+    },
+    {
+      "content": "adsfasdf",
+      "active": true,
+      "userId": 1,
+      "id": 10
+    }
+  ],
   "checkIns": []
 }

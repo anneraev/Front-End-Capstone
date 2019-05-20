@@ -87,9 +87,11 @@ export default class ChallengesList extends Component {
         return (
             <React.Fragment>
                 {this.messages()}
+                <section className = "challenge-section">
                 {
                     this.props.issues.map(issue => this.challengeListButtonHandler(issue))
                 }
+                </section>
             </React.Fragment>
         )
     }
