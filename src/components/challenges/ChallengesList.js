@@ -32,7 +32,7 @@ export default class ChallengesList extends Component {
                     <div className="challenge">
                         <div className="answer-bubble">
                             <Button className="challenge-button" key={issue.id} id={issue.id} onClick={event => this.showMessages(event)}>
-                                {issue.content}
+                                <span id={issue.id} onClick={event => this.showMessages(event)} className="issue-text">{issue.content}</span>
                             </Button>
                         </div>
                     </div>
@@ -50,7 +50,7 @@ export default class ChallengesList extends Component {
                 <React.Fragment>
                     <section className="message-section">
                         <div className="speech-bubble">
-                            <h2>
+                            <h2 className="speech-text">
                                 Hello, {userName}. How are you doing?
                     </h2>
                         </div>
@@ -65,17 +65,13 @@ export default class ChallengesList extends Component {
             if (this.state.currentIssueId !== 0) {
                 return (
                     <React.Fragment>
-                        <section className="message-section">
-                            < MessagesList {...this.props} currentIssueId={this.state.currentIssueId} />
-                        </section>
+                        < MessagesList {...this.props} currentIssueId={this.state.currentIssueId} />
                     </React.Fragment>
                 )
             } else {
                 return (
                     <React.Fragment>
-                        <section>
-                            {this.welcomeMessage()}
-                        </section>
+                        {this.welcomeMessage()}
                     </React.Fragment>
                 )
             }
@@ -86,11 +82,13 @@ export default class ChallengesList extends Component {
     render() {
         return (
             <React.Fragment>
-                {this.messages()}
-                <section className = "challenge-section">
-                {
-                    this.props.issues.map(issue => this.challengeListButtonHandler(issue))
-                }
+                <section className="message-section">
+                    {this.messages()}
+                </section>
+                <section className="challenge-section">
+                    {
+                        this.props.issues.map(issue => this.challengeListButtonHandler(issue))
+                    }
                 </section>
             </React.Fragment>
         )
