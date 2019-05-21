@@ -8,21 +8,7 @@
       "password": "password123"
     }
   ],
-  "messages": [
-    {
-      "content": "New Messages",
-      "issueId": 4,
-      "active": false,
-      "id": 2
-    }
-  ],
-  "issues": [
-    {
-      "content": "This is a cool problem.",
-      "active": true,
-      "userId": 1,
-      "id": 4
-    }
-  ],
+  "messages": [],
+  "issues": [],
   "checkIns": []
 }

@@ -94,7 +94,7 @@ export default class MessagesList extends Component {
             return (
                 <React.Fragment>
                     <section id="bootstrap-overrides">
-                        <ListGroup>
+                        <ListGroup className="message-list-group">
                             {
                                 this.props.messages.map(message => this.showApplicableMessages(message)
                                 )

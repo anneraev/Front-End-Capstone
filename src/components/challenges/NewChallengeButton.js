@@ -82,7 +82,7 @@ export default class NewChallengeButton extends Component {
                 return (
                     <React.Fragment>
                         <hr />
-                        <Button onClick={event => this.openChallengeDialogue(event)}>
+                        <Button className="new-challenge-button" onClick={event => this.openChallengeDialogue(event)}>
                         I Want Some Help With Something
                     </Button>{' '}
                     </React.Fragment>
