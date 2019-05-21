@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import MessageEditList from "../messages/MessageEditList";
 import checkInUpdate from "../../modules/checkInUpdate";
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+
 
 export default class ChallengeEdit extends Component {
     //gets Id.
@@ -102,25 +104,27 @@ export default class ChallengeEdit extends Component {
         console.log("props", this.props)
         return (
             <React.Fragment>
-                <div>
-                    <span>Active?</span>
-                    <input type="checkbox" id={this.props.match.params.issueId} checked={this.state.active} onChange={this.toggleActive}></input>
-                </div>
-                <section className="form-group">
-                    <input type="text" required className="form-control" onChange={this.handleInput} id="content" placeholder="What would you like help with?" value={this.state.content}>
-                    </input>
-                </section>
+                <Form>
+                    <FormGroup check className="active-div">
+                        <Label check>
+                            <Input className="active-check" type="checkbox" id={this.props.match.params.issueId} checked={this.state.active} onChange={this.toggleActive}></Input>
+                        <span className="active-label">Active?</span>
+                        </Label>
+                    </FormGroup>
+                <FormGroup>
+                    <Input type="text" required className="form-control" onChange={this.handleInput} id="content" placeholder="What would you like help with?" value={this.state.content}>
+                    </Input>
+                </FormGroup>
                 <MessageEditList {...this.props} />
-                <section>
-                    <button onClick={this.updateChallenge}>
+                <FormGroup>
+                    <Button onClick={this.updateChallenge}>
                         Update Challenge
-                </button>
-                </section>
-                <React.Fragment>
-                    <button onClick={this.handleDelete}>
+                </Button>
+                </FormGroup>
+                    <Button onClick={this.handleDelete}>
                         Delete Challenge
-                </button>
-                </React.Fragment>
+                </Button>
+                </Form>
             </React.Fragment>
         )
     }

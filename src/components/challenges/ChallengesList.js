@@ -23,9 +23,9 @@ export default class ChallengesList extends Component {
     challengeListButtonHandler = (issue) => {
         console.log(this.props);
         if (this.props.history.location.pathname === "/profile" && this.props.isUser(issue)) {
-            return (<button key={issue.id} onClick={() => this.props.history.push(`profile/challenges/${issue.id}`)}>
+            return (<Button className="challenge-edit-button" key={issue.id} onClick={() => this.props.history.push(`profile/challenges/${issue.id}`)}>
                 {issue.content}
-            </button>)
+            </Button>)
         } else {
             if (this.props.isUser(issue) && issue.active === true) {
                 return (
@@ -48,13 +48,11 @@ export default class ChallengesList extends Component {
             userName = user.name
             return (
                 <React.Fragment>
-                    <section className="message-section">
-                        <div className="speech-bubble">
-                            <h2 className="speech-text">
-                                Hello, {userName}. How are you doing?
+                    <div className="speech-bubble">
+                        <h2 className="speech-text">
+                            Hello, {userName}. How are you doing?
                     </h2>
-                        </div>
-                    </section>
+                    </div>
                 </React.Fragment>
             )
         }
@@ -65,13 +63,17 @@ export default class ChallengesList extends Component {
             if (this.state.currentIssueId !== 0) {
                 return (
                     <React.Fragment>
+                    <section className="message-section">
                         < MessagesList {...this.props} currentIssueId={this.state.currentIssueId} />
+                    </section>
                     </React.Fragment>
                 )
             } else {
                 return (
                     <React.Fragment>
-                        {this.welcomeMessage()}
+                        <section className="message-section">
+                            {this.welcomeMessage()}
+                        </section>
                     </React.Fragment>
                 )
             }
@@ -82,9 +84,8 @@ export default class ChallengesList extends Component {
     render() {
         return (
             <React.Fragment>
-                <section className="message-section">
-                    {this.messages()}
-                </section>
+                {this.messages()}
+                <hr />
                 <section className="challenge-section">
                     {
                         this.props.issues.map(issue => this.challengeListButtonHandler(issue))

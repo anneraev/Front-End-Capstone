@@ -1,32 +1,12 @@
 import React, { Component } from "react";
 import { Button } from 'reactstrap';
+import "./NewChallengeButton.css"
 
 export default class NewChallengeButton extends Component {
     state = {
         createMode: false,
         content: "",
         userId: parseInt(sessionStorage.getItem("userId"))
-    }
-
-    helpMessage = () => {
-        if (this.props.issues && this.props.issues.find(issue => issue.userId === this.state.userId)){
-            return (
-                <React.Fragment>
-                <div>
-                    Is there something else you'd like help with?
-                </div>
-                </React.Fragment>
-            )
-        } else if (this.props.history.location.pathname === "/profile") {
-            return (
-                <React.Fragment>
-                <div>
-                    Is there something you'd like help with?
-                </div>
-                </React.Fragment>
-            )
-
-        }
     }
 
     //redirects to the newly-created issue.
@@ -92,16 +72,18 @@ export default class NewChallengeButton extends Component {
             if (this.props.issues && this.props.issues.find(issue => issue.userId === this.state.userId)) {
             return (
                 <React.Fragment>
-                    <button onClick={event => this.openChallengeDialogue(event)}>
-                    I need help with something else.
-                </button>
+                    <hr />
+                    <Button className="new-challenge-button" onClick={event => this.openChallengeDialogue(event)}>
+                    I Want Help With Something Else
+                </Button>
                 </React.Fragment>
             )
             } else {
                 return (
                     <React.Fragment>
+                        <hr />
                         <Button onClick={event => this.openChallengeDialogue(event)}>
-                        I Want Some Help
+                        I Want Some Help With Something
                     </Button>{' '}
                     </React.Fragment>
                 )
@@ -109,7 +91,8 @@ export default class NewChallengeButton extends Component {
         } else {
             return (
                 <React.Fragment>
-                    <Button onClick={event => this.createNewChallenge(event)}>
+                    <hr />
+                    <Button className="new-challenge-button" onClick={event => this.createNewChallenge(event)}>
                         Create This Challenge
                 </Button>{' '}
                 </React.Fragment>
@@ -122,7 +105,6 @@ export default class NewChallengeButton extends Component {
         return (
             <React.Fragment>
                 <section>
-                    {this.helpMessage()}
                     {this.newButton()}
                     {this.challengeDialogue()}
                 </section>
