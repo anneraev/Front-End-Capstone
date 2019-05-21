@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import MessagesList from "./MessagesList";
+import "./MessageEditList.css"
+import { Button, Input } from 'reactstrap';
+
 
 export default class MessageEditList extends Component {
     state = {
@@ -37,9 +40,9 @@ export default class MessageEditList extends Component {
         if (this.props.location.pathname.includes("profile/challenges/")) {
             return (
                 <React.Fragment>
-                    <button key="0" onClick={() => this.props.createNewMessage(this.constructNewMessage())}>
+                    <Button key="0" onClick={() => this.props.createNewMessage(this.constructNewMessage())}>
                         New Message
-            </button>
+            </Button>
                 </React.Fragment>
             )
         }
@@ -49,9 +52,14 @@ export default class MessageEditList extends Component {
     getMessageId = (key) => {
         const messageState = {}
         messageState.currentMessageId = parseInt(key)
-        const currentMessage = this.props.messages.find(message => message.id === messageState.currentMessageId);
-        messageState.currentFieldText = currentMessage.content;
-        this.setState(messageState);
+        if (key !== "0") {
+            const currentMessage = this.props.messages.find(message => message.id === messageState.currentMessageId);
+            messageState.currentFieldText = currentMessage.content;
+            this.setState(messageState);
+        } else {
+            console.log("resetting")
+            this.resetState()
+        }
     }
 
     //passes a newly-created message update back to Application Views for posting to the API, updates state as well.
@@ -60,7 +68,7 @@ export default class MessageEditList extends Component {
             content: this.state.currentFieldText,
             id: this.state.currentMessageId
         }
-        this.props.updateMessage(messageUpdate);
+        this.props.updateMessage(messageUpdate).then(() => this.resetState());
     }
 
     //renders the edit button only if there is a message Id stored in state, so that there is reference to the message being edited.
@@ -68,9 +76,9 @@ export default class MessageEditList extends Component {
         if (this.state.currentMessageId !== 0) {
             return (
                 <React.Fragment>
-                    <button onClick={this.handleMessageUpdate}>
+                    <Button onClick={this.handleMessageUpdate}>
                         Update Message
-                    </button>
+                    </Button>
                 </React.Fragment>
             )
         }
@@ -87,7 +95,7 @@ export default class MessageEditList extends Component {
     createMessageEditWindow = () => {
         return (
             <React.Fragment>
-                <textarea className="form-control" placeholder="Type a reminder to help you navigate the problem." onChange={this.handleInput} value={this.state.currentFieldText}></textarea>
+                <Input type="textarea" className="form-control" placeholder="Type a reminder to help you navigate the problem." onChange={this.handleInput} value={this.state.currentFieldText}></Input>
                 {this.renderEditButton()}
             </React.Fragment>
         )
@@ -99,9 +107,9 @@ export default class MessageEditList extends Component {
                 <section>
                     <h2>Write messages to help yourself navigate your challenges</h2>
                     {this.createMessageEditWindow()}
-                    <MessagesList {...this.props} getMessageId={this.getMessageId} />
                     {this.newMessageItem()}
-                </section>
+                    <MessagesList {...this.props} getMessageId={this.getMessageId} />
+                    </section>
             </React.Fragment>
         )
     }

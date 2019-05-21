@@ -16,8 +16,8 @@ export default class Profile extends Component {
     render(){
         return(
             <React.Fragment>
-                < ChallengesList {...this.props} />
                 < NewChallengeButton {...this.props} />
+                < ChallengesList {...this.props} />
             </React.Fragment>
         )
     }

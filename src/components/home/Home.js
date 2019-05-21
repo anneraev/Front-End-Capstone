@@ -27,9 +27,9 @@ export default class Home extends Component {
     render(){
         return(
             <React.Fragment>
+                {this.ifNoChallenges()}
                 {/* passes props object to challengesList, including History and all properties defined the route for this current page (in this case, "users" and "messages".) All can be accessed with dot notation. */}
                 <ChallengesList {...this.props} />
-                {this.ifNoChallenges()}
             </React.Fragment>
         )
     }
