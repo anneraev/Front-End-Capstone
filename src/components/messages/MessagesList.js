@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import MessageCarousel from "./MessageCarousel";
+import { Button, ListGroup, ListGroupItem } from 'reactstrap';
+import "./MessageList.css"
 
 export default class MessagesList extends Component {
 
@@ -10,11 +12,12 @@ export default class MessagesList extends Component {
     handleMessageClick = (event) => {
         if (this.props.getMessageId) {
             this.props.getMessageId(event.target.id)
+            event.target.classList.toggle("message-item-select")
         }
     }
 
     handleDelete = (event) => {
-        this.props.deleteSingleMessage(event.target.id);
+        this.props.deleteSingleMessage(event.target.id).then(() => this.props.getMessageId("0"));
     }
 
     //toggles message active property when button is clicked.
@@ -23,7 +26,7 @@ export default class MessagesList extends Component {
             active: true,
             id: event.target.id
         }
-        this.props.updateMessage(messageUpdate)
+        this.props.updateMessage(messageUpdate).then(() => this.props.getMessageId("0"))
     }
 
     deactivate = (event) => {
@@ -31,7 +34,7 @@ export default class MessagesList extends Component {
             active: false,
             id: event.target.id
         }
-        this.props.updateMessage(messageUpdate)
+        this.props.updateMessage(messageUpdate).then(() => this.props.getMessageId("0"))
     }
 
     //displays a button that, when clicked, toggles active/inactive flag for the message in the data. The appearance of the button changes based on the status of the message.
@@ -39,17 +42,17 @@ export default class MessagesList extends Component {
         if (message.active === true) {
             return (
                 <React.Fragment>
-                    <button key={message.id} id={message.id} onClick={this.deactivate}>
+                    <Button key={message.id} id={message.id} onClick={this.deactivate}>
                         Active
-                    </button>
+                    </Button>
                 </React.Fragment>
             )
         } else {
             return (
                 <React.Fragment>
-                    <button key={message.id} id={message.id} onClick={this.activate}>
+                    <Button key={message.id} id={message.id} onClick={this.activate}>
                         Inactive
-                    </button>
+                    </Button>
                 </React.Fragment>
             )
         }
@@ -59,9 +62,9 @@ export default class MessagesList extends Component {
         if (this.props.location.pathname.includes("/profile/challenges/")) {
             return (
                 <React.Fragment>
-                    <button key={message.id} id={message.id} onClick={this.handleDelete}>
+                    <Button className="inner-button" key={message.id} id={message.id} onClick={this.handleDelete}>
                         Clear
-                    </button>
+                    </Button>
                 </React.Fragment>
             )
         }
@@ -71,11 +74,11 @@ export default class MessagesList extends Component {
         //uses a conditional to see if the message's issueId matches the issueId passed through URL parameter when this page was routed to. The URL parameter is the same as the ID of the issue topic that was clicked on. If it does match, this returns the content of that message as a result, creates an elemement containing it, and passes that to the render function. If called from "/home", filters out inactive messages.
         if (message.issueId === Number(this.props.match.params.issueId)) {
             return (
-                <li key={message.id} id={message.id}>
-                    <span key={message.id} id={message.id} onClick={this.handleMessageClick}>{message.content}</span>
+                <ListGroupItem className="message-item" key={message.id} id={message.id} onClick={this.handleMessageClick}>
                     {this.renderDeleteButton(message)}
                     {this.renderActiveButton(message)}
-                </li>
+                    <span className="message-text" key={message.id} id={message.id} onClick={this.handleMessageClick}>{message.content}</span>
+                </ListGroupItem>
             )
         }
     }
@@ -90,13 +93,13 @@ export default class MessagesList extends Component {
         if (this.props.location.pathname.includes("profile/challenges/")) {
             return (
                 <React.Fragment>
-                    <section>
-                        <ul>
+                    <section id="bootstrap-overrides">
+                        <ListGroup>
                             {
                                 this.props.messages.map(message => this.showApplicableMessages(message)
                                 )
                             }
-                        </ul>
+                        </ListGroup>
                     </section>
                 </React.Fragment>
             )

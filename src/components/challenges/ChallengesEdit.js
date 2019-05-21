@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import MessageEditList from "../messages/MessageEditList";
 import checkInUpdate from "../../modules/checkInUpdate";
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 
 
 export default class ChallengeEdit extends Component {

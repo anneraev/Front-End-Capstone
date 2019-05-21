@@ -10,43 +10,13 @@
   ],
   "messages": [
     {
-      "content": "This is another solution.",
-      "issueId": 2,
-      "active": true,
-      "id": 4
-    },
-    {
-      "content": "This is a helpful message.",
-      "issueId": 4,
-      "active": true,
-      "id": 5
-    },
-    {
-      "content": "This is another helpful message.",
-      "issueId": 4,
-      "active": true,
-      "id": 6
-    },
-    {
-      "content": "This is a hidden message.",
+      "content": "New Messages",
       "issueId": 4,
       "active": false,
-      "id": 7
+      "id": 2
     }
   ],
   "issues": [
-    {
-      "content": "This is another problem.",
-      "active": true,
-      "userId": 1,
-      "id": 2
-    },
-    {
-      "content": "This is a hidden challenge.",
-      "active": false,
-      "userId": 1,
-      "id": 3
-    },
     {
       "content": "This is a cool problem.",
       "active": true,
