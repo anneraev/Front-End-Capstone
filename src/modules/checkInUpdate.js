@@ -1,5 +1,5 @@
 let now = new Date()
-let usersAlerts
+let usersAlerts = []
 
 //handles the update loop for the app.
 
