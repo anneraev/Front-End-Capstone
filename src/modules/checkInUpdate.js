@@ -7,6 +7,7 @@ export default {
     updateUsersAlerts: function (alerts){
         //passed list of all user alerts is filtered for those just assocaited with the current user.
         if (alerts) {
+            //ifthen
             usersAlerts = alerts.filter(alert => alert.userId === parseInt(sessionStorage.getItem("userId")))
         } else {
             usersAlerts = []
