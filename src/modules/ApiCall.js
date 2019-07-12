@@ -1,4 +1,4 @@
-const apiURL = "https://innerventionapi.herokuapp.com/"
+const apiURL = "https://innerventionapi.herokuapp.com"
 export default {
 
     getAll: (key) => {
