@@ -8,6 +8,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media only screen
+and (min-device-width : 414px)
+and (min-device-width : 736px) {
+body {
+  width: 414px;
+  height: 736px;
+}
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
