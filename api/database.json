@@ -8,7 +8,34 @@
       "password": "password123"
     }
   ],
-  "messages": [],
-  "issues": [],
-  "checkIns": []
+  "messages": [
+    {
+      "content": "Concentrate on the importance of what you have to say.",
+      "issueId": 1,
+      "active": true,
+      "id": 1
+    },
+    {
+      "content": "Use humor.",
+      "issueId": 1,
+      "active": true,
+      "id": 2
+    }
+  ],
+  "issues": [
+    {
+      "content": "I have problems with public speaking.",
+      "active": true,
+      "userId": 1,
+      "id": 1
+    }
+  ],
+  "checkIns": [
+    {
+      "userId": 1,
+      "alertTime": "3:10 PM",
+      "alertSeconds": 54600,
+      "id": 1
+    }
+  ]
 }
