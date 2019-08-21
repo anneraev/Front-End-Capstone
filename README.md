@@ -1,5 +1,7 @@
 
-#Front-End Capstone: An App for Bettering Yourself
+##Front-End Capstone: An App for Bettering Yourself
+
+Website: https://innervention.herokuapp.com/
 
 If you're struggling with bad coping mechanisms, poor self-control, or you just aren't making progress on your self-improvement goals, this is the app for you. This Front-End Capstone provides simple tools for having daily interventions with yourself, allowing you to modify your behavior without having to devote as much mental bandwidth to controlling yourself. The app works under the assumption that the user knows what the right decisions are, but has trouble making them in the moment. It allows the user to take their own advice (or keep track of the advice of professionals).
 
