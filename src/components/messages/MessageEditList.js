@@ -57,7 +57,6 @@ export default class MessageEditList extends Component {
             messageState.currentFieldText = currentMessage.content;
             this.setState(messageState);
         } else {
-            console.log("resetting")
             this.resetState()
         }
     }

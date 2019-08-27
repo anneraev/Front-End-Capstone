@@ -32,7 +32,6 @@ export default class MessageCarousel extends Component {
         if (this.props.currentIssueId !== this.state.issueIndex) {
         const newIndex = {issueIndex: this.props.currentIssueId, activeIndex: 0}
         this.setState(newIndex)
-        console.log("setting new carousel state")
         }
     }
 
@@ -63,8 +62,6 @@ export default class MessageCarousel extends Component {
 
     render() {
         this.getItems()
-        console.log("carousel props", this.props)
-        console.log("carousel state", this.state)
         const { activeIndex } = this.state;
 
         const slides = this.items.map(item => {

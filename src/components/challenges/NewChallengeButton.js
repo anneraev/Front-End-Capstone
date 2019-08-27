@@ -11,14 +11,9 @@ export default class NewChallengeButton extends Component {
 
     //redirects to the newly-created issue.
     goToCreatedIssue = () => {
-        console.log("props", this.props)
-        console.log("all issues", this.props.issues)
         const issues = this.props.issues.filter(issue => issue.userId === this.state.userId);
-        console.log("user issues", issues);
         const issueIds = issues.map(issue => issue.id);
-        console.log("issueIds", issueIds);
         let newestIssue = Math.max(...issueIds);
-        console.log("issue number", newestIssue)
         if (newestIssue === -Infinity) {
             newestIssue = 1
         }

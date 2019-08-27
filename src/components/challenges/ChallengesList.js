@@ -16,12 +16,10 @@ export default class ChallengesList extends Component {
         if (event.target.id === this.state.currentIssueId) {
             newState.currentIssueId = 0
         }
-        console.log("newState", newState.currentIssueId)
         this.setState(newState);
     }
 
     challengeListButtonHandler = (issue) => {
-        console.log(this.props);
         if (this.props.history.location.pathname === "/profile" && this.props.isUser(issue)) {
             return (<Button className="challenge-edit-button" key={issue.id} onClick={() => this.props.history.push(`profile/challenges/${issue.id}`)}>
                 {issue.content}

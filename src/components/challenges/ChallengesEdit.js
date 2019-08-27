@@ -24,7 +24,6 @@ export default class ChallengeEdit extends Component {
 
     //gets a list of messages associated with the current issue.
     getIssueMessages = () => {
-        console.log("propsmessages", this.props.messages)
         if (this.props.messages && this.props.messages.length > 0) {
             const id = this.getId();
             const messages = this.props.messages.filter(message => message.issueId === id)
@@ -49,14 +48,12 @@ export default class ChallengeEdit extends Component {
 
     //called when anything changes in the input field.
     handleInput = (event) => {
-        console.log(event.target.value)
         //creates a new object with the value from the entry field.
         const newContent = {
             content: event.target.value
         }
         //sets state content to the new object content.
         this.setState(newContent);
-        console.log(this.state.content)
     }
 
     //delete issue and all associated messages. Also updates data.
@@ -73,7 +70,6 @@ export default class ChallengeEdit extends Component {
             active: this.state.active
         }
         if (this.state.content === "") {
-            console.log(this.state.issue)
             issueChange.content = this.state.issue.content
         }
         if (!newMessagesList || newMessagesList === []) {
@@ -101,7 +97,6 @@ export default class ChallengeEdit extends Component {
     }
 
     render() {
-        console.log("props", this.props)
         return (
             <React.Fragment>
                 <Form>
