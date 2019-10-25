@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import MessageEditList from "../messages/MessageEditList";
-import checkInUpdate from "../../modules/checkInUpdate";
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 
 
@@ -84,16 +83,6 @@ export default class ChallengeEdit extends Component {
             active: event.target.checked
         }
         this.setState(checked);
-    }
-
-    componentWillMount() {
-        checkInUpdate.stopUpdate()
-        this.props.refreshMessagesList()
-    }
-
-    //starts update and also clears previous issue from storage.
-    componentDidMount() {
-        checkInUpdate.startUpdate(this.props.history);
     }
 
     render() {

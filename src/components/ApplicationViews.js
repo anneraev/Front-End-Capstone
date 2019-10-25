@@ -3,17 +3,12 @@ import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
 import "./ApplicationViews.css"
 
-import Home from "./home/Home";
-import Profile from "./profile/Profile";
-import CheckInList from "./checkIns/CheckInList";
-import ChallengeEdit from "./challenges/ChallengesEdit";
 import ChallengesAPI from "./challenges/ChallengesAPI";
 import MessagesAPI from "./messages/MessagesAPI";
 import CheckInsAPI from "./checkIns/CheckInsAPI";
 import Login from "./userAuthentication/Login";
-import LogOut from "./userAuthentication/LogOut";
 import UsersAPI from "./users/UsersAPI";
-import checkInUpdate from "../modules/checkInUpdate";
+import MasterUpdateCheckin from "../components/checkIns/MasterUpdateCheckin"
 
 export default class ApplicationViews extends Component {
     //state object. All information for rendering to DOM is pulled from here.
@@ -22,6 +17,7 @@ export default class ApplicationViews extends Component {
         messages: [],
         issues: [],
         checkIns: [],
+        stage: null,
     }
 
     getUser = () => {
@@ -63,9 +59,9 @@ export default class ApplicationViews extends Component {
 
     //separate call for deleting all messages associated with an issue (called when deleting an issue).
     deleteMessagesInMessageList = messageList => {
-            const newState = {};
-            const messageIds = messageList.map(message => message.id)
-            return MessagesAPI.deleteMass(messageIds).then(() => MessagesAPI.getAll().then(messages => newState.messages = messages)).then(this.setState(newState));
+        const newState = {};
+        const messageIds = messageList.map(message => message.id)
+        return MessagesAPI.deleteMass(messageIds).then(() => MessagesAPI.getAll().then(messages => newState.messages = messages)).then(this.setState(newState));
     }
 
     //called when a new edit page is opened. Ensures that there are no lingering messages from previously deleted challenge.
@@ -94,17 +90,17 @@ export default class ApplicationViews extends Component {
     //CheckIn API
     postCheckIn = alert => {
         const newState = {}
-        return CheckInsAPI.post(alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState, () => checkInUpdate.updateUsersAlerts(this.state.checkIns)))
+        return CheckInsAPI.post(alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState));
     }
 
     updateCheckIn = (id, alert) => {
         const newState = {}
-        return CheckInsAPI.patch(id, alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState, () => checkInUpdate.updateUsersAlerts(this.state.checkIns)))
+        return CheckInsAPI.patch(id, alert).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState));
     }
 
     deleteCheckIn = id => {
         const newState = {}
-        return CheckInsAPI.delete(id).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState, () => checkInUpdate.updateUsersAlerts(this.state.checkIns)))
+        return CheckInsAPI.delete(id).then(() => CheckInsAPI.getAll().then(checkIns => newState.checkIns = checkIns)).then(() => this.setState(newState));
     }
 
     //Updates all data.
@@ -117,57 +113,19 @@ export default class ApplicationViews extends Component {
     }
 
     componentDidMount() {
-        this.updateData().then(() => checkInUpdate.updateUsersAlerts(this.state.checkIns));
+        this.updateData();
     }
 
     //renders a JSX element.
     render() {
-        //failsafe in case render loads before there is data.
-        if (this.state.checkIns === []) {
-            window.location.reload();
-        } else {
-            return (
-                <React.Fragment>
-                    <Route exact path="/dashboard" render={props => {
-                        return < Redirect to="/" />
-                    }} />
-                    <Route exact path="/" render={props => {
-                        if (this.isAuthenticated()) {
-                            return <Home {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} isUser={this.isUser} postIssue={this.postIssue} getUser={this.getUser}/>
-                        } else {
-                            return < Login {...props} users={this.state.users} createNewUser={this.createNewUser} />
-                        }
-                    }} />
-                    <Route exact path="/profile" render={props => {
-                        if (this.isAuthenticated()) {
-                            return <Profile {...props} issues={this.state.issues} messages={this.state.messages} users={this.state.users} postIssue={this.postIssue} clearIssueStorage={this.clearIssueStorage} isUser={this.isUser} />
-                        }
-                        else {
-                            return < Login {...props} users={this.state.users} createNewUser={this.createNewUser} />
-                        }
-                    }} />
-                    <Route exact path="/profile/challenges/:issueId(\d+)" render={props => {
-                        if (this.isAuthenticated()) {
-
-                            return <ChallengeEdit {...props} issues={this.state.issues} messages={this.state.messages} updateIssue={this.updateIssue} updateData={this.updateData} createNewMessage={this.createNewMessage} updateMessage={this.updateMessage} deleteSingleMessage={this.deleteSingleMessage} deleteIssue={this.deleteIssue} isUser={this.isUser} deleteMessagesInMessageList={this.deleteMessagesInMessageList} refreshMessagesList={this.refreshMessagesList} />
-                        }
-                        else {
-                            return < Login {...props} users={this.state.users} createNewUser={this.createNewUser} />
-                        }
-                    }} />
-                    <Route exact path="/checkins" render={props => {
-                        if (this.isAuthenticated()) {
-                            return < CheckInList {...props} checkIns={this.state.checkIns} users={this.state.users} postCheckIn={this.postCheckIn} updateCheckIn={this.updateCheckIn} deleteCheckIn={this.deleteCheckIn} isUser={this.isUser} />
-                        }
-                        else {
-                            return < Login {...props} users={this.state.users} createNewUser={this.createNewUser} />
-                        }
-                    }} />
-                    <Route exact path="/logOut" render={props => {
-                        return < LogOut {...props} isAuthenticated={this.isAuthenticated} />
-                    }} />
-                </React.Fragment>
-            )
-        }
+        return (
+            <Route exact path="/" render={props => {
+                if (this.isAuthenticated()) {
+                    //if no stage, go to home.
+                    return <MasterUpdateCheckin {...props} checkIns={this.state.checkIns} issues={this.state.issues} messages={this.state.messages} users={this.state.users} isUser={this.isUser} postIssue={this.postIssue} getUser={this.getUser} />
+                } else {
+                    return < Login {...props} users={this.state.users} createNewUser={this.createNewUser} />
+                }
+            }} />)
     }
 }

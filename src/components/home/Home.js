@@ -1,18 +1,8 @@
 import React, { Component } from  "react";
 import ChallengesList from "../challenges/ChallengesList";
-import checkInUpdate from "../../modules/checkInUpdate"
 import NewChallengeButton from "../challenges/NewChallengeButton";
 
 export default class Home extends Component {
-    //stops update before component renders.
-    componentWillMount(){
-        checkInUpdate.stopUpdate()
-    }
-    //starts update after component renders. Passes current history so that update can utilize it for redirects.
-    componentDidMount() {
-        checkInUpdate.startUpdate(this.props.history)
-    }
-
     ifNoChallenges = () => {
         const user = this.props.getUser()
         if (!this.props.issues || !this.props.issues.find(issue => issue.userId === user && issue.active === true)){

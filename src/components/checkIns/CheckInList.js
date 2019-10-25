@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import checkInUpdate from "../../modules/checkInUpdate"
 import TimeKeeper from 'react-timekeeper';
 import "./CheckInList.css"
 import { Button } from 'reactstrap';
@@ -11,13 +10,6 @@ export default class CheckInList extends Component {
         alertTime: "12:00",
         userId: parseInt(sessionStorage.getItem("userId")),
         alertSeconds: 43200
-    }
-
-    componentWillMount() {
-        checkInUpdate.stopUpdate()
-    }
-    componentDidMount() {
-        checkInUpdate.startUpdate(this.props.history)
     }
 
     //resets state to default, triggering rerender and setting id to 0, so that user is no longer accessing that checkIn in the edit feature.
